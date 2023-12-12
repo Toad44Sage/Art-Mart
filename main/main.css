@@ -1,0 +1,198 @@
+@import url("./reset.css");
+
+@font-face {
+	font-family: "Franklin Gothic Book";
+	src: url("FranklinGothicBookRegular.ttf");
+	font-style: normal;
+	font-weight: 400;
+	color: #000000;
+	line-height: 20px;
+}
+
+body {
+	font-family: "Franklin Gothic Book", "Arial", sans-serif;
+	font-size: 24px;
+	margin: 0 auto;
+}
+
+
+/* <------------- Navigtaion ---------------> */
+.navigation {
+	top: 0;
+	position: relative;
+	z-index: 3;
+	max-width: 100%;
+	background: #FFFFFF;
+	margin: 21px 86px 0 72px;
+}
+
+.nav-content {
+	height: 67px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left-nav {
+	display: flex;
+	align-items: center;
+}
+
+.left-nav li {
+	margin-right: 30px;
+}
+
+.left-nav li a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #000000;
+}
+
+
+.left-nav li a img {
+	margin-left: 15px;
+}
+
+.right-nav {
+	display: flex;
+	align-items: center;
+	text-align: center;
+}
+
+.right-nav button {
+	background-color: #FFFFFF;
+	white-space: nowrap;
+	font-size: 22px;
+}
+
+.login {
+	margin-right: 11px;
+}
+
+.log-button {
+	padding: 17px 25px;
+	border: 0.70113px solid #E6E6E6;
+	border-radius: 2.8px;
+	cursor: pointer;
+}
+
+button.sign-button {
+	padding: 17px 45px;
+	border: 0;
+	background: #EA7462;
+	color: #FFFFFF;
+	border-radius: 2.8px;
+	cursor: pointer;
+}
+
+.arrow {
+	display: inline-block;
+	margin-left: 9px;
+	width: 25px;
+	height: 12px;
+	background-image: url('./Vector.svg');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px;
+}
+
+
+/* <------------------- Header -----------------> */
+
+.header {
+	margin: 58px 84px 60px 84px;
+}
+
+.header-inner {
+	letter-spacing: 0.03em;
+	font-size: 40px;
+	line-height: 37px;
+	text-align: center;
+	margin-bottom: 27px;
+}
+
+.gallery {
+	display: flex;
+	align-items: center;
+	color: #E36F2D;
+	letter-spacing: 0.04em;
+	font-size: 1.375rem;
+	margin-bottom: 15px;
+}
+
+.hr {
+	border: 0.564381px solid;
+	width: 45px;
+	margin-right: 10px;
+	height: 0;
+}
+
+.header-footer {	
+	font-size: 1.875rem;
+	line-height: 1.438rem;
+	text-align: center;
+}
+
+.content {
+	width: 60%;
+	margin: 0 auto;
+}
+
+.container {
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: (6, 1fr);
+	grid-auto-rows: minmax(100px, 3);
+	grid-gap: 11px;
+	justify-content: center;
+}
+
+.container img {
+	width: 100%;
+	object-fit: cover;
+}
+
+.picture1 {
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;
+}
+.picture2 {	
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
+}
+.picture3 {
+	grid-column: 3 / 5;
+	grid-row: 1 / 2;
+}
+
+.picture4 {
+	margin-top: 225px;
+	grid-column: 1 / 2;
+	grid-row: 1 / 2;
+}
+.picture5 {
+	margin-top: 225px;
+	grid-column: 3 / 4;
+	grid-row: 1 / 2;
+}
+.picture6 {
+	margin-top: 225px;
+	grid-column: 4 / 5;
+	grid-row: 1 / 2;
+}
+
+.picture7 {
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
+}
+.picture8 {
+	grid-column: 2 / 3;
+	grid-row: 2 / 3;
+}
+.picture9 {
+	grid-column: 3 / 5;
+	grid-row: 2 / 3;
+}
+
+

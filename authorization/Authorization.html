@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Authorization</title>
+
+    <link rel="stylesheet" type="text/css" href="authorization.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="authorization.js"></script>
+  </head>
+  <body>
+    <main class="content">
+      <div class="content-left">
+        <div class="login-form">
+          <span class="header-text">Sign In</span>
+
+          <div class="data-input">
+            <hr class="input-line" />
+            <span class="input-text">Data input</span>
+          </div>
+
+          <form class="form_auth_style" action="#" method="post">
+            <div class="login">
+              <label>Login</label>
+              <p>
+                <input
+                  name="login"
+                  minlength="1"
+                  maxlength="32"
+                  type="text"
+                  placeholder="Steve"
+                  required
+                />
+              </p>
+            </div>
+
+            <div class="password">
+              <label>Password</label>
+              <p>
+                <input
+                  name="password"
+                  minlength="1"
+                  maxlength="32"
+                  type="password"
+                  placeholder="********"
+                  required
+                />
+              </p>
+            </div>
+            <div class="sign-button">
+              <button class="sign-in" type="submit" name="sign-in">
+                Sign In
+              </button>
+            </div>
+          </form>
+
+          <div id="message"></div>
+
+          <div class="login-footer">
+            <span class="account-text">Don`t have an account?</span>
+            <a class="signin" href="../registration/Registration.html"
+              >Sign Up</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="content-right">
+        <img src="Authorization.JPG" alt="Background-img" />
+      </div>
+    </main>
+  </body>
+</html>

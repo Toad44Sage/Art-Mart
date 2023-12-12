@@ -1,0 +1,30 @@
+.header {
+	margin: 0 auto;
+	padding: 3rem 20rem 3.4rem 13.7rem;
+	line-height: 1.6;
+	font-size: 1.6rem;
+	&__logo-box {
+		display: flex;
+		justify-content: space-around;
+		align-items: center;
+		gap: 11rem;
+	}
+	&__description {
+		line-height: 1.6;
+		max-width: 78rem;
+	}
+	&__img {
+		height: auto;
+		width: 237px;
+
+		@include respond(small-desk) {
+			width: 190px;
+		}
+		@include respond(tab-land) {
+			width: 170px;
+		}
+		@include respond(tab-port) {
+			width: 150px;
+		}
+	}
+}

@@ -1,0 +1,22 @@
+.tabs {
+	margin: 0 auto;
+	padding-left: 5rem;
+	font-size: 2.4rem;
+	line-height: 1.2;
+	display: flex;
+	justify-content: flex-start;
+	gap: 5rem;
+	border-bottom: 1px solid $color-grey-light2;
+	&__item {
+		padding-bottom: 5px;
+		cursor: pointer;
+		transition: all 0.1s;
+		&--active {
+			border-bottom: 3px solid $color-black;
+			color: $color-black;
+		}
+		&:hover {
+			border-bottom: 3px solid $color-black;
+		}
+	}
+}

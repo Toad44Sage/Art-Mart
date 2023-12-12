@@ -1,0 +1,17 @@
+{
+	"name": "auctions",
+	"version": "1.0.0",
+	"description": "Auctions page",
+	"main": "index.js",
+	"scripts": {
+		"compile:sass": "node-sass sass/main.scss css/style.css -w"
+	},
+	"author": "Deni",
+	"license": "ISC",
+	"devDependencies": {
+		"node-sass": "^9.0.0"
+	},
+	"dependencies": {
+		"jquery": "^3.7.1"
+	}
+}

@@ -1,0 +1,125 @@
+.btn-post {
+	&,
+	&:link,
+	&:visited {
+		display: inline-block;
+		font-size: 2.4rem;
+		line-height: 0.8;
+		border-radius: 4px;
+		text-align: center;
+		white-space: nowrap;
+		padding: 1.1rem 0;
+		width: 100%;
+		max-width: 46.7rem;
+		transition: all 0.2s;
+		border: none;
+		cursor: pointer;
+	}
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 1rem 2rem rgba($color-primary-darker, 0.5);
+	}
+	&:active,
+	&:focus {
+		outline: none;
+		transform: translateY(-1px);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
+	&--orange {
+		color: $color-white;
+		background-color: $color-primary-darker;
+	}
+}
+
+.btn-filter {
+	&,
+	&:link,
+	&:visited {
+		display: inline-block;
+		font-size: 1.6rem;
+		line-height: 1.15;
+		border-radius: 2px;
+		text-align: center;
+		white-space: nowrap;
+		padding: 5px 0;
+		width: 100%;
+		max-width: 11.9rem;
+		transition: all 0.2s;
+		border: 1px solid $color-grey-light2;
+		cursor: pointer;
+		color: $color-grey-dark2;
+		background-color: $color-white;
+	}
+	&:hover {
+		box-shadow: 0 1rem 1rem rgba($color-grey-light, 0.1);
+	}
+	&:active,
+	&:focus {
+		outline: none;
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
+}
+
+.btn-submit {
+	&,
+	&:link,
+	&:visited {
+		display: inline-block;
+		font-size: 3.2rem;
+		line-height: 1;
+		color: $color-white;
+		background-color: $color-primary-darker;
+		border-radius: 4px;
+		padding: 1.6rem 7.6rem;
+		max-width: 31.8rem;
+		width: 100%;
+		text-wrap: nowrap;
+		text-align: center;
+		border: none;
+		cursor: pointer;
+		transition: all 0.3s;
+	}
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 1rem 2rem rgba($color-primary-darker, 0.5);
+	}
+	&:active,
+	&:focus {
+		outline: none;
+		transform: translateY(-1px);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
+}
+
+.btn-upload {
+	&,
+	&:link,
+	&:visited {
+		display: inline-block;
+		font-size: 2.4rem;
+		line-height: 0.8;
+		border-radius: 4px;
+		text-align: center;
+		white-space: nowrap;
+		height: 5.5rem;
+		width: 100%;
+		max-width: 48rem;
+		transition: all 0.2s;
+		border: none;
+		cursor: pointer;
+	}
+	&:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 1rem 2rem rgba($color-primary-darker, 0.5);
+	}
+	&:active,
+	&:focus {
+		outline: none;
+		transform: translateY(-1px);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
+	&--orange {
+		color: $color-white;
+		background-color: $color-primary-darker;
+	}
+}

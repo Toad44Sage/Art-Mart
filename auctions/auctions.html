@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=AR+One+Sans:wght@400;700&family=Inter:wght@400;500;600&family=Open+Sans:ital,wght@0,400;1,300;1,400&family=Rubik:wght@400;500;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://db.onlinewebfonts.com/c/e130d119682ecb567748343bf7f263b0?family=Franklin+Gothic+Book"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./css/style.css" />
+
+		<script defer src="https://unpkg.com/vue@next"></script>
+		<script defer src="./app.js"></script>
+
+		<title>Аукционы</title>
+	</head>
+	<body>
+		<!-- ############################## NAVIGATION ############################## -->
+
+		<nav class="nav">
+			<ul class="nav__left">
+				<li class="nav__item">
+					<a class="nav__link" href="../newsfeed/HTML/news.html">Home</a>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link" href="../../auctions/auctions.html">Auctions</a>
+				</li>
+			</ul>
+			<ul class="nav__right">
+				<li class="nav__item">
+					<span id="balance">999909</span
+					><img
+						src="./img/nav-icons/mona-lisa.svg"
+						alt="Icon"
+						class="nav__lisa-icon"
+					/>
+				</li>
+				<li class="nav__item">
+					<img
+						src="./img/nav-icons/plus.svg"
+						alt="Logo"
+						class="nav__upload-icon"
+					/>
+				</li>
+				<li class="nav__item">
+					<img
+						src="./img/nav-icons/notif0.png"
+						alt="Logo"
+						class="nav__notif-icon"
+					/>
+					<!-- ############################## DROPDOWN ############################## -->
+					<div class="notif-dropdown hidden">
+						<ul class="notif-dropdown__container">
+							<li class="notif-dropdown__item">
+								<p>
+									<span class="mrg-small-right">login</span>liked you painting
+								</p>
+								<img
+									src="./img/posts/post1.png"
+									alt="Notification user-image"
+								/>
+							</li>
+						</ul>
+					</div>
+				</li>
+				<li class="nav__item">
+					<img
+						class="nav__profile-pic"
+						src="img/nav-icons/miniprofile.png"
+						alt="Mini Profile"
+					/>
+					<div class="profile-dropdown hidden">
+						<a
+							class="profile-dropdown__link"
+							href="../profile/HTML/profile.html"
+							>Profile
+						</a>
+						<a class="profile-dropdown__settings" href="#">Settings</a>
+						<a class="profile-dropdown__exit" href="#">Log Out</a>
+					</div>
+				</li>
+			</ul>
+		</nav>
+
+		<!-- ##############################   HEADER   ############################## -->
+
+		<header class="header">
+			<ul class="header__logo-box">
+				<img
+					class="header__img"
+					src="./img/header/logo.svg"
+					alt="Mona lissa image is a project logo"
+				/>
+				<p class="header__description">
+					Bid on works you love with auctions on Artmart. With bidding opening
+					daily, Artmart connects collectors like you to art from leading
+					auction houses, nonprofit organizations, and sellers across the globe.
+					We feature premium artworks including modern, contemporary, and street
+					art, so you can find works by your favorite artists — and discover new
+					ones — all in one place.
+				</p>
+			</ul>
+		</header>
+
+		<!-- ##############################    MAIN    ############################## -->
+		<main class="mrg-medium-bottom">
+			<!-- ##############################    TABS    ############################## -->
+			<div class="tabs">
+				<span class="tabs__item tabs__item--active">Ongoing</span>
+				<span class="tabs__item">Auction results</span>
+			</div>
+
+			<!-- ##############################    POSTS    ############################## -->
+			<section class="posts">
+				<div class="grid grid--2-cols">
+					<div class="filter">
+						<form
+							action="#"
+							class="filter__container mrg-small-bottom"
+							id="filterForm"
+						>
+							<div class="filter__heading">
+								<h2 class="posts__heading">Filter by</h2>
+								<button class="btn-filter">Clear all</button>
+							</div>
+							<div class="filter__style">
+								<p class="filter__text">Style</p>
+								<fieldset class="filter__container">
+									<ul>
+										<li>
+											<input type="checkbox" id="Aaaa" />
+											<label for="Aaaa">Aaaa</label>
+										</li>
+									</ul>
+								</fieldset>
+							</div>
+							<div class="filter__bet">
+								<p class="filter__text">Current bet</p>
+								<fieldset class="filter__bets">
+									<ul>
+										<li>
+											<input type="number" id="betFrom" placeholder="from" />
+										</li>
+										<li>
+											<input type="number" id="betTo" placeholder="to" />
+										</li>
+									</ul>
+								</fieldset>
+							</div>
+							<div class="filter__search">
+								<p class="filter__text">Search by</p>
+								<fieldset class="filter__author-search">
+									<ul>
+										<li>
+											<input type="text" id="authorName" placeholder="author" />
+										</li>
+										<li>
+											<input
+												type="text"
+												id="paintingName"
+												placeholder="painting"
+											/>
+										</li>
+									</ul>
+								</fieldset>
+							</div>
+						</form>
+						<button type="submit" form="filterForm" class="btn-submit">
+							New auction
+						</button>
+					</div>
+					<div class="posts-container">
+						<div class="post post--ongoing">
+							<figure class="post__img">
+								<img src='./img/posts/post1.png' alt='Painting: Cat at the
+								table'/ >
+							</figure>
+							<ul class="post__description">
+								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
+								<li class="post__text">author</li>
+								<li class="post__text">style</li>
+								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
+								<li class="post__text">buy now for: 5000</li>
+								<li class="post__text">current bet: 150</li>
+								<li>
+									<button class="btn-post btn-post--orange">Place a bet</button>
+								</li>
+							</ul>
+						</div>
+						<div class="post post--ongoing">
+							<figure class="post__img">
+								<img src='./img/posts/post2.png' alt='Painting: Cat at the
+								table'/ >
+							</figure>
+							<ul class="post__description">
+								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
+								<li class="post__text">author</li>
+								<li class="post__text">style</li>
+								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
+								<li class="post__text">buy now for: 5000</li>
+								<li class="post__text">current bet: 150</li>
+								<li>
+									<button class="btn-post btn-post--orange">Place a bet</button>
+								</li>
+							</ul>
+						</div>
+						<div class="post post--ongoing">
+							<figure class="post__img">
+								<img src='./img/posts/post2.png' alt='Painting: Cat at the
+								table'/ >
+							</figure>
+							<ul class="post__description">
+								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
+								<li class="post__text">author</li>
+								<li class="post__text">style</li>
+								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
+								<li class="post__text">buy now for: 5000</li>
+								<li class="post__text">current bet: 150</li>
+								<li>
+									<button class="btn-post btn-post--orange">Place a bet</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<!-- ##############################    FOOTER    ############################## -->
+		<footer class="footer">
+			<ul>
+				<li class="footer__item">
+					<img
+						src="./img/footer/logo.svg"
+						alt="Mona-lisa website logo"
+						class="footer__logo"
+					/>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="20"
+							fill="#707070"
+							viewBox="0 0 256 256"
+						>
+							<path
+								d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM96,128a32,32,0,0,0,57.6,19.2,8,8,0,0,1,12.8,9.61,48,48,0,1,1,0-57.62,8,8,0,0,1-12.8,9.61A32,32,0,0,0,96,128Z"
+							></path>
+						</svg>
+						2023 Artmart
+					</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Terms of Use</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Privacy Policy</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Security</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Conditions of sale</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">ACA Seller`s Agreement</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Buyer Guarantee</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link"
+						>Do not sell my personall information
+					</a>
+				</li>
+			</ul>
+			<div class="footer__social">
+				<p class="footer__heading">Contact us</p>
+				<address>
+					<a href="" class="footer__social-link">
+						<img src="./img/footer/twitter.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="./img/footer/link3.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="./img/footer/tiktok.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="./img/footer/spotify.svg" class="footer__img" alt="" />
+					</a>
+				</address>
+			</div>
+		</footer>
+
+		<!-- ############################  BALANCE-MODAL    ########################## -->
+		<div class="balance-modal hidden">
+			<div class="balance-modal__container">
+				<p class="balance-modal__text balance-modal__text--orange">
+					Our currency is LisaCoins
+				</p>
+				<img src="./img/modals/mona-lisa.png" alt="Image of Mona Lisa" />
+				<p class="balance-modal__text balance-modal__text--orange">
+					Your balance:
+				</p>
+				<span class="balance-modal__text">0</span>
+				<form>
+					<input type="number" placeholder="Balance replenishment amount" />
+					<button type="submit" class="btn-post btn-post--orange">
+						Top up balance
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- ############################  BALANCE-MODAL    ########################## -->
+		<div class="post-modal hidden">
+			<div class="post-modal__container">
+				<div class="post-modal__content">
+					<p>
+						<span class="post-modal__name" id="postName">Name</span
+						><span class="post-modal__style" id="postStyle">Style</span>
+					</p>
+					<img src="./img/posts/post3.png" alt="#" />
+				</div>
+				<div class="post-modal__description">
+					<div class="post-modal__header">
+						<img
+							src="./img/modals/profile.png"
+							alt="#"
+							class="post-modal__profile-img"
+						/>
+						<h2 class="post-modal__heading">PrinceCats</h2>
+					</div>
+					<p class="post-modal__info post-modal__info--description">
+						Description Description Description Description Description
+						Descriptionddsadas
+					</p>
+					<ul class="post-modal__info post-modal__info--info">
+						<li>
+							from:<span class="post-modal-data mrg-small-left"
+								>15.09.2023</span
+							>
+						</li>
+						<li>
+							to:<span class="post-modal-data mrg-small-left">25.09.2023</span>
+						</li>
+						<li>
+							buy now for:<span class="post-modal-data mrg-small-left"
+								>5000</span
+							>
+						</li>
+						<li>
+							current bet:<span class="post-modal-data mrg-small-left"
+								>150</span
+							>
+						</li>
+					</ul>
+					<form class="mrg-small-top" action="#">
+						<button class="btn-post btn-post--orange">Buy now</button>
+						<input type="number" placeholder="Your bet" />
+						<button class="btn-post btn-post--orange">Place a bet</button>
+					</form>
+					<div class="post-modal__error hidden">Insufficient funds</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- ############################  UPLOAD-MODAL    ########################## -->
+		<div class="post-upload hidden">
+			<div class="post-upload__container">
+				<p class="post-upload__text post-upload__text--orange">
+					Put your painting up for auction
+				</p>
+				<div class="grid-container grid-container--2-cols">
+					<ul class="post-upload__list">
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+						<li>
+							<img src="./img/posts/post2.png" alt="" />
+							<div>
+								<span class="post-modal__name">Name</span
+								><span class="post-upload__style">Style</span>
+							</div>
+						</li>
+					</ul>
+					<form class="post-upload__data">
+						<label for="#">Auction end date</label>
+						<input type="date" />
+						<label for="#">Initial bid</label>
+						<input type="number" placeholder="100" />
+						<label for="#">Amount to buy immediately</label>
+						<input type="number" placeholder="3000" />
+						<button class="btn-upload btn-upload--orange">
+							Create auction
+						</button>
+						<div class="post-upload__error hidden">Maximum 30 days</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- ##########################  PAINTING UPLOAD   ########################## -->
+		<div class="painting-upload hidden">
+			<div class="painting-upload__container">
+				<form action="upload.php" method="POST" enctype="multipart/form-data">
+					<div class="painting-upload__header">
+						<input
+							type="file"
+							id="photo-upload"
+							accept=".png, .jpg, .jpeg"
+							style="display: none"
+						/>
+						<label for="photo-upload" class="painting-upload__select-img"
+							>Select an Image</label
+						>
+					</div>
+					<div class="painting-upload__body">
+						<input
+							type="text"
+							id="paint-name"
+							name="name"
+							placeholder="Name:"
+						/>
+						<input
+							type="text"
+							id="paint-description"
+							name="about"
+							placeholder="Description:"
+						/>
+						<select id="paint-style" name="style_id">
+							<option value="">Style: &darr;</option>
+						</select>
+						<button class="btn-post btn-post--orange">Publish</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</body>
+</html>

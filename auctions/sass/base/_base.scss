@@ -1,0 +1,51 @@
+/* 
+
+COLORS:
+
+main-color: #EA7462
+primary-color: #E36F2D
+light-orange: rgba(234, 116, 98, 0.55)
+
+white: #fff
+black: #000000
+
+dark-grey: rgba(0, 0, 0, 0.7)
+medium-grey: rgba(0, 0, 0, 0.5)
+medium-grey-2: rgba(136, 136, 136, 0.4)
+light-grey: #707070
+light-grey2: #DBDBDB
+
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+	list-style: none;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 62.5%; // 1 rem = 10px, 10 px / 16 px = 62.5%
+	@include respond(big-desk) {
+		font-size: 56.25%;
+	}
+	@include respond(normal-desk) {
+		font-size: 50%;
+	}
+	@include respond(small-desk) {
+		font-size: 43.75%;
+	}
+	@include respond(tab-land) {
+		font-size: 37.5%;
+	}
+	@include respond(tab-port) {
+		font-size: 31.25%;
+	}
+}

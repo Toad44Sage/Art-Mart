@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../css/profile.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="../JS/userhead.js"></script>
+	<script src="../JS/profile.js"></script>
+
+</head>
+
+
+<body>
+
+	<!-- Navigation -->
+	<nav class="navigation">
+		<div class="nav-content">
+			<ul class="left-nav">
+				<li><a class="nav-item-link" href="../../newsfeed/HTML/news.html">Home</a></li>
+				<li><a class="nav-item-link" href="../../auctions/auctions.html">Auctions</a></li>
+			</ul>
+			<div class="search-guide">
+				<span class="search-icon"></span>
+				<input type="text" class="search-input" placeholder="Search">
+				<ul class="search-results"></ul>
+			</div>
+			<ul class="right-nav">
+				<li><span id="balance">0</span><img src="../img/mona-lisa 2.png" style="height: 20px; width: 17px;"
+						alt="Icon" /></li>
+				<li class="nav-item-plus"><img src="../img/plus 1.svg" style="height: 39px; width: 39px;" alt="Logo" /></li>
+				<div id="modal" class="modal" style="display: none;">
+					<div class="modal-content">
+						<form action="upload.php" method="POST" enctype="multipart/form-data">
+							<div class="modal-header">
+								<div class="upload-photo">
+									<input type="file" id="photo-upload" accept=".png, .jpg, .jpeg" style="display: none;">
+									<label for="photo-upload" class="select-image">Select an Image</label>
+								</div>
+							</div>
+							<div class="modal-body">
+								<div>
+									<label for="paint-name">Name:</label>
+									<input type="text" id="paint-name" name="name">
+								</div>
+								<div>
+									<label for="paint-description">Description:</label>
+									<input type="text" id="paint-description" name="about">
+								</div>
+								<div>
+									<label for="paint-style">Style:</label>
+									<select id="paint-style" name="style_id">
+
+									</select>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button class="publish-button">Publish</button>
+							</div>
+						</form>
+					</div>
+				</div>
+				<li class="nav-item-notif"><img src="../img/notif0.png" style="height: 30px; width: 30px;" alt="Logo" /></a>
+				</li>
+				<li class="nav-item-profile">
+					<img class="miniprofile-pic" alt="Mini Profile" />
+					<div class="dropdown">
+						<a class="profilelink" href="../../profile/HTML/profile.html">Profile</a>
+						<a class="settings" href="#">Settings</a>
+						<a class="exit" href="#">Log Out</a>
+					</div>
+				</li>
+
+			</ul>
+			<script>
+				var navItemPlus = document.querySelector('.nav-item-plus');
+				var modal = document.createElement('div');
+				modal.classList.add('modal');
+				modal.style.width = '794px';
+				modal.style.height = '919px';
+
+				navItemPlus.addEventListener('click', function () {
+					document.body.appendChild(modal);
+				});
+			</script>
+		</div>
+	</nav>
+
+	<main>
+
+		<!-- Profile -->
+		<header>
+
+			<div class="header-wrap">
+				<div class="profile-pic">
+					<img id="profile-picture" alt="profile-logo">
+				</div>
+
+				<div class="profile-info">
+					<div class="title-row">
+						<h1 id="profile-login"></h1>
+						<button class="primary"></button>
+					</div>
+					<div class="details-row">
+						<ul>
+							<li><span id="profile-posts"></span> posts</li>
+							<li><span id="profile-followers"></span> followers</li>
+							<!-- HTML для модального окна -->
+							<div id="followers-modal" class="modal">
+								<div class="modal-content">
+									<h2 class="followers_modal_text">Followers</h2>
+									<ul id="followers-list"></ul>
+
+									<div id="no-more-followers" style="display: none;">Подписчиков больше нет</div>
+								</div>
+							</div>
+							<li><span id="profile-following"></span> following</li>
+						</ul>
+					</div>
+					<div class="details-last-row">
+						<h2 id="profile-username">
+							<span id="name"></span>
+							<span id="surname"></span>
+						</h2>
+					</div>
+				</div>
+
+			</div>
+			<div id="profile-desc"></div>
+		</header>
+		<!-- Tab item`s 	-->
+
+		<div class="tabs">
+			<div class="tab-item activetab">
+				<img src="../img/grid.svg" alt="Logo" /><span>POSTS</span>
+			</div>
+			<div class="tab-item">
+				<img src="../img/profileicon.svg" alt="MiniProfileIcon" /><span>BOUGHT</span>
+			</div>
+		</div>
+
+		<!-- Gallery -->
+		<div class="gallery">
+		</div>
+
+		<!-- Bought paintings -->
+		<div class="Bought" style="display:none">
+		</div>
+
+	</main>
+
+	<!--------------- privacy settings modal ----------------->
+	<div class="privacyModal">
+		<div class="modal-content">
+			<span>Change User Details</span>
+			<form>
+				<div class="input-item">
+					<input type="password" id="input1" name="currPass" placeholder="Current password" required />
+				</div>
+				<div class="hr-line">
+					<hr class="pass-line">
+				</div>
+				<div class="input-item">
+					<input type="text" id="input2" name="newEmail" minlength="8" maxlength="32" placeholder="New email">
+				</div>
+				<div class="input-item">
+					<input type="password" id="input3" name="newPass" minlength="8" maxlength="32" placeholder="New password">
+				</div>
+				<div class="input-item">
+					<input type="password" id="input4" name="repeatPass" minlength="8" maxlength="32"
+						placeholder="Repeat password">
+				</div>
+				<button type="submit">Confirm</button>
+			</form>
+			<div id="privacyMessage"></div>
+		</div>
+	</div>
+
+
+	<!--------------- edit profile details modal --------->
+	<div class="editModal">
+		<div class="modal-content">
+			<form>
+
+				<div class="input-group1">
+					<div class="input-image">
+						<img src="../IMG/profile1.png" alt="imageLoader" id="imageClick">
+						<input type="file" accept="image/*" id="newImg-input" style="display: none">
+					</div>
+					<div class="input-items2">
+						<div class="input-item">
+							<input type="text" maxlength="32" placeholder="Name" name="inputName">
+						</div>
+						<div class="input-item">
+							<input type="text" maxlength="32" placeholder="Surname" name="inputSurname">
+						</div>
+					</div>
+				</div>
+
+				<div class="input-group2">
+					<div class="input-item">
+						<input type="date" maxlength="12" placeholder="Date of birth" name="inputDOB">
+					</div>
+					<div class="input-item">
+						<input type="text" maxlength="32" placeholder="Country" name="inputCountry">
+					</div>
+					<div class="input-item">
+						<textarea maxlength="150" placeholder="About me" name="inputDesc"></textarea>
+					</div>
+				</div>
+
+				<button type="submit">Confirm</button>
+
+			</form>
+			<div class="error" id="editMessage">Данные не изменились</div>
+		</div>
+	</div>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,151 @@
+.filter {
+	background-color: $color-white;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	&__container {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		max-width: 28.8rem;
+	}
+	&__heading {
+		display: flex;
+		gap: 5.5rem;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__style {
+		line-height: 1.1;
+		color: $color-grey-dark2;
+		width: 100%;
+		& ul {
+			display: flex;
+			flex-direction: column;
+			gap: 7px;
+		}
+		& li {
+			display: flex;
+			align-items: center;
+			gap: 15px;
+			padding-left: 5px;
+			&:first-child {
+				padding-top: 9px;
+			}
+			&:last-child {
+				padding-bottom: 9px;
+			}
+			@include respond(tab-land) {
+				&:first-child {
+					padding-top: 6px;
+				}
+				&:last-child {
+					padding-bottom: 6px;
+				}
+			}
+			@include respond(tab-port) {
+				&:first-child {
+					padding-top: 3px;
+				}
+				&:last-child {
+					padding-bottom: 3px;
+				}
+			}
+		}
+		& input {
+			font-size: 2rem;
+			width: 20px;
+			height: 20px;
+			@include respond(small-desk) {
+				width: 17px;
+			}
+			@include respond(tab-land) {
+				width: 14px;
+			}
+			@include respond(tab-port) {
+				width: 13px;
+			}
+		}
+		& fieldset {
+			border: none;
+			border-top: 3px solid $color-grey-light2;
+			border-bottom: 3px solid $color-grey-light2;
+			max-height: 22rem;
+			overflow-y: auto;
+			&::-webkit-scrollbar {
+				width: 0.6rem;
+			}
+			&::-webkit-scrollbar-track {
+				background: $color-grey-light2;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: $color-grey-dark;
+				border-radius: 4px;
+				width: 0.3rem;
+			}
+		}
+	}
+	&__bet {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		width: 100%;
+		& ul {
+			display: flex;
+			gap: 2.6rem;
+		}
+		& input {
+			font-size: 2.4rem;
+			height: 3.8rem;
+			max-width: 13rem;
+			border-radius: 4px;
+			border: 1px solid $color-grey-light2;
+			&[type='number'] {
+				padding-left: 9px;
+				color: $color-grey-dark2;
+			}
+			&:focus,
+			&:active {
+				outline: 1px solid $color-grey-dark2;
+			}
+		}
+		& fieldset {
+			border: none;
+		}
+	}
+	&__search {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		& ul {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+		}
+		& input {
+			font-size: 2.4rem;
+			max-width: 28.6rem;
+			width: 100%;
+			height: 3.8rem;
+			border-radius: 4px;
+			border: 1px solid $color-grey-light2;
+			&[type='text'] {
+				padding-left: 9px;
+				color: $color-grey-dark2;
+			}
+			&:focus,
+			&:active {
+				outline: 1px solid $color-grey-dark2;
+			}
+		}
+		& fieldset {
+			border: none;
+		}
+	}
+	&__text {
+		font-size: 2.4rem;
+		color: $color-grey-dark2;
+		margin-bottom: 0.5rem;
+	}
+}

@@ -1,0 +1,621 @@
+@import url("./reset.css");
+
+@font-face {
+	font-family: "FranklinGothicBook";
+	src: url("../FONT/FranklinGothicBookRegular.ttf");
+	font-style: normal;
+	font-weight: 400;
+	color: #000000;
+	line-height: 20px;
+}
+
+body {
+	font-family: "FranklinGothicBook", sans-serif;
+	font-size: 24px;
+	margin: 0 auto;
+	max-width: 1440px;
+}
+
+
+
+/* <------------- Navigtaion ---------------> */
+.navigation {
+	top: 0;
+	position: sticky;
+	z-index: 3;
+	width: 100%;
+	background: white;
+}
+
+.search-input {
+	max-width: 215px;
+	width: 100%;
+	height: 25px;
+	font-size: 14px;
+	border: 1px solid hsl(100, 0%, 80%);
+	border-radius: 3px;
+	background-image: url("../IMG/Vector_search_icon.svg");
+	background-repeat: no-repeat;
+	background-position: center;
+	background-position-x: 70px;
+}
+
+.search-guide {
+	width: 100%;
+	max-width: 215px;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.search-input:focus,
+.search-input:not(:placeholder-shown) {
+	outline-color: hsl(0, 0%, 85%);
+	background: none;
+}
+
+.search-input:active {
+	background: none;
+}
+
+
+.search-input::placeholder {
+	color: hsl(0, 0%, 30%);
+	text-align: center;
+}
+
+.nav-content {
+	margin: 0 35px;
+	height: 95px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.left-nav {
+	display: flex;
+	align-items: center;
+}
+
+.right-nav {
+	display: flex;
+	align-items: center;
+}
+
+.left-nav li {
+	margin-right: 30px;
+}
+
+
+.left-nav li a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	color: #000000;
+}
+
+.left-nav li a:hover {
+	color:hsl(0, 0%, 65%);
+}
+
+.left-nav li a img {
+	margin-left: 15px;
+}
+
+
+.right-nav {
+	display: flex;
+	align-items: center;
+}
+
+.right-nav li {
+	display: flex;
+	align-items: center;
+}
+
+.right-nav li {
+	margin-left: 19px;
+}
+
+.notification-icon--active img {
+	content: url('../IMG/notif1.png');
+}
+
+.nav-item-profile {
+	cursor: pointer;
+	border-radius: 50%;
+}
+
+.nav-item-plus img {
+	cursor: pointer;
+}
+
+.miniprofile-pic {
+	display: block;
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+}
+
+.search-results li a img {
+	width: 42px;
+	height: 42px;
+}
+/* <----------------Filter list ------------------->*/
+
+.style-list {
+	position: static;
+	float: right;
+	margin: 14px 55px 0 0;
+	font-size: 20px;
+	width: 100%;
+	max-width: 274px;
+	height: auto;
+	font-size: 20px;
+	font-family: 'Inter';
+}
+
+.styles {
+	color: rgba(0, 0, 0, 0.5);
+	line-height: 24px;
+	font-family: 'Inter', sans-serif;
+	padding-bottom: 17px;
+}
+
+.default-list {
+	width: 100%;
+	height: 40px;
+	border: 1px solid #DBDBDBDB;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	background: #DBDBDB;
+	color: #FFFFFF;
+	letter-spacing: -0.006em;
+	cursor: pointer;
+	font-size: 20px;
+	text-align: left;
+	padding-left: 9px;
+}
+
+.default-list:hover {
+	color: hsl(0, 0%, 30%);
+}
+
+.filter-list {
+	position: absolute;
+	list-style-type: none;
+	border: 1px solid #DBDBDB;
+	background: #FFFFFF;
+	overflow-y: scroll;
+	max-height: 370px;
+	width: 274px;
+}
+
+.filter-list li {
+	padding: 0 0 20px 9px;
+}
+
+.filter-list li:first-child {
+	margin-top: 10px;
+}
+
+.style-item {
+	text-decoration: none;
+	font-family: 'Inter';
+	font-size: 20px;
+	color: rgba(0, 0, 0, 0.5);
+	letter-spacing: -0.006em;
+}
+
+
+.filter-list::-webkit-scrollbar {
+	width: 7px;
+	height: 36px;
+	background: #DBDBDB;
+}
+
+.filter-list::-webkit-scrollbar-thumb {
+	background: #FFFFFF;
+}
+
+.filter-list .style-item:hover {
+	color: rgba(0, 0, 0, 0.2);
+}
+
+
+/* <------------- Publications ---------------> */
+.post {
+	width: auto;
+	height: auto;
+	max-width: 1000px;
+	max-height: 1100px;
+	font-size: 20px;
+	margin: 0 0 60px 57px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.post-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 16px;
+}
+
+.author-avatar {
+	width: 42px;
+	height: 42px;
+	cursor: pointer;
+}
+
+.post-header .author-info {
+	display: flex;
+	align-items: center;
+}
+
+
+.post-titles{
+	color: #00000099;
+	font-family: "Inter", sans-serif;
+	display: flex;
+	flex-direction: row;
+}
+
+
+.post-titles span {
+	padding: 0 7px 0 11px;
+}
+
+.author-info img {
+	margin-right: 9px;
+}
+
+.post-img-block {
+	cursor: pointer;
+	background-color: rgb(231, 228, 228, 0.5);
+}
+
+.post-image {
+	margin: 0 auto;
+	max-width: 100%;
+	height: auto;
+	display: block;
+}
+
+
+.post-footer {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 14px 5px 0 5px;
+}
+
+.likes,
+.comments {
+	display: flex;
+	align-items: center;
+	padding: 1px 6px;
+}
+
+
+
+.likes-icon {
+	width: 35px;
+	height: 35px;
+	content: url('../img/love0.svg')
+}
+
+.active{
+	content: url('../IMG/love.svg');
+}
+
+.comments-icon {
+	width: 35px;
+	height: 35px;
+}
+
+#likes-count,
+#comments-count {
+	margin-right: 10px;
+	color: hsl(100, 0%, 70%);
+}
+
+.likes-btn,
+.comments-btn {
+	border: 1px solid hsl(100, 0%, 89%);
+	background: hsl(100, 0%, 95%);
+	font-size: inherit;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	border-radius: 10px;
+}
+
+
+.likes-btn:hover {
+	background-color: hsl(100, 0%, 88%);
+}
+
+.comments-btn:hover {
+	background-color: hsl(100, 0%, 88%);
+}
+
+
+/* <----------------back button -------------------> */
+
+.back-button {
+	right: 5%;
+	bottom: 20px;
+	position: fixed;
+}
+
+.press-back {
+	border: 1px solid #DBDBDB;
+	border-radius: 50%;
+	width: 45px;
+	height: 45px;
+	bottom: 20px;
+	background-color: #FFFFFF;
+	cursor: pointer;
+}
+
+.press-back:hover{
+	background: hsl(0, 0%, 95%); 
+}
+
+.arrow {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+
+/* <-------------- всякая выпадающая ерунда ---------------> */
+
+.dropdown {
+	position: absolute;
+	top: 75px;
+	right: 20px;
+	background-color: white;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	display: none;
+	z-index: 1;
+	padding: 5px 5px;
+}
+
+.dropdown a {
+	text-decoration: none;
+	font-size: 14px;
+	font-family: "Inter";
+	color:rgba(0, 0, 0, 0.9);
+	display: block;
+	padding: 4px;
+}
+
+.dropdown a:hover {
+	color: rgba(0, 0, 0, 0.4);
+}
+
+.dropdown .exit {
+	color: #E36F2D;
+}
+
+
+/* <-------- Privacy settings modal --------> */
+
+.privacyModal {
+	overflow-y: auto;
+	display: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: rgba(0, 0, 0, 0.7);
+	font-family: "Inter";
+}
+
+.privacyModal .modal-content {
+	margin: 35px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow-y: auto;
+	width: 730px;
+	height: 770px;
+	font-family: "Inter";
+	font-weight: 400;
+	background-color: #FFFFFF;
+	border-radius: 30px;
+	box-shadow: 2px 2px 20px hsl(0, 0%, 50%);
+}
+
+.privacyModal .modal-content form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.privacyModal .input-item input {
+	display: flex;
+	flex-direction: column;
+	width: 498px;
+	height: 54px;
+	border: 1px solid #E8E8E8;
+	border-radius: 10px;
+	padding: 17px 10px;
+	font-size: 18px;
+}
+
+
+.privacyModal .input-item:not(:first-child) {
+	margin-bottom: 48px;
+}
+
+.privacyModal .input-item input::placeholder {
+	color: rgba(0, 0, 0, 0.5);
+}
+
+.privacyModal .modal-content button[type="submit"] {
+	width: 567px;
+	height: 69px;
+	cursor: pointer;
+	box-shadow: 0px 10px 30px #FFB7D5;
+	background-color: #EA7462;
+	color: #FFFFFF;
+	border-radius: 2.8px;
+	font-size: 32px;
+	line-height: 19px;
+	text-align: center;
+}
+
+.privacyModal .modal-content button[type="submit"]:hover {
+	background: #FF6347;
+	box-shadow: 0px 10px 30px #B22222;
+	border-radius: 4.8px;
+}
+
+.hr-line .pass-line {
+	width: 480px;
+	height: 0px;
+	border: 1px solid #E36F2D;
+	margin: 54px 0 59px 0;
+}
+
+.privacyModal .modal-content span {
+	font-size: 24px;
+	color: #E36F2D;
+	margin: 32px 0 48px 0;
+}
+
+#privacyMessage {
+	display: block;
+	width: 100%;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	font-weight: 400;
+	text-align: center;
+	margin-top: 20px;
+}
+
+#privacyMessage.error {
+	color: #EA7462;
+	background-color: rgba(234, 116, 98, 0.55);
+}
+
+#privacyMessage.warning {
+	color: white;
+	background-color: rgba(100, 100, 100, 0.2);
+}
+
+#privacyMessage.success {
+	color: #008000;
+	background-color: #cfc;
+}
+
+/* <------------ Publication upload modal -------------> */
+/* Оформление модального окна */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal .modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.publish-button {
+  margin: 0 auto;
+  width: 63.48%;
+  height: 34.7%;
+  background: #ea7462;
+  box-shadow: 0px 10px 30px #ffb7d5;
+  border-radius: 2.8px;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #e36f2d;
+}
+
+.modal-header h3 {
+  margin: 0;
+}
+
+.modal-body {
+  padding: 20px 0;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.cancel-button,
+.submit-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.cancel-button:hover,
+.submit-button:hover {
+  background-color: #ddd;
+}
+
+.upload-photo {
+  position: relative;
+  width: 549px;
+  height: 359px;
+  background: #d9d9d9;
+  cursor: pointer;
+}
+
+.select-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 302px;
+  height: 48px;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+  color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-photo:hover {
+  opacity: 0.8;
+}

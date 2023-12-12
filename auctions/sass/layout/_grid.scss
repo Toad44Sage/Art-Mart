@@ -1,0 +1,19 @@
+.grid {
+	margin: 0 auto;
+	display: grid;
+	align-items: start;
+	column-gap: 5rem;
+	padding: 2.5rem 4rem 0 5.5rem;
+	&--2-cols {
+		grid-template-columns: 31.8rem 1fr;
+	}
+}
+
+.grid-container {
+	display: grid;
+	column-gap: 4.5rem;
+	padding: 0 4rem 2.8rem 2.5rem;
+	&--2-cols {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

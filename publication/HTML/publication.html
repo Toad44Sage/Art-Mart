@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../CSS/publication.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+	<script src="../JS/publication.js"></script>
+	<script src="../JS/decodeURL.js"></script>
+	<script src="../JS/likes.js"></script>
+	<script src="../JS/comments.js"></script>
+
+
+	<title>Publication</title>
+
+</head>
+
+<body>
+	<!------------------- publication ---------------->
+	<main class="publication">
+		<button class="exit-btn">Exit</button>
+
+		<section class="post">
+			<article class="post-header">
+				<h1></h1>
+				<h2></h2>
+			</article>
+			<div class="post-img">
+				<img class="post-image">
+			</div>
+			<div class="post-footer">
+				<button class="likes-count">
+					<div class="likes">
+						<span class="likescount"></span>
+						<img class="likes-icon" style="width: 35px; height: 35px;">
+					</div>
+				</button>
+				<button class="comments-count">
+					<div class="comms">
+						<span class="commscount"></span>
+						<img src="../img/comment.png" style="width: 35px; height: 35px;">
+					</div>
+				</button>
+			</div>
+		</section>
+
+		<!------------------------- comments ---------------------->
+		<section id="testcom" class="comments">
+			<article class="comments-header">
+				<img class="author-profile-img" style="height: 42px; width: 42px;">
+				<h3></h3>
+			</article>
+
+			<div class="post-description">
+			</div>
+
+			<hr class="orange-line first">
+
+		<!----------- comments container -------------->
+			<div class="comments-container">
+			</div>
+
+			<hr class="orange-line sec">
+
+			<form id="comment-form" action="/submit-comment">
+				<textarea id="comment" maxlength="128" placeholder="Comment..."></textarea>
+			</form>
+
+		</section>
+	</main>
+
+</body>
+
+</html>

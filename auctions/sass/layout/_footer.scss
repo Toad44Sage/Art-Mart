@@ -1,0 +1,79 @@
+.footer {
+	bottom: 0;
+	font-size: 1.3rem;
+	text-wrap: nowrap;
+	border-top: 1px solid $color-grey-light2;
+	padding: 1.4rem 6.8rem 3.9rem 3.2rem;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+
+	& ul {
+		display: flex;
+		gap: 1rem;
+		align-items: center;
+	}
+	&__social {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		& address {
+			display: flex;
+			gap: 2rem;
+		}
+		&-link,
+		&-link:link,
+		&-link:visited {
+			transition: all 0.3s;
+		}
+		&-link:hover,
+		&-link:active {
+			transform: scale(1.2);
+		}
+	}
+	&__img {
+		width: 20px;
+		height: auto;
+
+		@include respond(small-desk) {
+			width: 16px;
+		}
+		@include respond(tab-land) {
+			width: 14px;
+		}
+		@include respond(tab-port) {
+			width: 12px;
+		}
+	}
+	&__logo {
+		height: auto;
+		width: 60px;
+		@include respond(small-desk) {
+			width: 48px;
+		}
+		@include respond(tab-land) {
+			width: 43px;
+		}
+		@include respond(tab-port) {
+			width: 33px;
+		}
+	}
+	&__link {
+		&,
+		&:visited,
+		&:link {
+			transition: all 0.2s;
+			display: flex;
+			align-items: center;
+			color: $color-grey-light;
+		}
+		&:hover,
+		&:active {
+			font-size: 1.4rem;
+			color: $color-primary;
+			box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
+			transform: scale(1.05);
+		}
+	}
+}

@@ -1,0 +1,260 @@
+@import url("./reset.css");
+
+@font-face {
+	font-family: "FranklinGothicBook";
+	src: url("../FONT/FranklinGothicBookRegular.ttf");
+	font-style: normal;
+	font-weight: 400;
+	color: #000000;
+	line-height: 20px;
+}
+
+.publication {
+	position: relative;
+	max-width: 1440px;
+	display: flex;
+	margin: 0 auto;
+}
+
+
+.post,
+.comments {
+	flex: 1;
+}
+
+/* <----------- button -----------> */
+.exit-btn {
+	position:absolute;
+	top: 14px;
+	right: 0;
+	width: 100%;
+	max-width: 71px;
+	height: 30px;
+
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-weight: 600;
+	font-size: 14px;
+	line-height: 18px;
+	padding: 6px 24px;
+	gap: 10px;
+	color: #FFFFFF;
+	background: rgba(234, 116, 98, 0.9);
+	border-radius: 4px;
+
+	cursor: pointer;
+}
+
+
+/* <------------------- Posts ----------------> */
+
+.post {
+	max-width: 1000px;
+	height: auto;
+	width: 100%;
+	margin: 70px 0 62px 35px;
+	border-top: 2px solid rgba(0, 0, 0, 0.1);
+	border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+	border-radius: 20px;
+	padding: 10px 0;
+	mask-border-width: 2px;
+}
+
+.post-img {
+	max-width: 1000px;
+	width: 100%;
+	max-height: 800px;
+	border-radius: 8px;
+}
+
+.post-image {
+	display: block;
+	object-fit: cover;
+	margin: 0 auto;
+	max-width: 1000px;
+	height: auto;
+}
+
+.post-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: 1000px;
+	margin-bottom: 22px;
+	line-height: 23px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.post-header h1 {
+	font-size: 20px;
+	margin-left: 12px;
+	font-family: "FranklinGothicBook";
+}
+
+.post-header h2 {
+	margin-right: 12px;
+	font-size: 18px;
+	font-family: "Inter";
+}
+
+
+.post-footer {
+	max-width: 1000px;
+	width: 100%;
+	margin-top: 21px;
+	padding: 0 13px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 20px;
+	line-height: 23px;
+}
+
+.likes,
+.comms {
+	display: flex;
+	align-items: center;
+	padding: 1px 6px;
+}
+
+.likes-count,
+.comments-count {
+	font-family: "FranklinGothicBook";
+
+	border: 1px solid hsl(100, 0%,89%);
+	background: hsl(100, 0%, 95%);
+	font-size: inherit;
+	transition: background-color 0.2s;
+	border-radius: 10px;
+}
+
+.likes-count {
+	cursor: pointer;
+}
+
+
+.likes-count:hover {
+	background: hsl(100, 0%, 93%);
+}
+
+
+.likescount,
+.commscount {
+	color: hsl(100, 0%, 70%);
+	margin-right: 10px;
+}
+
+
+.likes-icon {
+	content: url('../IMG/love0.svg');
+}
+
+.likes-icon.active {
+	content: url('../IMG/love.svg');
+}
+
+
+/* <----------------- comments --------------------> */
+
+.comments {
+	display: block;
+	margin: 75px 43px 10px 28px;
+	max-width: 334px;
+	width: 100%;
+	height: auto;
+}
+
+.comments-header {
+	display: flex;
+	align-items: center;
+	font-family: "FranklinGothicBook";
+	font-size: 20px;
+}
+
+.comments-header img {
+	margin-right: 12px;
+}
+
+
+.post-description {
+	margin-top: 23px;
+	font-family: "Inter";
+	font-size: 20px;
+	word-wrap: break-word;
+	hyphens: auto;
+	color: rgba(0, 0, 0, 0.8);
+	line-height: 28px;
+	letter-spacing: 0.25px;
+}
+
+.author-profile-img {
+	cursor: pointer;
+}
+
+.author-img {
+	cursor: pointer;
+	height: 42px;
+	width: 42px;
+}
+
+.comments-container {
+	overflow-y: auto;
+	height: 458px;
+}
+
+.comment {
+	margin: 0 7px 29px 0;
+	display: flex;
+	align-items: center;
+}
+
+.comment img {
+	margin-right: 13px;;
+}
+
+.comment-info {
+	display: flex;
+	flex-direction: column;
+	word-wrap: break-word;
+	max-width: 84%;
+}
+
+.comment-info .author {
+	font-family: "FranklinGothicBook", sans-serif;
+	font-size: 16px;
+	margin-bottom: 2px;
+}
+
+.comment-info .comment-desc {
+	font-family: "Inter", sans-serif;
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.6);
+}
+
+.orange-line {
+	width: 100%;
+	border: 1px solid #E36F2D;
+}
+
+.orange-line.first {
+	margin: 19px 0 24px 0;
+}
+
+.orange-line.sec {
+	margin: 19px 0 23px 0;
+}
+
+#comment-form, #comment {
+	width: 100%;
+	height: 80px;
+}
+
+#comment {
+	padding: 10px;
+	border: 1px solid rgba(0, 0, 0, 0.2);;
+	border-radius: 8px;
+	font-size: 18px;
+	color: rgba(0, 0, 0, 0.6);
+	resize: none;
+	outline: none;
+}

@@ -1,0 +1,31 @@
+.post {
+	display: flex;
+	justify-content: space-between;
+	gap: 4rem;
+	border: 1px solid $color-grey-light2;
+	border-radius: 4px;
+	padding: 2rem 6rem 2rem 2.4rem;
+	transition: all 0.3s;
+	align-items: center;
+	&__description {
+		display: flex;
+		flex-direction: column;
+		gap: 2.5rem;
+		width: 46.7rem;
+		max-width: 46.7rem;
+	}
+	&__img {
+		overflow: hidden;
+		display: block;
+		& img {
+			width: 100%;
+			max-width: 41.3rem;
+			height: auto;
+			object-fit: cover;
+			transition: all 0.3s;
+			&:hover {
+				transform: scale(1.1);
+			}
+		}
+	}
+}

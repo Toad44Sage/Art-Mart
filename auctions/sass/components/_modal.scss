@@ -1,0 +1,432 @@
+.balance-modal {
+	overflow-y: auto;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: $color-grey-dark2;
+	&__container {
+		@include absCenter;
+
+		padding: 3rem 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 62.9rem;
+		height: 76rem;
+		background-color: $color-white;
+		border-radius: 30px;
+		gap: 30px;
+		& input[type='number'] {
+			max-width: 46.7rem;
+			width: 100%;
+			height: 5.5rem;
+			border: 1px solid $color-grey-light2;
+			border-radius: 4px;
+			font-size: 2.4rem;
+			text-align: center;
+			&:focus,
+			&:active {
+				outline: 1px solid $color-grey-dark2;
+			}
+		}
+		& form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 3rem;
+			width: 100%;
+		}
+		& button {
+			height: 5.5rem;
+		}
+		& img {
+			max-width: 29.7rem;
+			height: auto;
+			@include respond(small-desk) {
+				width: 43%;
+			}
+			@include respond(tab-land) {
+				width: 40%;
+			}
+			@include respond(tab-port) {
+				width: 35%;
+			}
+		}
+	}
+	&__text {
+		font-size: 3.2rem;
+		line-height: 0.6;
+		font-weight: 400;
+		&--orange {
+			color: $color-primary;
+		}
+	}
+}
+
+.post-modal {
+	overflow-y: auto;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: $color-grey-dark2;
+	&__container {
+		@include absCenter;
+
+		width: 52%;
+		height: 64%;
+		background-color: $color-white;
+		border-radius: 10px;
+		gap: 30px;
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	&__content {
+		padding: 1.8rem 0 3rem 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.8rem;
+		& img {
+			max-width: 725px;
+			height: auto;
+			@include respond(big-desk) {
+				width: 660px;
+			}
+			@include respond(normal-desk) {
+				width: 580px;
+			}
+			@include respond(small-desk) {
+				width: 540px;
+			}
+			@media (max-width: 86em) {
+				width: 510px;
+			}
+			@media (max-width: 80em) {
+				width: 480px;
+			}
+			@include respond(tab-land) {
+				width: 400px;
+			}
+			@include respond(tab-port) {
+				width: 350px;
+			}
+		}
+		& p {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+	&__name {
+		font-size: 2.4rem;
+		line-height: 1.15;
+		color: $color-black;
+	}
+	&__style {
+		font-size: 1.8rem;
+		line-height: 1.15;
+		color: $color-grey-dark2;
+	}
+	&__heading {
+		font-size: 2rem;
+		font-weight: 400;
+		line-height: 1.1;
+	}
+	&__description {
+		padding: 1.5rem 2.3rem 7.5rem 0;
+		display: flex;
+		flex-direction: column;
+		max-width: 20rem;
+		gap: 2rem;
+	}
+	&__header {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 1rem;
+	}
+	&__profile-img {
+		width: 42px;
+		height: auto;
+		@include respond(big-desk) {
+			width: 38px;
+		}
+		@include respond(normal-desk) {
+			width: 34px;
+		}
+		@include respond(small-desk) {
+			width: 32px;
+		}
+		@include respond(tab-land) {
+			width: 28px;
+		}
+		@include respond(tab-port) {
+			width: 24px;
+		}
+	}
+	&__info {
+		font-size: 1.6rem;
+		&--description {
+			line-height: 1.75;
+			color: $color-grey-dark2;
+			max-height: 8.4rem;
+			overflow-y: auto;
+			&::-webkit-scrollbar {
+				width: 0.6rem;
+			}
+			&::-webkit-scrollbar-track {
+				background: $color-grey-light2;
+			}
+			&::-webkit-scrollbar-thumb {
+				background: $color-grey-dark;
+				border-radius: 4px;
+				width: 0.3rem;
+			}
+		}
+		&--info {
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			padding: 1.5rem 0;
+			border-top: 2px solid $color-primary;
+			border-bottom: 2px solid $color-primary;
+			line-height: 1.25;
+			color: $color-black;
+		}
+	}
+	& form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+		& button {
+			width: 100%;
+			height: 3.4rem;
+			padding: 0;
+			font-size: 2rem;
+		}
+		& input[type='number'] {
+			font-size: 1.6rem;
+			color: $color-grey-dark2;
+			padding-left: 9px;
+			border: 1px solid $color-grey-light2;
+			border-radius: 4px;
+			height: 2.7rem;
+			width: 100%;
+			&:focus {
+				outline: 1px solid $color-grey-dark2;
+			}
+		}
+	}
+	&__error {
+		width: 100%;
+		height: 4.4rem;
+		line-height: 4.4rem;
+		font-size: 1.8rem;
+		text-align: center;
+		vertical-align: center;
+		background-color: $color-error;
+		border-radius: 6px;
+		color: $color-primary;
+	}
+}
+
+.post-upload {
+	overflow-y: auto;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: $color-grey-dark2;
+	&__text {
+		text-align: center;
+		padding: 2.5rem 0 2rem 0;
+		font-size: 3.6rem;
+		line-height: 1.15;
+		&--orange {
+			color: $color-primary;
+		}
+	}
+	&__container {
+		@include absCenter;
+
+		background-color: $color-white;
+		width: 110rem;
+		height: 60rem;
+	}
+	&__list {
+		max-width: 51rem;
+		max-height: 49.3rem;
+		overflow-y: scroll;
+		background-color: $color-white;
+		border: 2px solid $color-grey-light2;
+		border-radius: 4px;
+		&::-webkit-scrollbar {
+			width: 0.6rem;
+		}
+		&::-webkit-scrollbar-track {
+			background: $color-grey-light2;
+		}
+		&::-webkit-scrollbar-thumb {
+			background: $color-grey-dark;
+			border-radius: 4px;
+			width: 0.3rem;
+		}
+		& li {
+			display: flex;
+			align-items: center;
+			padding: 1.5rem 0 1.5rem 1.5rem;
+			gap: 1.5rem;
+			transition: all 0.2s;
+			&:hover {
+				cursor: pointer;
+				background-color: $color-grey-light2;
+			}
+			& img {
+				width: 80px;
+				height: 80px;
+				object-fit: cover;
+				@include respond(normal-desk) {
+					width: 60px;
+					height: 60px;
+				}
+				@include respond(tab-land) {
+					width: 40px;
+					height: 40px;
+				}
+			}
+			& div {
+				display: flex;
+				flex-direction: column;
+				gap: 1.5rem;
+			}
+		}
+	}
+	&__name {
+		font-size: 2.8rem;
+		color: $color-black;
+	}
+	&__style {
+		font-size: 2.4rem;
+		color: $color-grey-light;
+	}
+	&__data {
+		font-size: 2.8rem;
+		line-height: 0.6;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 2rem;
+		max-width: 48rem;
+		& input {
+			width: 100%;
+			height: 6rem;
+			font-size: 2.8rem;
+			border: 1px solid $color-grey-light2;
+			border-radius: 4px;
+			&[type='date'],
+			&[type='number'] {
+				padding-left: 9px;
+				color: $color-grey-dark2;
+				&:focus {
+					outline: 1px solid $color-grey-dark2;
+				}
+			}
+		}
+	}
+	&__error {
+		width: 100%;
+		height: 5.5rem;
+		line-height: 5.5rem;
+		font-size: 3.2rem;
+		text-align: center;
+		vertical-align: center;
+		background-color: $color-error;
+		border-radius: 6px;
+		color: $color-primary;
+	}
+}
+
+.painting-upload {
+	overflow-y: auto;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 4;
+	background-color: $color-grey-dark2;
+	&__container {
+		@include absCenter;
+
+		background-color: $color-white;
+		width: 38%;
+		height: 85%;
+		padding: 5.7rem 12rem 9rem 12rem;
+		border-radius: 3rem;
+		& form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 2.3rem;
+		}
+	}
+	&__header {
+		width: 100%;
+	}
+	&__select-img {
+		text-wrap: nowrap;
+		display: block;
+		background-color: $color-grey-light2;
+		width: 100%;
+		text-align: center;
+		line-height: 26rem;
+		font-size: 4rem;
+		color: $color-white;
+		transition: all 0.3s;
+		&:hover {
+			cursor: pointer;
+			background-color: $color-grey-dark;
+			transform: scale(0.98);
+		}
+	}
+	&__body {
+		font-family: 'Inter';
+		font-size: 1.6rem;
+		display: flex;
+		flex-direction: column;
+		gap: 3.7rem;
+		border-top: 1px solid $color-primary;
+		width: 95%;
+		height: 85%;
+		padding: 3.7rem 0;
+		& input,
+		select {
+			font: inherit;
+			width: 100%;
+			height: 5.4rem;
+			border: 1px solid $color-grey-light2;
+			border-radius: 10px;
+			color: $color-grey-light;
+			padding-left: 1rem;
+			&:focus,
+			&:active {
+				outline: 1px solid $color-grey-dark2;
+			}
+		}
+	}
+	& button {
+		height: 5.9rem;
+		max-width: 100%;
+		margin: 0 auto;
+	}
+}
