@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 01 2023 г., 19:29
+-- Время создания: Дек 14 2023 г., 22:13
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -30,22 +30,22 @@ SET time_zone = "+00:00";
 CREATE TABLE `auctions` (
   `auction_id` int NOT NULL,
   `painting_id` int NOT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
+  `user_id` int NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   `start_price` decimal(12,2) NOT NULL,
   `buyout_price` decimal(12,2) DEFAULT NULL,
-  `increment` decimal(5,2) NOT NULL,
-  `final_bet_id` int DEFAULT NULL,
-  `winner_id` int DEFAULT NULL
+  `bet_id` int DEFAULT NULL,
+  `is_current` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Дамп данных таблицы `auctions`
 --
 
-INSERT INTO `auctions` (`auction_id`, `painting_id`, `start_date`, `end_date`, `start_price`, `buyout_price`, `increment`, `final_bet_id`, `winner_id`) VALUES
-(1, 1, '2023-05-07 02:57:30', '2023-05-09 03:57:30', '50.00', '320.00', '2.00', NULL, 39),
-(2, 2, '2023-05-05 03:57:30', '2023-05-10 03:57:30', '630.00', '700.00', '9.00', NULL, 39);
+INSERT INTO `auctions` (`auction_id`, `painting_id`, `user_id`, `start_date`, `end_date`, `start_price`, `buyout_price`, `bet_id`, `is_current`) VALUES
+(5, 12, 39, '2023-10-27', '2023-10-30', '20.50', '50.70', 8, 0),
+(6, 3, 39, '2023-10-29', '2023-10-31', '221.00', '505.00', 13, 0);
 
 -- --------------------------------------------------------
 
@@ -60,6 +60,22 @@ CREATE TABLE `bets` (
   `bet` decimal(10,2) NOT NULL,
   `bet_time` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `bets`
+--
+
+INSERT INTO `bets` (`bet_id`, `auction_id`, `user_id`, `bet`, `bet_time`) VALUES
+(4, 6, 40, '5.00', '2023-10-27 17:35:02'),
+(5, 6, 40, '17.00', '2023-10-27 17:37:04'),
+(6, 6, 40, '5054.30', '2023-10-27 18:15:09'),
+(7, 5, 40, '50.70', '2023-10-30 23:09:44'),
+(8, 5, 40, '50.70', '2023-10-30 23:25:09'),
+(9, 6, 39, '777.00', '2023-11-01 19:48:18'),
+(10, 6, 39, '777.00', '2023-11-01 19:51:22'),
+(11, 6, 40, '777.00', '2023-11-01 19:53:12'),
+(12, 6, 39, '777.00', '2023-11-01 19:55:32'),
+(13, 6, 39, '777.00', '2023-11-01 19:55:37');
 
 -- --------------------------------------------------------
 
@@ -86,7 +102,8 @@ INSERT INTO `comments` (`comment_id`, `painting_id`, `user_id`, `comment_datetim
 (4, 12, 39, '2023-05-25 23:04:36', 'sdgfsagfs'),
 (6, 12, 39, '2023-05-25 23:04:37', 'test'),
 (7, 12, 66, '2023-05-28 19:37:53', 'fewf4gh6j6kktekrdkm'),
-(8, 12, 67, '2023-05-30 23:56:09', 'ffffffff');
+(8, 12, 67, '2023-05-30 23:56:09', 'ffffffff'),
+(10, 2, 39, '2023-11-01 18:46:14', 'normik');
 
 -- --------------------------------------------------------
 
@@ -314,6 +331,41 @@ CREATE TABLE `likes` (
   `user_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Дамп данных таблицы `likes`
+--
+
+INSERT INTO `likes` (`painting_id`, `user_id`) VALUES
+(2, 39);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `notifications`
+--
+
+CREATE TABLE `notifications` (
+  `notification_id` int NOT NULL,
+  `user_id` int NOT NULL,
+  `message` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `icon` varchar(64) NOT NULL,
+  `is_viewed` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `notifications`
+--
+
+INSERT INTO `notifications` (`notification_id`, `user_id`, `message`, `icon`, `is_viewed`) VALUES
+(31, 39, 't bought your painting', 'images/users/39/39-8a51604daeeafc2a.jpg', 0),
+(32, 39, 't bought your painting', 'images/users/39/paintings/r_1.jpg', 1),
+(34, 40, 'You won the auction', 'images/users/39/39-8a51604daeeafc2a.jpg', 0),
+(35, 40, 'You won the auction', 'images/users/39/paintings/r_1.jpg', 0),
+(38, 40, 'r liked yor painting', 'images/users/40/paintings/t_2.jpg', 0),
+(54, 40, 'r commented your painting', 'images/users/40/paintings/t_2.jpg', 0),
+(55, 40, 'r subscribed to you', 'images/users/39/39-a5d3aa28ff7aa4c6.jpg', 0),
+(59, 40, 'you bet was outbit', 'images/users/39/r_1.jpg', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -337,9 +389,9 @@ CREATE TABLE `paintings` (
 --
 
 INSERT INTO `paintings` (`painting_id`, `name`, `style_id`, `author_id`, `path_to_paint`, `likes`, `comments`, `about`, `post_datetime`) VALUES
-(1, 'Paint 1 By TTTTTT', 1, 40, '/users/40/paintings/t_1.jpg', 0, 0, 'rsdhxdtrjxdj', '2023-03-08 23:48:01'),
-(2, 'Paint 2 by TTTTTT', 6, 40, '/users/40/paintings/t_2.jpg', 0, 0, 'rsn mftkrm', '2023-05-01 23:49:16'),
-(3, 'Paint 1 by RRRRRR', 3, 39, '/users/40/paintings/r_1.jpg', 0, 0, 'guluigtjgj', '2022-05-15 23:49:37'),
+(1, 'Paint 1 By TTTTTT', 1, 40, 'images/users/40/t_1.jpg', 0, 0, 'rsdhxdtrjxdj', '2023-03-08 23:48:01'),
+(2, 'Paint 2 by TTTTTT', 6, 40, 'images/users/40/t_2.jpg', 1, 2, 'rsn mftkrm', '2023-05-01 23:49:16'),
+(3, 'Paint 1 by RRRRRR', 3, 39, 'images/users/39/r_1.jpg', 0, 0, 'guluigtjgj', '2022-05-15 23:49:37'),
 (12, 'wew', 4, 39, 'images/users/39/39-8a51604daeeafc2a.jpg', 0, 7, 'zxzxzxwew', '2023-05-24 19:08:19');
 
 -- --------------------------------------------------------
@@ -437,7 +489,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `login`, `password`, `surname`, `name`, `email`, `profile_picture`, `birth_date`, `country_id`, `about`, `balance`, `create_date`) VALUES
-(39, 'r', '$2y$10$GLp29jTy0TcNR5HACFaHiuuDHH0e0BofhMviLYa3DDV3KOXmFVJWa', 'RRRRRR', 'rrrrrr', 'r@r', 'images/users/39/39-a5d3aa28ff7aa4c6.jpg', '1992-04-17', NULL, 'It\'s me, RRRRRR rrrrrr', '5389.50', '2023-05-06'),
+(39, 'r', '$2y$10$GLp29jTy0TcNR5HACFaHiuuDHH0e0BofhMviLYa3DDV3KOXmFVJWa', 'RRRRRR', 'rrrrrr', 'r@r', 'images/users/39/39-a5d3aa28ff7aa4c6.jpg', '1992-04-17', NULL, 'It\'s me, RRRRRR rrrrrr', '2646520.80', '2023-05-06'),
 (40, 't', '$2y$10$CpxZzsujx6G4f8XLGt3nUueHas/NWgVifZIr.AvLSLyzRCxYa7YAe', 'TTTTTT', 'tttttt', 't@t', 'images/default_profile_picture.jpg', '1998-05-02', NULL, 'It\'s me, TTTTTT tttttt', '9932.74', '2023-05-06'),
 (41, 'fin', '$2y$10$JrW/CvgTXlTHepygjNESgeg4tin3aqLHzdeIgDocYUpqmlecYWUKm', NULL, NULL, 'e@e', 'images/default_profile_picture.jpg', NULL, NULL, NULL, '0.00', '2023-05-08'),
 (42, 'xtfin', '$2y$10$GCIIJqpx9xoo.jmYYnkTKukYZ845tVPiehBI4tLIgxn8b0m6k2N1.', NULL, NULL, 'x@x', 'images/default_profile_picture.jpg', NULL, NULL, NULL, '0.00', '2023-05-09'),
@@ -456,8 +508,8 @@ INSERT INTO `users` (`user_id`, `login`, `password`, `surname`, `name`, `email`,
 ALTER TABLE `auctions`
   ADD PRIMARY KEY (`auction_id`),
   ADD KEY `auctions_ibfk_1` (`painting_id`),
-  ADD KEY `auctions_ibfk_2` (`final_bet_id`),
-  ADD KEY `auctions_ibfk_3` (`winner_id`);
+  ADD KEY `auctions_ibfk_2` (`bet_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Индексы таблицы `bets`
@@ -487,6 +539,13 @@ ALTER TABLE `countries`
 ALTER TABLE `likes`
   ADD PRIMARY KEY (`painting_id`,`user_id`),
   ADD KEY `likes_ibfk_2` (`user_id`);
+
+--
+-- Индексы таблицы `notifications`
+--
+ALTER TABLE `notifications`
+  ADD PRIMARY KEY (`notification_id`),
+  ADD KEY `notifications_ibfk_1` (`user_id`);
 
 --
 -- Индексы таблицы `paintings`
@@ -525,25 +584,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `auctions`
 --
 ALTER TABLE `auctions`
-  MODIFY `auction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `auction_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `bets`
 --
 ALTER TABLE `bets`
-  MODIFY `bet_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `bet_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT для таблицы `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `comment_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `countries`
 --
 ALTER TABLE `countries`
   MODIFY `country_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=199;
+
+--
+-- AUTO_INCREMENT для таблицы `notifications`
+--
+ALTER TABLE `notifications`
+  MODIFY `notification_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT для таблицы `paintings`
@@ -572,8 +637,8 @@ ALTER TABLE `users`
 --
 ALTER TABLE `auctions`
   ADD CONSTRAINT `auctions_ibfk_1` FOREIGN KEY (`painting_id`) REFERENCES `paintings` (`painting_id`) ON DELETE CASCADE ON UPDATE RESTRICT,
-  ADD CONSTRAINT `auctions_ibfk_2` FOREIGN KEY (`final_bet_id`) REFERENCES `bets` (`bet_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `auctions_ibfk_3` FOREIGN KEY (`winner_id`) REFERENCES `users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `auctions_ibfk_2` FOREIGN KEY (`bet_id`) REFERENCES `bets` (`bet_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `auctions_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ограничения внешнего ключа таблицы `bets`
@@ -597,6 +662,12 @@ ALTER TABLE `likes`
   ADD CONSTRAINT `likes_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Ограничения внешнего ключа таблицы `notifications`
+--
+ALTER TABLE `notifications`
+  ADD CONSTRAINT `notifications_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Ограничения внешнего ключа таблицы `paintings`
 --
 ALTER TABLE `paintings`
@@ -615,6 +686,35 @@ ALTER TABLE `subscribtions`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`country_id`) REFERENCES `countries` (`country_id`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+DELIMITER $$
+--
+-- События
+--
+CREATE DEFINER=`root`@`%` EVENT `end_auctions` ON SCHEDULE EVERY 1 DAY STARTS '2023-01-01 00:00:00' ENDS '2043-01-01 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO BEGIN
+
+INSERT INTO notifications (user_id, message, icon)
+SELECT auctions.user_id, CONCAT(users.login, ' bought your painting'), paintings.path_to_paint
+FROM auctions
+LEFT JOIN bets ON auctions.bet_id = bets.bet_id
+JOIN users ON bets.user_id = users.user_id
+JOIN paintings ON auctions.painting_id = paintings.painting_id
+WHERE is_current = true and end_date <= CURDATE();
+
+INSERT INTO notifications (user_id, message, icon)
+SELECT bets.user_id, 'You won the auction', paintings.path_to_paint
+FROM auctions
+LEFT JOIN bets ON auctions.bet_id = bets.bet_id
+JOIN paintings ON auctions.painting_id = paintings.painting_id
+WHERE is_current = true and end_date <= CURDATE();
+
+UPDATE auctions
+    SET is_current = false
+    WHERE is_current = true and end_date <= CURDATE();
+    
+END$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

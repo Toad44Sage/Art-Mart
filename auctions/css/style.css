@@ -443,7 +443,7 @@ body {
     background-color: #fff;
     border-radius: 30px;
     gap: 30px; }
-    .balance-modal__container input[type='number'] {
+    .balance-modal__container input[type='text'] {
       max-width: 46.7rem;
       width: 100%;
       height: 5.5rem;
@@ -451,7 +451,7 @@ body {
       border-radius: 4px;
       font-size: 2.4rem;
       text-align: center; }
-      .balance-modal__container input[type='number']:focus, .balance-modal__container input[type='number']:active {
+      .balance-modal__container input[type='text']:focus, .balance-modal__container input[type='text']:active {
         outline: 1px solid rgba(0, 0, 0, 0.7); }
     .balance-modal__container form {
       display: flex;
@@ -736,7 +736,7 @@ body {
     height: 60rem; }
   .post-upload__list {
     max-width: 51rem;
-    max-height: 49.3rem;
+    height: 49.3rem;
     overflow-y: scroll;
     background-color: #fff;
     border: 2px solid #dbdbdb;
@@ -811,16 +811,24 @@ body {
         color: rgba(0, 0, 0, 0.7); }
         .post-upload__data input[type='date']:focus, .post-upload__data input[type='number']:focus {
           outline: 1px solid rgba(0, 0, 0, 0.7); }
-  .post-upload__error {
+  .post-upload__item {
+    background-color: #fff; }
+    .post-upload__item--selected {
+      background-color: #dbdbdb; }
+  .post-upload__answer {
     width: 100%;
     height: 5.5rem;
     line-height: 5.5rem;
-    font-size: 3.2rem;
+    font-size: 2.2rem;
     text-align: center;
     vertical-align: center;
-    background-color: rgba(234, 116, 98, 0.55);
-    border-radius: 6px;
-    color: #e36f2d; }
+    border-radius: 6px; }
+    .post-upload__answer--error {
+      background-color: rgba(234, 116, 98, 0.55);
+      color: #e36f2d; }
+    .post-upload__answer--success {
+      color: #008000;
+      background-color: #cfc; }
 
 .painting-upload {
   overflow-y: auto;
@@ -890,8 +898,94 @@ body {
     max-width: 100%;
     margin: 0 auto; }
 
+.pr-settings-modal {
+  overflow-y: auto;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  background-color: rgba(0, 0, 0, 0.7); }
+  .pr-settings-modal__content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    width: 38%;
+    height: 85%;
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 2px 2px 20px gray; }
+    .pr-settings-modal__content form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%; }
+    .pr-settings-modal__content button[type='submit'] {
+      width: 567px;
+      height: 69px;
+      cursor: pointer;
+      box-shadow: 0px 10px 30px #ffb7d5;
+      background-color: #ea7462;
+      color: #ffffff;
+      border-radius: 2.8px;
+      border: none;
+      font-size: 3.2rem;
+      line-height: 19px;
+      text-align: center; }
+      .pr-settings-modal__content button[type='submit']:hover {
+        background: #ea7462;
+        box-shadow: 0px 10px 30px #b22222;
+        border-radius: 4.8px; }
+    .pr-settings-modal__content .pass-line {
+      width: 480px;
+      height: 0px;
+      border: 1px solid #e36f2d;
+      margin: 54px 0 59px 0; }
+    .pr-settings-modal__content span {
+      font-size: 24px;
+      color: #e36f2d;
+      margin: 32px 0 48px 0; }
+  .pr-settings-modal__input-item input {
+    display: flex;
+    flex-direction: column;
+    width: 498px;
+    height: 54px;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 17px 10px;
+    font-size: 18px; }
+    .pr-settings-modal__input-item input::placeholder {
+      color: rgba(0, 0, 0, 0.7); }
+    .pr-settings-modal__input-item input:focus {
+      outline: 1px solid rgba(0, 0, 0, 0.7); }
+  .pr-settings-modal__input-item:not(:first-child) {
+    margin-bottom: 4.8rem; }
+  .pr-settings-modal__ans {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 2rem;
+    font-weight: 600; }
+    .pr-settings-modal__ans--success {
+      color: #008000;
+      background-color: #cfc; }
+    .pr-settings-modal__ans--warning {
+      color: white;
+      background-color: #fcc419; }
+    .pr-settings-modal__ans--error {
+      color: #ea7462;
+      background-color: rgba(234, 116, 98, 0.55); }
+
 .notif-dropdown {
-  display: block;
+  display: none;
   position: absolute;
   background-color: #fff;
   border: 2px solid #dbdbdb;
@@ -997,6 +1091,7 @@ body {
 .profile-dropdown {
   position: absolute;
   top: 55px;
+  display: none;
   background-color: white;
   border: 1px solid #ccc;
   border-radius: 5px;

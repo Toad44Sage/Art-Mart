@@ -1,8 +1,8 @@
-@import url("./reset.css");
+@import url('./reset.css');
 
 @font-face {
-	font-family: "Franklin Gothic Book";
-	src: url("FranklinGothicBookRegular.ttf");
+	font-family: 'Franklin Gothic Book';
+	src: url('FranklinGothicBookRegular.ttf');
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -10,11 +10,10 @@
 }
 
 body {
-	font-family: "Franklin Gothic Book", "Arial", sans-serif;
+	font-family: 'Franklin Gothic Book', 'Arial', sans-serif;
 	font-size: 24px;
 	margin: 0 auto;
 }
-
 
 /* <------------- Navigtaion ---------------> */
 .navigation {
@@ -22,7 +21,7 @@ body {
 	position: relative;
 	z-index: 3;
 	max-width: 100%;
-	background: #FFFFFF;
+	background: #ffffff;
 	margin: 21px 86px 0 72px;
 }
 
@@ -49,7 +48,6 @@ body {
 	color: #000000;
 }
 
-
 .left-nav li a img {
 	margin-left: 15px;
 }
@@ -60,30 +58,42 @@ body {
 	text-align: center;
 }
 
-.right-nav button {
-	background-color: #FFFFFF;
-	white-space: nowrap;
-	font-size: 22px;
-}
-
 .login {
 	margin-right: 11px;
 }
 
 .log-button {
+	display: inline-block;
+	font-size: 22px;
 	padding: 17px 25px;
-	border: 0.70113px solid #E6E6E6;
-	border-radius: 2.8px;
+	border: 1px solid #e6e6e6;
+	background-color: #fff;
+	border-radius: 3px;
 	cursor: pointer;
+	white-space: nowrap;
+	transition: all 0.3s;
 }
 
-button.sign-button {
+.log-button:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 10px rgba(100, 0, 0, 0.15);
+}
+
+.sign-button {
+	font-size: 22px;
+	display: inline-block;
 	padding: 17px 45px;
 	border: 0;
-	background: #EA7462;
-	color: #FFFFFF;
+	background-color: #ea7462;
+	color: #ffffff;
 	border-radius: 2.8px;
 	cursor: pointer;
+	transition: all 0.3s;
+}
+
+.sign-button:hover {
+	transform: scale(1.1);
+	box-shadow: 0 4px 10px rgba(100, 0, 0, 0.15);
 }
 
 .arrow {
@@ -96,7 +106,6 @@ button.sign-button {
 	background-position: center;
 	background-size: 16px;
 }
-
 
 /* <------------------- Header -----------------> */
 
@@ -115,7 +124,7 @@ button.sign-button {
 .gallery {
 	display: flex;
 	align-items: center;
-	color: #E36F2D;
+	color: #e36f2d;
 	letter-spacing: 0.04em;
 	font-size: 1.375rem;
 	margin-bottom: 15px;
@@ -128,7 +137,7 @@ button.sign-button {
 	height: 0;
 }
 
-.header-footer {	
+.header-footer {
 	font-size: 1.875rem;
 	line-height: 1.438rem;
 	text-align: center;
@@ -151,13 +160,17 @@ button.sign-button {
 .container img {
 	width: 100%;
 	object-fit: cover;
+	transition: all 0.3s;
 }
 
+.container img:hover {
+	transform: scale(1.1);
+}
 .picture1 {
 	grid-column: 1 / 2;
 	grid-row: 1 / 2;
 }
-.picture2 {	
+.picture2 {
 	grid-column: 2 / 3;
 	grid-row: 1 / 2;
 }
@@ -195,4 +208,127 @@ button.sign-button {
 	grid-row: 2 / 3;
 }
 
-
+.footer {
+	margin-top: 80px;
+	font-size: 13px;
+	text-wrap: nowrap;
+	border-top: 1px solid #dbdbdb;
+	padding: 14px 68px 39px 32px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+.footer ul {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.footer__social {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+.footer__social address {
+	display: flex;
+	gap: 20px;
+}
+.footer__social-link,
+.footer__social-link:link,
+.footer__social-link:visited {
+	transition: all 0.3s;
+}
+.footer__social-link:hover,
+.footer__social-link:active {
+	transform: scale(1.2);
+}
+.footer__img {
+	width: 20px;
+	height: auto;
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+}
+@media (max-width: 90em) {
+	.footer__img {
+		width: 16px;
+	}
+}
+@media (max-width: 75em) {
+	.footer__img {
+		width: 14px;
+	}
+}
+@media (max-width: 60em) {
+	.footer__img {
+		width: 12px;
+	}
+}
+.footer__logo {
+	height: auto;
+	width: 60px;
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 912px (Tablets) */
+	/**************************/
+	/**************************/
+	/* BELOW 1200px (Landscape Tablets) */
+	/**************************/
+}
+@media (max-width: 90em) {
+	.footer__logo {
+		width: 48px;
+	}
+}
+@media (max-width: 75em) {
+	.footer__logo {
+		width: 43px;
+	}
+}
+@media (max-width: 60em) {
+	.footer__logo {
+		width: 33px;
+	}
+}
+.footer__link,
+.footer__link:visited,
+.footer__link:link {
+	text-decoration: none;
+	transition: all 0.2s;
+	display: flex;
+	align-items: center;
+	color: #707070;
+}
+.footer__link:hover,
+.footer__link:active {
+	font-size: 14px;
+	color: #e36f2d;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	transform: scale(1.05);
+}

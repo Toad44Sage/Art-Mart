@@ -1,84 +1,194 @@
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="./main.css">
-		<title>Main page</title>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-		<script src="./main.js"></script>
-	</head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./main.css" />
+    <title>Main page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script defer src="./main.js"></script>
+  </head>
 
+  <body>
+    <!-- Navigation -->
+    <nav class="navigation">
+      <div class="nav-content">
+        <ul class="left-nav">
+          <li><a class="nav-item-link" href="#"></a></li>
+          <li><a class="nav-item-link" href="#"></a></li>
+        </ul>
 
-	<body>
+        <ul class="right-nav">
+          <li class="login">
+            <button class="log-button" id="loginButton">Log In</button>
+          </li>
+          <li class="signup">
+            <form action="../registration/Registration.html">
+              <button class="sign-button">Get Started</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
-		<!-- Navigation -->
-		<nav class="navigation">
-			<div class="nav-content">
-				<ul class="left-nav">
-					<li><a class="nav-item-link" href="#">Home</a></li>
-					<li><a class="nav-item-link" href="#">Auctions</a></li>
-				</ul>
+    <div class="header">
+      <p class="header-inner">
+        Let`s Look At The Latest <br /><br />Works For Today
+      </p>
+      <div class="gallery">
+        <hr class="hr" />
+        <span class="gallery-text">GALLERY</span>
+      </div>
+      <span class="header-footer">Your works may be here</span>
+    </div>
 
-				<ul class="right-nav">
-					<li class="login"><form action="#">
-						<button class="log-button">Log In</button>
-					</form></li>
-					<li class="signup"><form action="../registration/Registration.html">
-						<button class="sign-button">Get Started</button>
-					</form></li>
-					</ul>
-			</div>	
-		</nav>
+    <main class="content">
+      <div class="container">
+        <div class="picture1">
+          <img
+            src="./img/picture1.jpg"
+            width="277px"
+            height="214px"
+            alt="Picture1"
+          />
+        </div>
+        <div class="picture2">
+          <img
+            src="./img/picture2.jpg"
+            width="382px"
+            height="447px"
+            alt="Picture2"
+          />
+        </div>
+        <div class="picture3">
+          <img
+            src="./img/picture3.jpg"
+            width="454px"
+            height="214px"
+            alt="Picture3"
+          />
+        </div>
 
-		<div class="header">
-			<p class="header-inner">Let`s Look At The Latest <br><br>Works For Today</p>
-			<div class="gallery">
-				<hr class="hr">
-				<span class="gallery-text">GALLERY</span>
-			</div>
-			<span class="header-footer">Your works may be here</span>
-		</div>
+        <div class="picture4">
+          <img
+            src="./img/picture4.jpg"
+            width="277px"
+            height="222px"
+            alt="Picture4"
+          />
+        </div>
+        <div class="picture5">
+          <img
+            src="./img/picture5.jpg"
+            width="232px"
+            height="222px"
+            alt="Picture5"
+          />
+        </div>
+        <div class="picture6">
+          <img
+            src="./img/picture6.jpg"
+            width="210px"
+            height="222px"
+            alt="Picture6"
+          />
+        </div>
 
-		<main class="content">
-			<div class="container">
-					<div class="picture1">
-						<img src="./img/picture1.jpg" width="277px" height="214px" alt="Picture1">
-					</div>
-					<div class="picture2">
-						<img src="./img/picture2.jpg" width="382px" height="447px" alt="Picture2">
-					</div>
-					<div class="picture3">
-						<img src="./img/picture3.jpg" width="454px" height="214px" alt="Picture3">
-					</div>
+        <div class="picture7">
+          <img
+            src="./img/picture7.jpg"
+            width="303px"
+            height="214px"
+            alt="Picture7"
+          />
+        </div>
+        <div class="picture8">
+          <img
+            src="./img/picture8.jpg"
+            width="335px"
+            height="214px"
+            alt="Picture8"
+          />
+        </div>
+        <div class="picture9">
+          <img
+            src="./img/picture9.jpg"
+            width="475px"
+            height="214px"
+            alt="Picture9"
+          />
+        </div>
+      </div>
+    </main>
 
-					<div class="picture4">
-						<img src="./img/picture4.jpg" width="277px" height="222px" alt="Picture4">
-					</div>
-					<div class="picture5">
-						<img src="./img/picture5.jpg" width="232px" height="222px" alt="Picture5">
-					</div>
-					<div class="picture6">
-						<img src="./img/picture6.jpg" width="210px" height="222px" alt="Picture6">
-					</div>
-	
-
-
-					<div class="picture7">
-						<img src="./img/picture7.jpg" width="303px" height="214px" alt="Picture7">
-					</div>
-					<div class="picture8">
-						<img src="./img/picture8.jpg" width="335px" height="214px" alt="Picture8">
-					</div>
-					<div class="picture9">
-						<img src="./img/picture9.jpg" width="475px" height="214px" alt="Picture9">
-					</div>
-
-				</div>
-		</main>
-
-	</body>
-
-
-	</html>
+    <!-- ##############################    FOOTER    ############################## -->
+    <footer class="footer">
+      <ul>
+        <li class="footer__item">
+          <img
+            src="./img/footer/logo.svg"
+            alt="Mona-lisa website logo"
+            class="footer__logo"
+          />
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="20"
+              fill="#707070"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM96,128a32,32,0,0,0,57.6,19.2,8,8,0,0,1,12.8,9.61,48,48,0,1,1,0-57.62,8,8,0,0,1-12.8,9.61A32,32,0,0,0,96,128Z"
+              ></path>
+            </svg>
+            2023 Artmart
+          </a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">Terms of Use</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">Privacy Policy</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">Security</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">Conditions of sale</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">ACA Seller`s Agreement</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link">Buyer Guarantee</a>
+        </li>
+        <li class="footer__item">
+          <a href="#" class="footer__link"
+            >Do not sell my personall information
+          </a>
+        </li>
+      </ul>
+      <div class="footer__social">
+        <p class="footer__heading">Contact us</p>
+        <address>
+          <a href="" class="footer__social-link">
+            <img src="./img/footer/twitter.svg" class="footer__img" alt="" />
+          </a>
+          <a href="" class="footer__social-link">
+            <img src="./img/footer/link3.svg" class="footer__img" alt="" />
+          </a>
+          <a href="" class="footer__social-link">
+            <img src="./img/footer/tiktok.svg" class="footer__img" alt="" />
+          </a>
+          <a href="" class="footer__social-link">
+            <img src="./img/footer/spotify.svg" class="footer__img" alt="" />
+          </a>
+        </address>
+      </div>
+    </footer>
+  </body>
+</html>

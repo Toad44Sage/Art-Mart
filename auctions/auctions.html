@@ -16,16 +16,22 @@
 			rel="stylesheet"
 		/>
 		<link rel="stylesheet" href="./css/style.css" />
-
-		<script defer src="https://unpkg.com/vue@next"></script>
-		<script defer src="./app.js"></script>
+		<script
+			defer
+			src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"
+		></script>
+		<script defer src="./js/app.js"></script>
+		<script defer src="./js/nav/nav.js"></script>
+		<script defer src="./js/modals/modals.js"></script>
+		<script defer src="./js/filter/filter.js"></script>
+		<script defer src="./js/posts/post	.js"></script>
 
 		<title>Аукционы</title>
 	</head>
 	<body>
 		<!-- ############################## NAVIGATION ############################## -->
 
-		<nav class="nav">
+		<nav class="nav" id="nav">
 			<ul class="nav__left">
 				<li class="nav__item">
 					<a class="nav__link" href="../newsfeed/HTML/news.html">Home</a>
@@ -36,19 +42,22 @@
 			</ul>
 			<ul class="nav__right">
 				<li class="nav__item">
-					<span id="balance">999909</span
+					<span id="balanceCount"></span
 					><img
 						src="./img/nav-icons/mona-lisa.svg"
 						alt="Icon"
 						class="nav__lisa-icon"
+						data-modal="balanceModal"
 					/>
 				</li>
 				<li class="nav__item">
-					<img
-						src="./img/nav-icons/plus.svg"
-						alt="Logo"
-						class="nav__upload-icon"
-					/>
+					<a href="../profile/HTML/profile.html">
+						<img
+							src="./img/nav-icons/plus.svg"
+							alt="Logo"
+							class="nav__upload-icon"
+						/>
+					</a>
 				</li>
 				<li class="nav__item">
 					<img
@@ -57,7 +66,7 @@
 						class="nav__notif-icon"
 					/>
 					<!-- ############################## DROPDOWN ############################## -->
-					<div class="notif-dropdown hidden">
+					<div class="notif-dropdown">
 						<ul class="notif-dropdown__container">
 							<li class="notif-dropdown__item">
 								<p>
@@ -77,13 +86,18 @@
 						src="img/nav-icons/miniprofile.png"
 						alt="Mini Profile"
 					/>
-					<div class="profile-dropdown hidden">
+					<div class="profile-dropdown">
 						<a
 							class="profile-dropdown__link"
 							href="../profile/HTML/profile.html"
 							>Profile
 						</a>
-						<a class="profile-dropdown__settings" href="#">Settings</a>
+						<a
+							class="profile-dropdown__settings"
+							href="#"
+							data-modal="privacyModal"
+							>Settings</a
+						>
 						<a class="profile-dropdown__exit" href="#">Log Out</a>
 					</div>
 				</li>
@@ -134,7 +148,7 @@
 							<div class="filter__style">
 								<p class="filter__text">Style</p>
 								<fieldset class="filter__container">
-									<ul>
+									<ul id="filter-style-list">
 										<li>
 											<input type="checkbox" id="Aaaa" />
 											<label for="Aaaa">Aaaa</label>
@@ -173,63 +187,11 @@
 								</fieldset>
 							</div>
 						</form>
-						<button type="submit" form="filterForm" class="btn-submit">
+						<button class="btn-submit" data-modal="uploadModal">
 							New auction
 						</button>
 					</div>
-					<div class="posts-container">
-						<div class="post post--ongoing">
-							<figure class="post__img">
-								<img src='./img/posts/post1.png' alt='Painting: Cat at the
-								table'/ >
-							</figure>
-							<ul class="post__description">
-								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
-								<li class="post__text">author</li>
-								<li class="post__text">style</li>
-								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
-								<li class="post__text">buy now for: 5000</li>
-								<li class="post__text">current bet: 150</li>
-								<li>
-									<button class="btn-post btn-post--orange">Place a bet</button>
-								</li>
-							</ul>
-						</div>
-						<div class="post post--ongoing">
-							<figure class="post__img">
-								<img src='./img/posts/post2.png' alt='Painting: Cat at the
-								table'/ >
-							</figure>
-							<ul class="post__description">
-								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
-								<li class="post__text">author</li>
-								<li class="post__text">style</li>
-								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
-								<li class="post__text">buy now for: 5000</li>
-								<li class="post__text">current bet: 150</li>
-								<li>
-									<button class="btn-post btn-post--orange">Place a bet</button>
-								</li>
-							</ul>
-						</div>
-						<div class="post post--ongoing">
-							<figure class="post__img">
-								<img src='./img/posts/post2.png' alt='Painting: Cat at the
-								table'/ >
-							</figure>
-							<ul class="post__description">
-								<li class="post__text"><h1 class="posts__heading">Name</h1></li>
-								<li class="post__text">author</li>
-								<li class="post__text">style</li>
-								<li class="post__text">date: 15.09.2023 - 25.09.2023</li>
-								<li class="post__text">buy now for: 5000</li>
-								<li class="post__text">current bet: 150</li>
-								<li>
-									<button class="btn-post btn-post--orange">Place a bet</button>
-								</li>
-							</ul>
-						</div>
-					</div>
+					<div class="posts-container"></div>
 				</div>
 			</section>
 		</main>
@@ -303,28 +265,8 @@
 			</div>
 		</footer>
 
-		<!-- ############################  BALANCE-MODAL    ########################## -->
-		<div class="balance-modal hidden">
-			<div class="balance-modal__container">
-				<p class="balance-modal__text balance-modal__text--orange">
-					Our currency is LisaCoins
-				</p>
-				<img src="./img/modals/mona-lisa.png" alt="Image of Mona Lisa" />
-				<p class="balance-modal__text balance-modal__text--orange">
-					Your balance:
-				</p>
-				<span class="balance-modal__text">0</span>
-				<form>
-					<input type="number" placeholder="Balance replenishment amount" />
-					<button type="submit" class="btn-post btn-post--orange">
-						Top up balance
-					</button>
-				</form>
-			</div>
-		</div>
-
-		<!-- ############################  BALANCE-MODAL    ########################## -->
-		<div class="post-modal hidden">
+		<!-- ############################  POST MODAL    ########################## -->
+		<div class="post-modal hidden" id="postModal">
 			<div class="post-modal__container">
 				<div class="post-modal__content">
 					<p>
@@ -376,75 +318,83 @@
 			</div>
 		</div>
 
+		<!-- ############################  BALANCE-MODAL    ########################## -->
+		<div class="balance-modal hidden" id="balanceModal">
+			<div class="balance-modal__container">
+				<p class="balance-modal__text balance-modal__text--orange">
+					Our currency is LisaCoins
+				</p>
+				<img src="./img/modals/mona-lisa.png" alt="Image of Mona Lisa" />
+				<p class="balance-modal__text balance-modal__text--orange">
+					Your balance:
+				</p>
+				<span class="balance-modal__text" id="balanceTopUp"></span>
+				<form>
+					<input
+						type="text"
+						inputmode="numeric"
+						placeholder="Balance replenishment amount"
+						min="0"
+						maxlength="14"
+						step="0.01"
+						id="balanceInput"
+						pattern="^\d*(\.\d{0,2})?$"
+						required
+					/>
+					<button
+						type="submit"
+						class="btn-post btn-post--orange"
+						id="addBalance"
+					>
+						Top up balance
+					</button>
+				</form>
+			</div>
+		</div>
+
 		<!-- ############################  UPLOAD-MODAL    ########################## -->
-		<div class="post-upload hidden">
+		<div class="post-upload hidden" id="uploadModal">
 			<div class="post-upload__container">
 				<p class="post-upload__text post-upload__text--orange">
 					Put your painting up for auction
 				</p>
 				<div class="grid-container grid-container--2-cols">
-					<ul class="post-upload__list">
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-						<li>
-							<img src="./img/posts/post2.png" alt="" />
-							<div>
-								<span class="post-modal__name">Name</span
-								><span class="post-upload__style">Style</span>
-							</div>
-						</li>
-					</ul>
+					<ul class="post-upload__list"></ul>
 					<form class="post-upload__data">
 						<label for="#">Auction end date</label>
-						<input type="date" />
+						<input
+							class="post-upload__input"
+							type="date"
+							id="upload-date"
+							required
+						/>
 						<label for="#">Initial bid</label>
-						<input type="number" placeholder="100" />
+						<input
+							class="post-upload__input"
+							type="number"
+							placeholder="100"
+							id="upload-bid"
+							required
+						/>
 						<label for="#">Amount to buy immediately</label>
-						<input type="number" placeholder="3000" />
-						<button class="btn-upload btn-upload--orange">
+						<input
+							class="post-upload__input"
+							type="number"
+							placeholder="3000"
+							id="upload-imBuy"
+							required
+						/>
+						<button class="btn-upload btn-upload--orange" id="createAuctionBtn">
 							Create auction
 						</button>
-						<div class="post-upload__error hidden">Maximum 30 days</div>
+						<div class="post-upload__answer hidden" id="aucAnswer"></div>
 					</form>
 				</div>
 			</div>
 		</div>
 
-		<!-- ##########################  PAINTING UPLOAD   ########################## -->
-		<div class="painting-upload hidden">
+		<!-- ##########################  PAINTING-UPLOAD MODAL   ########################## -->
+		<div class="painting-upload hidden" id="pushModal">
 			<div class="painting-upload__container">
 				<form action="upload.php" method="POST" enctype="multipart/form-data">
 					<div class="painting-upload__header">
@@ -477,6 +427,64 @@
 						<button class="btn-post btn-post--orange">Publish</button>
 					</div>
 				</form>
+			</div>
+		</div>
+
+		<!-- ##########################  PRIVACY-SETTINGS MODAL   ########################## -->
+		<div class="pr-settings-modal hidden" id="privacyModal">
+			<div class="pr-settings-modal__content">
+				<span>Change User Details</span>
+				<form>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input1"
+							name="currPass"
+							placeholder="Current password"
+							required
+						/>
+					</div>
+					<div class="hr-line">
+						<hr class="pass-line" />
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="text"
+							id="input2"
+							name="newEmail"
+							minlength="8"
+							maxlength="32"
+							placeholder="New email"
+						/>
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input3"
+							name="newPass"
+							minlength="8"
+							maxlength="32"
+							placeholder="New password"
+						/>
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input4"
+							name="repeatPass"
+							minlength="8"
+							maxlength="32"
+							placeholder="Repeat password"
+						/>
+					</div>
+					<button type="submit">Confirm</button>
+				</form>
+				<div
+					class="pr-settings-modal__ans pr-settings-modal__ans--error"
+					id="privacyMessage"
+				>
+					Пароли не совпадают
+				</div>
 			</div>
 		</div>
 	</body>

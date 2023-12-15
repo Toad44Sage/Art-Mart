@@ -1,5 +1,5 @@
 .notif-dropdown {
-	display: block;
+	display: none;
 	position: absolute;
 	background-color: $color-white;
 	border: 2px solid $color-grey-light2;
@@ -71,6 +71,7 @@
 .profile-dropdown {
 	position: absolute;
 	top: 55px;
+	display: none;
 	background-color: white;
 	border: 1px solid #ccc;
 	border-radius: 5px;

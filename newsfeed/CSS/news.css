@@ -1,8 +1,8 @@
-@import url("./reset.css");
+@import url('./reset.css');
 
 @font-face {
-	font-family: "FranklinGothicBook";
-	src: url("../FONT/FranklinGothicBookRegular.ttf");
+	font-family: 'FranklinGothicBook';
+	src: url('../FONT/FranklinGothicBookRegular.ttf');
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -10,13 +10,11 @@
 }
 
 body {
-	font-family: "FranklinGothicBook", sans-serif;
+	font-family: 'FranklinGothicBook', sans-serif;
 	font-size: 24px;
 	margin: 0 auto;
 	max-width: 1440px;
 }
-
-
 
 /* <------------- Navigtaion ---------------> */
 .navigation {
@@ -34,7 +32,7 @@ body {
 	font-size: 14px;
 	border: 1px solid hsl(100, 0%, 80%);
 	border-radius: 3px;
-	background-image: url("../IMG/Vector_search_icon.svg");
+	background-image: url('../IMG/Vector_search_icon.svg');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-position-x: 70px;
@@ -57,7 +55,6 @@ body {
 .search-input:active {
 	background: none;
 }
-
 
 .search-input::placeholder {
 	color: hsl(0, 0%, 30%);
@@ -86,7 +83,6 @@ body {
 	margin-right: 30px;
 }
 
-
 .left-nav li a {
 	display: flex;
 	align-items: center;
@@ -95,13 +91,12 @@ body {
 }
 
 .left-nav li a:hover {
-	color:hsl(0, 0%, 65%);
+	color: hsl(0, 0%, 65%);
 }
 
 .left-nav li a img {
 	margin-left: 15px;
 }
-
 
 .right-nav {
 	display: flex;
@@ -155,6 +150,10 @@ body {
 	font-family: 'Inter';
 }
 
+.style-list:after {
+	clear: both;
+}
+
 .styles {
 	color: rgba(0, 0, 0, 0.5);
 	line-height: 24px;
@@ -165,11 +164,11 @@ body {
 .default-list {
 	width: 100%;
 	height: 40px;
-	border: 1px solid #DBDBDBDB;
+	border: 1px solid #dbdbdbdb;
 	border-top-left-radius: 4px;
 	border-top-right-radius: 4px;
-	background: #DBDBDB;
-	color: #FFFFFF;
+	background: #dbdbdb;
+	color: #ffffff;
 	letter-spacing: -0.006em;
 	cursor: pointer;
 	font-size: 20px;
@@ -184,8 +183,8 @@ body {
 .filter-list {
 	position: absolute;
 	list-style-type: none;
-	border: 1px solid #DBDBDB;
-	background: #FFFFFF;
+	border: 1px solid #dbdbdb;
+	background: #ffffff;
 	overflow-y: scroll;
 	max-height: 370px;
 	width: 274px;
@@ -207,21 +206,19 @@ body {
 	letter-spacing: -0.006em;
 }
 
-
 .filter-list::-webkit-scrollbar {
 	width: 7px;
 	height: 36px;
-	background: #DBDBDB;
+	background: #dbdbdb;
 }
 
 .filter-list::-webkit-scrollbar-thumb {
-	background: #FFFFFF;
+	background: #ffffff;
 }
 
 .filter-list .style-item:hover {
 	color: rgba(0, 0, 0, 0.2);
 }
-
 
 /* <------------- Publications ---------------> */
 .post {
@@ -254,14 +251,12 @@ body {
 	align-items: center;
 }
 
-
-.post-titles{
+.post-titles {
 	color: #00000099;
-	font-family: "Inter", sans-serif;
+	font-family: 'Inter', sans-serif;
 	display: flex;
 	flex-direction: row;
 }
-
 
 .post-titles span {
 	padding: 0 7px 0 11px;
@@ -273,7 +268,7 @@ body {
 
 .post-img-block {
 	cursor: pointer;
-	background-color: rgb(231, 228, 228, 0.5);
+	background-color: #dbdbdb;
 }
 
 .post-image {
@@ -282,7 +277,6 @@ body {
 	height: auto;
 	display: block;
 }
-
 
 .post-footer {
 	display: flex;
@@ -298,15 +292,13 @@ body {
 	padding: 1px 6px;
 }
 
-
-
 .likes-icon {
 	width: 35px;
 	height: 35px;
-	content: url('../img/love0.svg')
+	content: url('../img/love0.svg');
 }
 
-.active{
+.active {
 	content: url('../IMG/love.svg');
 }
 
@@ -331,7 +323,6 @@ body {
 	border-radius: 10px;
 }
 
-
 .likes-btn:hover {
 	background-color: hsl(100, 0%, 88%);
 }
@@ -339,7 +330,6 @@ body {
 .comments-btn:hover {
 	background-color: hsl(100, 0%, 88%);
 }
-
 
 /* <----------------back button -------------------> */
 
@@ -350,17 +340,17 @@ body {
 }
 
 .press-back {
-	border: 1px solid #DBDBDB;
+	border: 1px solid #dbdbdb;
 	border-radius: 50%;
 	width: 45px;
 	height: 45px;
 	bottom: 20px;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	cursor: pointer;
 }
 
-.press-back:hover{
-	background: hsl(0, 0%, 95%); 
+.press-back:hover {
+	background: hsl(0, 0%, 95%);
 }
 
 .arrow {
@@ -369,7 +359,6 @@ body {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
 
 /* <-------------- всякая выпадающая ерунда ---------------> */
 
@@ -388,8 +377,8 @@ body {
 .dropdown a {
 	text-decoration: none;
 	font-size: 14px;
-	font-family: "Inter";
-	color:rgba(0, 0, 0, 0.9);
+	font-family: 'Inter';
+	color: rgba(0, 0, 0, 0.9);
 	display: block;
 	padding: 4px;
 }
@@ -399,9 +388,8 @@ body {
 }
 
 .dropdown .exit {
-	color: #E36F2D;
+	color: #e36f2d;
 }
-
 
 /* <-------- Privacy settings modal --------> */
 
@@ -415,7 +403,7 @@ body {
 	height: 100%;
 	z-index: 4;
 	background-color: rgba(0, 0, 0, 0.7);
-	font-family: "Inter";
+	font-family: 'Inter';
 }
 
 .privacyModal .modal-content {
@@ -426,9 +414,9 @@ body {
 	overflow-y: auto;
 	width: 730px;
 	height: 770px;
-	font-family: "Inter";
+	font-family: 'Inter';
 	font-weight: 400;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	border-radius: 30px;
 	box-shadow: 2px 2px 20px hsl(0, 0%, 50%);
 }
@@ -445,12 +433,11 @@ body {
 	flex-direction: column;
 	width: 498px;
 	height: 54px;
-	border: 1px solid #E8E8E8;
+	border: 1px solid #e8e8e8;
 	border-radius: 10px;
 	padding: 17px 10px;
 	font-size: 18px;
 }
-
 
 .privacyModal .input-item:not(:first-child) {
 	margin-bottom: 48px;
@@ -460,35 +447,35 @@ body {
 	color: rgba(0, 0, 0, 0.5);
 }
 
-.privacyModal .modal-content button[type="submit"] {
+.privacyModal .modal-content button[type='submit'] {
 	width: 567px;
 	height: 69px;
 	cursor: pointer;
-	box-shadow: 0px 10px 30px #FFB7D5;
-	background-color: #EA7462;
-	color: #FFFFFF;
+	box-shadow: 0px 10px 30px #ffb7d5;
+	background-color: #ea7462;
+	color: #ffffff;
 	border-radius: 2.8px;
 	font-size: 32px;
 	line-height: 19px;
 	text-align: center;
 }
 
-.privacyModal .modal-content button[type="submit"]:hover {
-	background: #FF6347;
-	box-shadow: 0px 10px 30px #B22222;
+.privacyModal .modal-content button[type='submit']:hover {
+	background: #ff6347;
+	box-shadow: 0px 10px 30px #b22222;
 	border-radius: 4.8px;
 }
 
 .hr-line .pass-line {
 	width: 480px;
 	height: 0px;
-	border: 1px solid #E36F2D;
+	border: 1px solid #e36f2d;
 	margin: 54px 0 59px 0;
 }
 
 .privacyModal .modal-content span {
 	font-size: 24px;
-	color: #E36F2D;
+	color: #e36f2d;
 	margin: 32px 0 48px 0;
 }
 
@@ -504,7 +491,7 @@ body {
 }
 
 #privacyMessage.error {
-	color: #EA7462;
+	color: #ea7462;
 	background-color: rgba(234, 116, 98, 0.55);
 }
 
@@ -521,101 +508,101 @@ body {
 /* <------------ Publication upload modal -------------> */
 /* Оформление модального окна */
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
+	display: none;
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal .modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+	background-color: #fefefe;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+	max-width: 600px;
+	border-radius: 8px;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .publish-button {
-  margin: 0 auto;
-  width: 63.48%;
-  height: 34.7%;
-  background: #ea7462;
-  box-shadow: 0px 10px 30px #ffb7d5;
-  border-radius: 2.8px;
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
+	margin: 0 auto;
+	width: 63.48%;
+	height: 34.7%;
+	background: #ea7462;
+	box-shadow: 0px 10px 30px #ffb7d5;
+	border-radius: 2.8px;
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
+	cursor: pointer;
 }
 
 .modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #e36f2d;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	border-bottom: 1px solid #e36f2d;
 }
 
 .modal-header h3 {
-  margin: 0;
+	margin: 0;
 }
 
 .modal-body {
-  padding: 20px 0;
+	padding: 20px 0;
 }
 
 .modal-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px 0;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 10px 0;
 }
 
 .cancel-button,
 .submit-button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  margin: 0 8px;
-  cursor: pointer;
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	margin: 0 8px;
+	cursor: pointer;
 }
 
 .cancel-button:hover,
 .submit-button:hover {
-  background-color: #ddd;
+	background-color: #ddd;
 }
 
 .upload-photo {
-  position: relative;
-  width: 549px;
-  height: 359px;
-  background: #d9d9d9;
-  cursor: pointer;
+	position: relative;
+	width: 549px;
+	height: 359px;
+	background: #d9d9d9;
+	cursor: pointer;
 }
 
 .select-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 302px;
-  height: 48px;
-  font-weight: 400;
-  font-size: 40px;
-  line-height: 48px;
-  color: #ffffff;
-  text-align: center;
-  cursor: pointer;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 302px;
+	height: 48px;
+	font-weight: 400;
+	font-size: 40px;
+	line-height: 48px;
+	color: #ffffff;
+	text-align: center;
+	cursor: pointer;
 }
 
 .upload-photo:hover {
-  opacity: 0.8;
+	opacity: 0.8;
 }
