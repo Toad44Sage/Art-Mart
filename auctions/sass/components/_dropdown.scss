@@ -41,6 +41,7 @@
 		& img {
 			width: 30px;
 			height: 30px;
+			object-fit: cover;
 			@include respond(tab-land) {
 				width: 25px;
 				height: 25px;

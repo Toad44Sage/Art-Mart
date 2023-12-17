@@ -21,10 +21,11 @@
 			src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"
 		></script>
 		<script defer src="./js/app.js"></script>
-		<script defer src="./js/nav/nav.js"></script>
 		<script defer src="./js/modals/modals.js"></script>
-		<script defer src="./js/filter/filter.js"></script>
 		<script defer src="./js/posts/post	.js"></script>
+		<script defer src="./js/nav/nav.js"></script>
+		<script defer src="./js/filter/filter.js"></script>
+		<script defer src="./js/notif/notif.js"></script>
 
 		<title>Аукционы</title>
 	</head>
@@ -60,24 +61,10 @@
 					</a>
 				</li>
 				<li class="nav__item">
-					<img
-						src="./img/nav-icons/notif0.png"
-						alt="Logo"
-						class="nav__notif-icon"
-					/>
+					<img alt="Logo" class="nav__notif-icon nav__notif-icon--checked" />
 					<!-- ############################## DROPDOWN ############################## -->
 					<div class="notif-dropdown">
-						<ul class="notif-dropdown__container">
-							<li class="notif-dropdown__item">
-								<p>
-									<span class="mrg-small-right">login</span>liked you painting
-								</p>
-								<img
-									src="./img/posts/post1.png"
-									alt="Notification user-image"
-								/>
-							</li>
-						</ul>
+						<ul class="notif-dropdown__container"></ul>
 					</div>
 				</li>
 				<li class="nav__item">
@@ -128,8 +115,10 @@
 		<main class="mrg-medium-bottom">
 			<!-- ##############################    TABS    ############################## -->
 			<div class="tabs">
-				<span class="tabs__item tabs__item--active">Ongoing</span>
-				<span class="tabs__item">Auction results</span>
+				<span class="tabs__item tabs__item--active" data-category="1"
+					>Ongoing
+				</span>
+				<span class="tabs__item" data-category="0">Auction results </span>
 			</div>
 
 			<!-- ##############################    POSTS    ############################## -->
@@ -265,9 +254,9 @@
 			</div>
 		</footer>
 
-		<!-- ############################  POST MODAL    ########################## -->
-		<div class="post-modal hidden" id="postModal">
-			<div class="post-modal__container">
+		<!-- ############################  POSTBET MODAL    ########################## -->
+		<div class="post-modal hidden" id="postBetModal">
+			<!-- <div class="post-modal__container">
 				<div class="post-modal__content">
 					<p>
 						<span class="post-modal__name" id="postName">Name</span
@@ -315,7 +304,54 @@
 					</form>
 					<div class="post-modal__error hidden">Insufficient funds</div>
 				</div>
-			</div>
+			</div> -->
+		</div>
+
+		<!-- ############################  POST MODAL    ########################## -->
+		<div class="post-modal hidden" id="postModal">
+			<!-- <div class="post-modal__container">
+				<div class="post-modal__content">
+					<p>
+						<span class="post-modal__name" id="postName">Name</span
+						><span class="post-modal__style" id="postStyle">Style</span>
+					</p>
+					<img src="./img/posts/post3.png" alt="#" />
+				</div>
+				<div class="post-modal__description">
+					<div class="post-modal__header">
+						<figure>
+							<img
+								src="./img/modals/profile.png"
+								alt="#"
+								class="post-modal__profile-img"
+							/>
+						</figure>
+						<h2 class="post-modal__heading">PrinceCats</h2>
+					</div>
+					<p class="post-modal__info post-modal__info--description">
+						Description Description Description Description Description
+						Descriptionddsadas
+					</p>
+					<ul class="post-modal__info post-modal__info--info">
+						<li>
+							from:<span class="post-modal-data mrg-small-left"
+								>15.09.2023</span
+							>
+						</li>
+						<li>
+							to:<span class="post-modal-data mrg-small-left">25.09.2023</span>
+						</li>
+						<li>
+							sold for:<span class="post-modal-data mrg-small-left">5000</span>
+						</li>
+						<li>
+							bought by:<span class="post-modal-data mrg-small-left"
+								>login</span
+							>
+						</li>
+					</ul>
+				</div>
+			</div> -->
 		</div>
 
 		<!-- ############################  BALANCE-MODAL    ########################## -->

@@ -1,15 +1,5 @@
 'use strict';
 
-const modalToggle = function () {
-  const modal = document.getElementById(`${this.dataset.modal}`);
-  modal.classList.remove('hidden');
-  modal.addEventListener('click', function (event) {
-    if (event.target.id == `${modal.id}`) {
-      modal.classList.add('hidden');
-    }
-  });
-};
-
 const dropdownState = {
   'profile-dropdown': false,
   'notif-dropdown': false,

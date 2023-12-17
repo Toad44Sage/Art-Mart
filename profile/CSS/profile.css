@@ -121,6 +121,12 @@ body {
 .miniprofile-pic {
 	width: 45px;
 	height: 45px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+
+#profile-picture {
+	object-fit: cover;
 }
 
 .search-results li a img {

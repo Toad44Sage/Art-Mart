@@ -1,18 +1,16 @@
 <?php
 
-	//массив ответа сервера
-	$response = array();
+//массив ответа сервера
+$response = array();
 
-	session_start();
-	
-	require 'authorizationCheck.php';
-	require 'connectDB.php';
+session_start();
 
-	$user_id = $_SESSION['user_id'];
+require 'authorizationCheck.php';
+require 'connectDB.php';
 
-	$response['success'] = '1';
-	$response['data'] = $mysqli->query("SELECT profile_picture, balance FROM users WHERE user_id = '$user_id' LIMIT 1")->fetch_assoc();
+$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : $_SESSION['user_id'];
 
-	echo json_encode($response); 
+$response['success'] = '1';
+$response['data'] = $mysqli->query("SELECT profile_picture, balance FROM users WHERE user_id = '$user_id' LIMIT 1")->fetch_assoc();
 
-?>
+echo json_encode($response);

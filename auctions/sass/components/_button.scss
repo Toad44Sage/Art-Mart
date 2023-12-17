@@ -15,19 +15,37 @@
 		border: none;
 		cursor: pointer;
 	}
-	&:hover {
-		transform: translateY(-2px);
-		box-shadow: 0 1rem 2rem rgba($color-primary-darker, 0.5);
-	}
-	&:active,
-	&:focus {
-		outline: none;
-		transform: translateY(-1px);
-		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
-	}
 	&--orange {
 		color: $color-white;
 		background-color: $color-primary-darker;
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 1rem 2rem rgba($color-primary-darker, 0.5);
+		}
+		&:active,
+		&:focus {
+			outline: none;
+			transform: translateY(-1px);
+			box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+		}
+	}
+	&--blocked {
+		color: $color-grey-dark2;
+		background-color: $color-grey-light2;
+	}
+	&--view {
+		color: $color-grey-dark2;
+		background-color: $color-grey-light2;
+		&:hover {
+			transform: translateY(-2px);
+			box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+		}
+		&:active,
+		&:focus {
+			outline: none;
+			transform: translateY(-1px);
+			box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+		}
 	}
 }
 

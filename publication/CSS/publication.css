@@ -1,8 +1,8 @@
-@import url("./reset.css");
+@import url('./reset.css');
 
 @font-face {
-	font-family: "FranklinGothicBook";
-	src: url("../FONT/FranklinGothicBookRegular.ttf");
+	font-family: 'FranklinGothicBook';
+	src: url('../FONT/FranklinGothicBookRegular.ttf');
 	font-style: normal;
 	font-weight: 400;
 	color: #000000;
@@ -16,7 +16,6 @@
 	margin: 0 auto;
 }
 
-
 .post,
 .comments {
 	flex: 1;
@@ -24,7 +23,7 @@
 
 /* <----------- button -----------> */
 .exit-btn {
-	position:absolute;
+	position: absolute;
 	top: 14px;
 	right: 0;
 	width: 100%;
@@ -37,13 +36,12 @@
 	line-height: 18px;
 	padding: 6px 24px;
 	gap: 10px;
-	color: #FFFFFF;
+	color: #ffffff;
 	background: rgba(234, 116, 98, 0.9);
 	border-radius: 4px;
 
 	cursor: pointer;
 }
-
 
 /* <------------------- Posts ----------------> */
 
@@ -88,15 +86,14 @@
 .post-header h1 {
 	font-size: 20px;
 	margin-left: 12px;
-	font-family: "FranklinGothicBook";
+	font-family: 'FranklinGothicBook';
 }
 
 .post-header h2 {
 	margin-right: 12px;
 	font-size: 18px;
-	font-family: "Inter";
+	font-family: 'Inter';
 }
-
 
 .post-footer {
 	max-width: 1000px;
@@ -119,9 +116,9 @@
 
 .likes-count,
 .comments-count {
-	font-family: "FranklinGothicBook";
+	font-family: 'FranklinGothicBook';
 
-	border: 1px solid hsl(100, 0%,89%);
+	border: 1px solid hsl(100, 0%, 89%);
 	background: hsl(100, 0%, 95%);
 	font-size: inherit;
 	transition: background-color 0.2s;
@@ -132,18 +129,15 @@
 	cursor: pointer;
 }
 
-
 .likes-count:hover {
 	background: hsl(100, 0%, 93%);
 }
-
 
 .likescount,
 .commscount {
 	color: hsl(100, 0%, 70%);
 	margin-right: 10px;
 }
-
 
 .likes-icon {
 	content: url('../IMG/love0.svg');
@@ -152,7 +146,6 @@
 .likes-icon.active {
 	content: url('../IMG/love.svg');
 }
-
 
 /* <----------------- comments --------------------> */
 
@@ -167,7 +160,7 @@
 .comments-header {
 	display: flex;
 	align-items: center;
-	font-family: "FranklinGothicBook";
+	font-family: 'FranklinGothicBook';
 	font-size: 20px;
 }
 
@@ -175,10 +168,9 @@
 	margin-right: 12px;
 }
 
-
 .post-description {
 	margin-top: 23px;
-	font-family: "Inter";
+	font-family: 'Inter';
 	font-size: 20px;
 	word-wrap: break-word;
 	hyphens: auto;
@@ -193,6 +185,8 @@
 
 .author-img {
 	cursor: pointer;
+	border-radius: 50%;
+	object-fit: cover;
 	height: 42px;
 	width: 42px;
 }
@@ -209,7 +203,7 @@
 }
 
 .comment img {
-	margin-right: 13px;;
+	margin-right: 13px;
 }
 
 .comment-info {
@@ -220,20 +214,20 @@
 }
 
 .comment-info .author {
-	font-family: "FranklinGothicBook", sans-serif;
+	font-family: 'FranklinGothicBook', sans-serif;
 	font-size: 16px;
 	margin-bottom: 2px;
 }
 
 .comment-info .comment-desc {
-	font-family: "Inter", sans-serif;
+	font-family: 'Inter', sans-serif;
 	font-size: 18px;
 	color: rgba(0, 0, 0, 0.6);
 }
 
 .orange-line {
 	width: 100%;
-	border: 1px solid #E36F2D;
+	border: 1px solid #e36f2d;
 }
 
 .orange-line.first {
@@ -244,14 +238,15 @@
 	margin: 19px 0 23px 0;
 }
 
-#comment-form, #comment {
+#comment-form,
+#comment {
 	width: 100%;
 	height: 80px;
 }
 
 #comment {
 	padding: 10px;
-	border: 1px solid rgba(0, 0, 0, 0.2);;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 8px;
 	font-size: 18px;
 	color: rgba(0, 0, 0, 0.6);

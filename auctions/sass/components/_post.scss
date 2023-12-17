@@ -16,12 +16,17 @@
 	}
 	&__img {
 		overflow: hidden;
-		display: block;
+		display: flex;
+		align-items: center;
+		background-color: $color-grey-ulralight;
+		width: 41.1rem;
+		height: 31.6rem;
 		& img {
 			width: 100%;
-			max-width: 41.3rem;
+			max-width: 41.1rem;
 			height: auto;
-			object-fit: cover;
+			max-height: 31.6rem;
+			object-fit: contain;
 			transition: all 0.3s;
 			&:hover {
 				transform: scale(1.1);
