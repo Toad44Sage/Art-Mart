@@ -138,10 +138,10 @@
 								<p class="filter__text">Style</p>
 								<fieldset class="filter__container">
 									<ul id="filter-style-list">
-										<li>
+										<!-- <li>
 											<input type="checkbox" id="Aaaa" />
 											<label for="Aaaa">Aaaa</label>
-										</li>
+										</li> -->
 									</ul>
 								</fieldset>
 							</div>
@@ -150,10 +150,22 @@
 								<fieldset class="filter__bets">
 									<ul>
 										<li>
-											<input type="number" id="betFrom" placeholder="from" />
+											<input
+												type="number"
+												id="betFrom"
+												placeholder="from"
+												step="0.01"
+												min="0"
+											/>
 										</li>
 										<li>
-											<input type="number" id="betTo" placeholder="to" />
+											<input
+												type="number"
+												id="betTo"
+												placeholder="to"
+												step="0.01"
+												min="0"
+											/>
 										</li>
 									</ul>
 								</fieldset>

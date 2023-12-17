@@ -19,7 +19,6 @@ $(function () {
 		data: { user_id: user_id }, // данные, отправляемые на сервер
 		success: function (data) {
 			// функция, которая будет выполнена при успешном выполнении запроса
-			console.log(data)
 			let object = JSON.parse(data) // парсинг полученных данных в объект JavaScript
 			let paintings = object.data // сохранение данных профиля в переменную
 

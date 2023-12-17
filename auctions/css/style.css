@@ -1047,7 +1047,7 @@ body {
   font-size: 1.6rem;
   top: 35px;
   right: -15px;
-  width: 30rem;
+  width: 33rem;
   text-wrap: nowrap;
   cursor: default;
   /**************************/
@@ -1064,8 +1064,9 @@ body {
   /**************************/ }
   .notif-dropdown__container {
     padding: 1rem 0.5rem;
-    max-height: 30rem;
-    overflow-y: scroll; }
+    max-height: 40rem;
+    overflow-y: scroll;
+    width: 100%; }
     .notif-dropdown__container::-webkit-scrollbar {
       width: 0.6rem; }
     .notif-dropdown__container::-webkit-scrollbar-track {

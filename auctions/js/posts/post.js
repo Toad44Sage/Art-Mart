@@ -5,11 +5,13 @@ let postState = 1;
 const mainShift = {
   offset: 0,
   limit: 8,
+  currentLen: 0,
 };
 
 const completedShift = {
   offset: 0,
   limit: 8,
+  currentLen: 0,
 };
 
 const closeBetModal = function (modal) {
@@ -239,6 +241,7 @@ const loadPosts = function () {
           betTimer();
         }
         mainShift.offset += mainShift.limit;
+        mainShift.currentLen += mainShift.limit;
       }
     }
   );
@@ -258,6 +261,7 @@ const loadCompletedPosts = function () {
           generateCompletedAuctions(post, response.current_user_id);
         });
         completedShift.offset += completedShift.limit;
+        mainShift.currentLen += mainShift.limit;
       }
     }
   );
@@ -268,12 +272,17 @@ const postToggle = function (postState) {
   if (postState === 1) {
     $('.posts-container').empty();
     mainShift.offset = 0;
+    mainShift.currentLen = 8;
+    resetFilterState();
+    console.log(filterState);
     loadPosts();
   }
   // changed to Completed posts
   else {
     $('.posts-container').empty();
     completedShift.offset = 0;
+    mainShift.currentLen = 8;
+    resetFilterState();
     loadCompletedPosts();
   }
 };
