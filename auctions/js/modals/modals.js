@@ -267,7 +267,9 @@ const createBet = function (event) {
 const imAuctionBuy = function () {
   const auction_id = Number($('#postBetModal')[0].dataset.auction);
   const is_buyout = 1;
-  const bet = Number($('#betInput')[0].value).toFixed(2);
+  // const bet = Number($('#betBuyOut').innerText).toFixed(2);
+  const bet = Number($('#betBuyOut')[0].innerText).toFixed(2);
+  console.log(bet);
   $.post(
     '../../../scripts/doBet.php',
     { auction_id: auction_id, bet: bet, is_buyout: is_buyout },

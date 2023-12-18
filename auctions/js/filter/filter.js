@@ -1,7 +1,8 @@
 'use strict';
 
+let isFilterActive = false;
+
 let filterState = {
-  limit: undefined,
   painting: undefined,
   author: undefined,
   styles: [],
@@ -17,6 +18,10 @@ const resetFilterState = function () {
       filterState[key] = initialState[key];
     }
   }
+};
+
+const resetFilterActive = function () {
+  isFilterActive = false;
 };
 
 const generateStyles = function (styles) {
@@ -49,12 +54,10 @@ $.post('../../../scripts/getStyles.php', {}, function (data) {
         let index = filterState.styles.indexOf(id);
         if (index > -1) {
           filterState.styles.splice(index, 1);
+          filterPostList();
         }
-        filterPostList();
       }
     });
-  } else {
-    alert('Возникла непредвиденная ошибка!');
   }
 });
 
@@ -80,42 +83,74 @@ $('#paintingName').on('input', function () {
   filterPostList();
 });
 
+let filterComplete;
+let filterOngoing;
+
 function filterPostList() {
-  if (filterState.styles.length) {
-    const data = {
-      limit: mainShift.currentLen,
+  isFilterActive = true;
+  if (filterState.styles && filterState.styles.length) {
+    let data = {
       painting: filterState.painting || undefined,
       author: filterState.author || undefined,
       styles: filterState.styles,
       bet_down: filterState.bet_down || undefined,
       bet_up: filterState.bet_up || undefined,
     };
-    getFilteredPosts(data);
+    getFilteredPosts(data).then(response => {
+      if (postState === 1) {
+        clearPosts();
+        loadFilterPosts(response);
+        filterOngoing = { ...data };
+      } else {
+        clearPosts();
+        loadCompletedFilterPosts(response);
+        filterComplete = { ...data };
+      }
+    });
   } else {
     if (
       filterState.painting ||
       filterState.author ||
       (filterState.bet_down && filterState.bet_up)
     ) {
-      const data = {
-        limit: mainShift.currentLen,
+      let data = {
         painting: filterState.painting || undefined,
         author: filterState.author || undefined,
         bet_down: filterState.bet_down || undefined,
         bet_up: filterState.bet_up || undefined,
       };
-      console.log(filterState);
-      getFilteredPosts(data);
+      getFilteredPosts(data).then(response => {
+        if (postState === 1) {
+          clearPosts();
+          loadFilterPosts(response);
+          filterOngoing = { ...data };
+        } else {
+          clearPosts();
+          loadCompletedFilterPosts(response);
+          filterComplete = { ...data };
+        }
+      });
     }
   }
 }
 
-const getFilteredPosts = function (data) {
-  $.post('../../../scripts/filteringAuctions.php', data, function (response) {
-    response = JSON.parse(response);
-    console.log(response.data);
-    if (postState === 1) {
-    } else {
-    }
+function loadFilterPosts(response) {
+  $.each(response.data.current_auctions, function (i, post) {
+    generateMainAuctions(post, response.data.current_user_id);
   });
-};
+}
+
+function loadCompletedFilterPosts(response) {
+  $.each(response.data.completed_auctions, function (i, post) {
+    generateCompletedAuctions(post, response.data.current_user_id);
+  });
+}
+
+function getFilteredPosts(data) {
+  return new Promise((resolve, object) => {
+    $.post('../../../scripts/filteringAuctions.php', data, function (response) {
+      response = JSON.parse(response);
+      resolve(response);
+    });
+  });
+}

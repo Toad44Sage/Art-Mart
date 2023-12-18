@@ -16,7 +16,19 @@ setInterval(async function () {
       }
     }
   );
-}, 3000);
+}, 5000);
+
+const checkNewNotifications = new Promise(function (resolve, reject) {
+  $.post('../../../scripts/checkNewNotifications.php', {}, function (response) {
+    response = JSON.parse(response);
+    const messageData = response.data;
+    if (response.success == 1) {
+      if (messageData == 'yes') {
+        notificationCheck = messageData;
+      }
+    }
+  });
+});
 
 /*
 <ul class="notif-dropdown__container">
@@ -40,6 +52,7 @@ const changeToChecked = function () {
   $('.nav__notif-icon')
     .removeClass('nav__notif-icon--checked nav__notif-icon--unchecked')
     .addClass('nav__notif-icon--checked');
+  notificationCheck = 'no';
 };
 
 const changeToUnchecked = function () {
@@ -49,6 +62,7 @@ const changeToUnchecked = function () {
 };
 
 const createNotifications = function (message) {
+  checkNewNotifications.then();
   if (notificationCheck == 'no') {
     changeToChecked();
   } else {

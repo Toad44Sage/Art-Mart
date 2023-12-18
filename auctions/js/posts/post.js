@@ -2,16 +2,20 @@
 
 let postState = 1;
 
-const mainShift = {
+let scrollState = 0;
+
+const postShift = {
   offset: 0,
-  limit: 8,
-  currentLen: 0,
+  limit: 2,
 };
 
-const completedShift = {
-  offset: 0,
-  limit: 8,
-  currentLen: 0,
+const resetShift = function () {
+  postShift.offset = 0;
+  postShift.limit = 2;
+};
+
+const resetScrollState = function () {
+  scrollState = 0;
 };
 
 const closeBetModal = function (modal) {
@@ -226,10 +230,10 @@ const generateCompletedAuctions = function (post, current_user_id) {
 };
 
 // загружаю посты
-const loadPosts = function () {
+function loadPosts() {
   $.post(
     '../../../scripts/getCurrentAuctionList.php',
-    { offset: mainShift.offset, limit: mainShift.limit },
+    { offset: postShift.offset, limit: postShift.limit },
     function (response) {
       response = JSON.parse(response);
       let posts = response.data;
@@ -237,22 +241,17 @@ const loadPosts = function () {
         $.each(posts, function (i, post) {
           generateMainAuctions(post, response.current_user_id);
         });
-        if (document.querySelectorAll('.bet-post').length != 0) {
-          betTimer();
-        }
-        mainShift.offset += mainShift.limit;
-        mainShift.currentLen += mainShift.limit;
       }
     }
   );
-};
+}
 
 loadPosts();
 
-const loadCompletedPosts = function () {
+function loadCompletedPosts() {
   $.post(
     '../../../scripts/getCompletedAuctionList.php',
-    { offset: completedShift.offset, limit: completedShift.limit },
+    { offset: postShift.offset, limit: postShift.limit },
     function (response) {
       response = JSON.parse(response);
       let posts = response.data;
@@ -260,29 +259,57 @@ const loadCompletedPosts = function () {
         $.each(posts, function (i, post) {
           generateCompletedAuctions(post, response.current_user_id);
         });
-        completedShift.offset += completedShift.limit;
-        mainShift.currentLen += mainShift.limit;
       }
     }
   );
+}
+
+function clearPosts() {
+  $('.posts-container').empty();
+}
+
+const disableInputs = function () {
+  $('#betFrom').attr('disabled', 'disabled');
+  $('#betTo').attr('disabled', 'disabled');
 };
 
-const postToggle = function (postState) {
+const enableInputs = function () {
+  $('#betFrom').removeAttr('disabled');
+  $('#betTo').removeAttr('disabled');
+};
+
+const clearFilter = function () {
+  $('#filterForm').find('input').val('');
+  $('#filterForm').find('input[type="checkbox"]').prop('checked', false);
+};
+
+const resetScroll = function () {
+  scrollState = 0;
+};
+
+const postToggle = function () {
   // changed to Ongoing posts
   if (postState === 1) {
-    $('.posts-container').empty();
-    mainShift.offset = 0;
-    mainShift.currentLen = 8;
+    clearFilter();
+    resetFilterActive();
+    resetScroll();
+    enableInputs();
+    clearPosts();
+    resetShift();
     resetFilterState();
-    console.log(filterState);
+    resetScrollState();
     loadPosts();
   }
   // changed to Completed posts
   else {
-    $('.posts-container').empty();
-    completedShift.offset = 0;
-    mainShift.currentLen = 8;
+    clearFilter();
+    resetFilterActive();
+    resetScroll();
+    disableInputs();
+    clearPosts();
+    resetShift();
     resetFilterState();
+    resetScrollState();
     loadCompletedPosts();
   }
 };
@@ -300,46 +327,25 @@ const setActiveTab = function () {
 $('.tabs__item').click(setActiveTab);
 
 $('.btn-filter').click(function () {
-  postToggle(postState);
+  postToggle();
 });
 
-const updateAllBets = async function () {
-  const postLists = document.querySelectorAll('.bet-post');
-  const postId = [];
-  if (postLists.length != 0) {
-    $.each(postLists, function (i, post) {
-      postId.push(Number(post.dataset.auctionid));
-    });
-    let betsData;
-    await $.post(
-      '../../../scripts/updateBets.php',
-      { auctions: postId },
-      function (response) {
-        response = JSON.parse(response);
-        betsData = response.data;
-      }
-    );
-
-    $.each(postLists, function (i, post) {
-      post.children[1].children[5].innerText = `current bet: ${betsData[i].bet}`;
-    });
-  }
-};
-
-const betTimer = function () {
-  setInterval(function () {
-    if (postState === 1) {
-      updateAllBets();
-    }
-  }, 3000);
-};
-
 $(window).scroll(function () {
-  if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+  if (
+    $(window).scrollTop() >= $(document).height() - $(window).height() &&
+    scrollState === 0 &&
+    !isFilterActive
+  ) {
     if (postState === 1) {
+      postShift.offset += postShift.limit;
+      postShift.limit = 99999999;
       loadPosts();
+      scrollState = 1;
     } else {
+      postShift.offset += postShift.limit;
+      postShift.limit = 99999999;
       loadCompletedPosts();
+      scrollState = 1;
     }
   }
 });

@@ -1,15 +1,13 @@
 <?php
 
-//массив ответа сервера
 $response = array();
 
-if (isset($_POST['limit']) and (isset($_POST['author']) or isset($_POST['painting']) or isset($_POST['styles']) or isset($_POST['bet_down']) or isset($_POST['bet_up']))) {
+if (isset($_POST['author']) or isset($_POST['painting']) or isset($_POST['styles']) or isset($_POST['bet_down']) or isset($_POST['bet_up'])) {
 
     session_start();
     require 'connectDB.php';
 
     $where = "WHERE";
-    $limit = $_POST['limit'];
 
     if (isset($_POST['author'])) {
         $where = $where . " users.login LIKE '" . $_POST['author'] . "%'";
@@ -36,8 +34,7 @@ if (isset($_POST['limit']) and (isset($_POST['author']) or isset($_POST['paintin
 				LEFT JOIN bets on auctions.bet_id = bets.bet_id
 				JOIN styles on paintings.style_id = styles.style_id
 				$where and auctions.is_current = 1
-				ORDER BY start_date DESC
-				LIMIT $limit")->fetch_all(MYSQLI_ASSOC);
+				ORDER BY start_date DESC")->fetch_all(MYSQLI_ASSOC);
 
         $response['data']['current_user_id'] = $_SESSION['user_id'];
     } else {
@@ -49,8 +46,7 @@ if (isset($_POST['limit']) and (isset($_POST['author']) or isset($_POST['paintin
 				LEFT JOIN bets on auctions.bet_id = bets.bet_id
 				JOIN styles on paintings.style_id = styles.style_id
 				$where and auctions.is_current = 1
-				ORDER BY start_date DESC
-				LIMIT $limit")->fetch_all(MYSQLI_ASSOC);
+				ORDER BY start_date DESC")->fetch_all(MYSQLI_ASSOC);
 
         $response['data']['completed_auctions'] = $mysqli->query("SELECT auctions.auction_id, auctions.painting_id, paintings.name as name, auctions.user_id as author_id, users.login as author, paintings.path_to_paint, styles.name as style, start_date, end_date, start_price, buyout_price, IFNULL(bets.bet, 0) as sold_for, IFNULL(bets.user_id, -1) as winner_id, IFNULL((SELECT login as winner_name from users LEFT JOIN bets ON bets.user_id = users.user_id WHERE users.user_id = winner_id LIMIT 1), 'No one') as winner_name
 				FROM auctions
@@ -59,8 +55,7 @@ if (isset($_POST['limit']) and (isset($_POST['author']) or isset($_POST['paintin
 				LEFT JOIN bets on auctions.bet_id = bets.bet_id
 				JOIN styles on paintings.style_id = styles.style_id
 				$where and auctions.is_current = 0
-				ORDER BY end_date DESC
-				LIMIT $limit")->fetch_all(MYSQLI_ASSOC);
+				ORDER BY end_date DESC")->fetch_all(MYSQLI_ASSOC);
 
         $response['data']['current_user_id'] = $_SESSION['user_id'];
 
