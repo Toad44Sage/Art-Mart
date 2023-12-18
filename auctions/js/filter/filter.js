@@ -20,9 +20,9 @@ const resetFilterState = function () {
   }
 };
 
-const resetFilterActive = function () {
+function resetFilterActive() {
   isFilterActive = false;
-};
+}
 
 const generateStyles = function (styles) {
   let styleContainer = $('#filter-style-list');
