@@ -1,301 +1,429 @@
 <!DOCTYPE html>
 
 <html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="../css/profile.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="../JS/editmodal.js"></script>
+		<script src="../JS/profile.js"></script>
+		<script src="../JS/postupload.js"></script>
+		<script src="../JS/userhead.js"></script>
+		<script src="../JS/follower.js"></script>
 
-<head>
+		<title>Profile</title>
+	</head>
 
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/profile.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+	<body>
+		<!-- ############################## NAVIGATION ############################## -->
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-	<script src="../JS/userhead.js"></script>
-	<script src="../JS/profile.js"></script>
-
-</head>
-
-
-<body>
-
-	<!-- Navigation -->
-	<nav class="navigation">
-		<div class="nav-content">
-			<ul class="left-nav">
-				<li><a class="nav-item-link" href="../../newsfeed/HTML/news.html">Home</a></li>
-				<li><a class="nav-item-link" href="../../auctions/auctions.html">Auctions</a></li>
+		<nav class="nav" id="nav">
+			<ul class="nav__left">
+				<li class="nav__item">
+					<a
+						class="nav__link nav__link--active"
+						href="../../newsfeed/HTML/news.html"
+						>Home</a
+					>
+				</li>
+				<li class="nav__item">
+					<a class="nav__link" href="../../auctions/auctions.html">Auctions</a>
+				</li>
 			</ul>
 			<div class="search-guide">
 				<span class="search-icon"></span>
-				<input type="text" class="search-input" placeholder="Search">
+				<input type="text" class="search-input" placeholder="Search" />
 				<ul class="search-results"></ul>
 			</div>
-			<ul class="right-nav">
-				<li><span id="balance">0</span><img src="../img/mona-lisa 2.png" style="height: 20px; width: 17px;"
-						alt="Icon" /></li>
-				<li class="nav-item-plus"><img src="../img/plus 1.svg" style="height: 39px; width: 39px;" alt="Logo" /></li>
-				<div id="modal" class="modal" style="display: none;">
-					<div class="modal-content">
-						<form action="upload.php" method="POST" enctype="multipart/form-data">
-							<div class="modal-header">
-								<div class="upload-photo">
-									<input type="file" id="photo-upload" accept=".png, .jpg, .jpeg" style="display: none;">
-									<label for="photo-upload" class="select-image">Select an Image</label>
-								</div>
-							</div>
-							<div class="modal-body">
-								<div>
-									<label for="paint-name">Name:</label>
-									<input type="text" id="paint-name" name="name">
-								</div>
-								<div>
-									<label for="paint-description">Description:</label>
-									<input type="text" id="paint-description" name="about">
-								</div>
-								<div>
-									<label for="paint-style">Style:</label>
-									<select id="paint-style" name="style_id">
-
-									</select>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button class="publish-button">Publish</button>
-							</div>
-						</form>
-					</div>
-				</div>
-				<li class="nav-item-notif"><img src="../img/notif0.png" style="height: 30px; width: 30px;" alt="Logo" /></a>
+			<ul class="nav__right">
+				<li class="nav__item">
+					<span id="balanceCount"></span
+					><img
+						src="../IMG/nav-icons/mona-lisa.svg"
+						alt="Icon"
+						class="nav__lisa-icon"
+						data-modal="balanceModal"
+					/>
 				</li>
-				<li class="nav-item-profile">
-					<img class="miniprofile-pic" alt="Mini Profile" />
-					<div class="dropdown">
-						<a class="profilelink" href="../../profile/HTML/profile.html">Profile</a>
-						<a class="settings" href="#">Settings</a>
-						<a class="exit" href="#">Log Out</a>
+				<li class="nav__item">
+					<img
+						src="../IMG/nav-icons/plus.svg"
+						alt="Logo"
+						class="nav__upload-icon"
+						data-modal="pushModal"
+					/>
+				</li>
+				<li class="nav__item">
+					<img alt="Logo" class="nav__notif-icon nav__notif-icon--checked" />
+					<!-- ############################## DROPDOWN ############################## -->
+					<div class="notif-dropdown">
+						<ul class="notif-dropdown__container"></ul>
 					</div>
 				</li>
-
+				<li class="nav__item">
+					<img
+						class="nav__profile-pic"
+						src="../IMG/nav-icons/miniprofile.png"
+						alt="Mini Profile"
+					/>
+					<div class="profile-dropdown">
+						<a
+							class="profile-dropdown__link"
+							href="../../profile/HTML/profile.html"
+							>Profile
+						</a>
+						<a
+							class="profile-dropdown__settings"
+							href="#"
+							data-modal="privacyModal"
+							>Settings</a
+						>
+						<a class="profile-dropdown__exit" href="#">Log Out</a>
+					</div>
+				</li>
 			</ul>
-			<script>
-				var navItemPlus = document.querySelector('.nav-item-plus');
-				var modal = document.createElement('div');
-				modal.classList.add('modal');
-				modal.style.width = '794px';
-				modal.style.height = '919px';
+		</nav>
 
-				navItemPlus.addEventListener('click', function () {
-					document.body.appendChild(modal);
-				});
-			</script>
-		</div>
-	</nav>
-
-	<main>
-
-		<!-- Profile -->
-		<header>
-
-			<div class="header-wrap">
-				<div class="profile-pic">
-					<img id="profile-picture" alt="profile-logo">
-				</div>
-
-				<div class="profile-info">
-					<div class="title-row">
-						<h1 id="profile-login"></h1>
-						<button class="primary"></button>
+		<main>
+			<!-- Profile -->
+			<header>
+				<div class="header-wrap">
+					<div class="profile-pic">
+						<img id="profile-picture" alt="profile-logo" />
 					</div>
-					<div class="details-row">
-						<ul>
-							<li><span id="profile-posts"></span> posts</li>
-							<li><span id="profile-followers"></span> followers</li>
-							<!-- HTML для модального окна -->
-							<div id="followers-modal" class="modal">
-								<div class="modal-content">
-									<h2 class="followers_modal_text">Followers</h2>
-									<ul id="followers-list"></ul>
 
-									<div id="no-more-followers" style="display: none;">Подписчиков больше нет</div>
+					<div class="profile-info">
+						<div class="title-row">
+							<h1 id="profile-login"></h1>
+							<button class="primary"></button>
+						</div>
+						<div class="details-row">
+							<ul>
+								<li><span id="profile-posts"></span> posts</li>
+								<li><span id="profile-followers"></span> followers</li>
+								<!-- HTML для модального окна -->
+								<div id="followers-modal" class="modal">
+									<div class="modal-content">
+										<h2 class="followers_modal_text">Followers</h2>
+										<ul id="followers-list"></ul>
+
+										<div id="no-more-followers" style="display: none">
+											Подписчиков больше нет
+										</div>
+									</div>
 								</div>
+								<li><span id="profile-following"></span> following</li>
+							</ul>
+						</div>
+						<div class="details-last-row">
+							<h2 id="profile-username">
+								<span id="name"></span>
+								<span id="surname"></span>
+							</h2>
+						</div>
+					</div>
+				</div>
+				<div id="profile-desc"></div>
+			</header>
+			<!-- Tab item`s 	-->
+
+			<div class="tabs">
+				<div class="tab-item activetab" data-categoryid="0">
+					<img src="../img/grid.svg" alt="Logo" /><span>POSTS</span>
+				</div>
+				<div class="tab-item" data-categoryid="1">
+					<img src="../img/profileicon.svg" alt="MiniProfileIcon" /><span
+						>BOUGHT</span
+					>
+				</div>
+			</div>
+
+			<!-- Gallery -->
+			<div class="gallery"></div>
+
+			<!-- Bought paintings -->
+			<div class="Bought" style="display: none"></div>
+		</main>
+
+		<!--------------- edit profile details modal --------->
+		<div class="editModal">
+			<div class="modal-content">
+				<form>
+					<div class="input-group1">
+						<div class="input-image">
+							<img alt="imageLoader" id="imageClick" />
+							<input
+								type="file"
+								accept="image/*"
+								id="newImg-input"
+								style="display: none"
+							/>
+						</div>
+						<div class="input-items2">
+							<div class="input-item">
+								<input
+									id="name-input"
+									type="text"
+									maxlength="32"
+									placeholder="Name"
+									name="inputName"
+								/>
 							</div>
-							<li><span id="profile-following"></span> following</li>
-						</ul>
-					</div>
-					<div class="details-last-row">
-						<h2 id="profile-username">
-							<span id="name"></span>
-							<span id="surname"></span>
-						</h2>
-					</div>
-				</div>
-
-			</div>
-			<div id="profile-desc"></div>
-		</header>
-		<!-- Tab item`s 	-->
-
-		<div class="tabs">
-			<div class="tab-item activetab">
-				<img src="../img/grid.svg" alt="Logo" /><span>POSTS</span>
-			</div>
-			<div class="tab-item">
-				<img src="../img/profileicon.svg" alt="MiniProfileIcon" /><span>BOUGHT</span>
-			</div>
-		</div>
-
-		<!-- Gallery -->
-		<div class="gallery">
-		</div>
-
-		<!-- Bought paintings -->
-		<div class="Bought" style="display:none">
-		</div>
-
-	</main>
-
-	<!--------------- privacy settings modal ----------------->
-	<div class="privacyModal">
-		<div class="modal-content">
-			<span>Change User Details</span>
-			<form>
-				<div class="input-item">
-					<input type="password" id="input1" name="currPass" placeholder="Current password" required />
-				</div>
-				<div class="hr-line">
-					<hr class="pass-line">
-				</div>
-				<div class="input-item">
-					<input type="text" id="input2" name="newEmail" minlength="8" maxlength="32" placeholder="New email">
-				</div>
-				<div class="input-item">
-					<input type="password" id="input3" name="newPass" minlength="8" maxlength="32" placeholder="New password">
-				</div>
-				<div class="input-item">
-					<input type="password" id="input4" name="repeatPass" minlength="8" maxlength="32"
-						placeholder="Repeat password">
-				</div>
-				<button type="submit">Confirm</button>
-			</form>
-			<div id="privacyMessage"></div>
-		</div>
-	</div>
-
-
-	<!--------------- edit profile details modal --------->
-	<div class="editModal">
-		<div class="modal-content">
-			<form>
-
-				<div class="input-group1">
-					<div class="input-image">
-						<img src="../IMG/profile1.png" alt="imageLoader" id="imageClick">
-						<input type="file" accept="image/*" id="newImg-input" style="display: none">
-					</div>
-					<div class="input-items2">
-						<div class="input-item">
-							<input type="text" maxlength="32" placeholder="Name" name="inputName">
-						</div>
-						<div class="input-item">
-							<input type="text" maxlength="32" placeholder="Surname" name="inputSurname">
+							<div class="input-item">
+								<input
+									id="surname-input"
+									type="text"
+									maxlength="32"
+									placeholder="Surname"
+									name="inputSurname"
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div class="input-group2">
-					<div class="input-item">
-						<input type="date" maxlength="12" placeholder="Date of birth" name="inputDOB">
+					<div class="input-group2">
+						<div class="input-item">
+							<input
+								id="date-input"
+								type="date"
+								maxlength="12"
+								placeholder="Date of birth"
+								name="inputDOB"
+							/>
+						</div>
+						<div class="input-item">
+							<input
+								id="country-input"
+								type="text"
+								maxlength="32"
+								placeholder="Country"
+								name="inputCountry"
+							/>
+						</div>
+						<div class="input-item">
+							<textarea
+								id="about-input"
+								maxlength="150"
+								placeholder="About me"
+								name="inputDesc"
+							></textarea>
+						</div>
 					</div>
-					<div class="input-item">
-						<input type="text" maxlength="32" placeholder="Country" name="inputCountry">
-					</div>
-					<div class="input-item">
-						<textarea maxlength="150" placeholder="About me" name="inputDesc"></textarea>
-					</div>
-				</div>
 
-				<button type="submit">Confirm</button>
-
-			</form>
-			<div class="error" id="editMessage">Данные не изменились</div>
+					<button type="submit" id="confirmButton">Confirm</button>
+				</form>
+				<div class="error" id="editMessage">Данные не изменились</div>
+			</div>
 		</div>
-	</div>
 
-	
+		<!-- ##############################    FOOTER    ############################## -->
+		<footer class="footer">
+			<ul>
+				<li class="footer__item">
+					<img
+						src="../img/footer/logo.svg"
+						alt="Mona-lisa website logo"
+						class="footer__logo"
+					/>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="14"
+							height="20"
+							fill="#707070"
+							viewBox="0 0 256 256"
+						>
+							<path
+								d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM96,128a32,32,0,0,0,57.6,19.2,8,8,0,0,1,12.8,9.61,48,48,0,1,1,0-57.62,8,8,0,0,1-12.8,9.61A32,32,0,0,0,96,128Z"
+							></path>
+						</svg>
+						2023 Artmart
+					</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Terms of Use</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Privacy Policy</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Security</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Conditions of sale</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">ACA Seller`s Agreement</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link">Buyer Guarantee</a>
+				</li>
+				<li class="footer__item">
+					<a href="#" class="footer__link"
+						>Do not sell my personall information
+					</a>
+				</li>
+			</ul>
+			<div class="footer__social">
+				<p class="footer__heading">Contact us</p>
+				<address>
+					<a href="" class="footer__social-link">
+						<img src="../img/footer/twitter.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="../img/footer/link3.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="../img/footer/tiktok.svg" class="footer__img" alt="" />
+					</a>
+					<a href="" class="footer__social-link">
+						<img src="../img/footer/spotify.svg" class="footer__img" alt="" />
+					</a>
+				</address>
+			</div>
+		</footer>
+		<!-- ##########################  PRIVACY-SETTINGS MODAL   ########################## -->
+		<div class="pr-settings-modal hidden" id="privacyModal">
+			<div class="pr-settings-modal__content">
+				<span>Change User Details</span>
+				<form>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input1"
+							name="currPass"
+							placeholder="Current password"
+							required
+						/>
+					</div>
+					<div class="hr-line">
+						<hr class="pass-line" />
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="text"
+							id="input2"
+							name="newEmail"
+							minlength="8"
+							maxlength="32"
+							placeholder="New email"
+						/>
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input3"
+							name="newPass"
+							minlength="8"
+							maxlength="32"
+							placeholder="New password"
+						/>
+					</div>
+					<div class="pr-settings-modal__input-item">
+						<input
+							type="password"
+							id="input4"
+							name="repeatPass"
+							minlength="8"
+							maxlength="32"
+							placeholder="Repeat password"
+						/>
+					</div>
+					<button type="submit">Confirm</button>
+				</form>
+				<div class="pr-settings-modal__ans" id="privacyMessage"></div>
+			</div>
+		</div>
 
-    <!-- ##############################    FOOTER    ############################## -->
-    <footer class="footer">
-      <ul>
-        <li class="footer__item">
-          <img
-            src="../img/footer/logo.svg"
-            alt="Mona-lisa website logo"
-            class="footer__logo"
-          />
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="20"
-              fill="#707070"
-              viewBox="0 0 256 256"
-            >
-              <path
-                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216ZM96,128a32,32,0,0,0,57.6,19.2,8,8,0,0,1,12.8,9.61,48,48,0,1,1,0-57.62,8,8,0,0,1-12.8,9.61A32,32,0,0,0,96,128Z"
-              ></path>
-            </svg>
-            2023 Artmart
-          </a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">Terms of Use</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">Privacy Policy</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">Security</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">Conditions of sale</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">ACA Seller`s Agreement</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link">Buyer Guarantee</a>
-        </li>
-        <li class="footer__item">
-          <a href="#" class="footer__link"
-            >Do not sell my personall information
-          </a>
-        </li>
-      </ul>
-      <div class="footer__social">
-        <p class="footer__heading">Contact us</p>
-        <address>
-          <a href="" class="footer__social-link">
-            <img src="../img/footer/twitter.svg" class="footer__img" alt="" />
-          </a>
-          <a href="" class="footer__social-link">
-            <img src="../img/footer/link3.svg" class="footer__img" alt="" />
-          </a>
-          <a href="" class="footer__social-link">
-            <img src="../img/footer/tiktok.svg" class="footer__img" alt="" />
-          </a>
-          <a href="" class="footer__social-link">
-            <img src="../img/footer/spotify.svg" class="footer__img" alt="" />
-          </a>
-        </address>
-      </div>
-    </footer>
-</body>
+		<!-- ##########################  PAINTING-UPLOAD MODAL   ########################## -->
+		<div class="painting-upload hidden" id="pushModal">
+			<div class="painting-upload__container">
+				<form
+					method="POST"
+					enctype="multipart/form-data"
+					class="painting-upload__form"
+				>
+					<div class="painting-upload__header">
+						<input
+							type="file"
+							id="photo-upload"
+							accept=".png, .jpg, .jpeg"
+							style="display: none"
+						/>
+						<label for="photo-upload" class="painting-upload__select-img"
+							>Select an Image</label
+						>
+					</div>
+					<div class="painting-upload__body">
+						<input
+							type="text"
+							id="paint-name"
+							name="name"
+							placeholder="Name:"
+						/>
+						<input
+							type="text"
+							id="paint-description"
+							name="about"
+							placeholder="Description:"
+						/>
+						<select id="paint-style" name="style_id">
+							<option value="" disabled>Style: &darr;</option>
+						</select>
+						<button
+							class="btn-post btn-post--orange"
+							id="paintingPublishButton"
+						>
+							Publish
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
 
-
-
+		<!-- ############################  BALANCE-MODAL    ########################## -->
+		<div class="balance-modal hidden" id="balanceModal">
+			<div class="balance-modal__container">
+				<p class="balance-modal__text balance-modal__text--orange">
+					Our currency is LisaCoins
+				</p>
+				<img src="../img/modals/mona-lisa.png" alt="Image of Mona Lisa" />
+				<p class="balance-modal__text balance-modal__text--orange">
+					Your balance:
+				</p>
+				<span class="balance-modal__text" id="balanceTopUp"></span>
+				<form>
+					<input
+						type="text"
+						inputmode="numeric"
+						placeholder="Balance replenishment amount"
+						min="0"
+						maxlength="14"
+						step="0.01"
+						id="balanceInput"
+						pattern="^\d*(\.\d{0,2})?$"
+						required
+					/>
+					<button
+						type="submit"
+						class="btn-post btn-post--orange"
+						id="addBalance"
+					>
+						Top up balance
+					</button>
+				</form>
+			</div>
+		</div>
+	</body>
 </html>

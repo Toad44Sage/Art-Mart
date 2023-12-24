@@ -1,304 +1,325 @@
+'use strict'
+
 $(function () {
 	// прогрузка баланса и аватарки
 	$.post('../../scripts/getUserHeadInfo.php', {}, function (data) {
-		result = JSON.parse(data);
-		stats = result.data;
+		const result = JSON.parse(data)
+		const stats = result.data
 		if (result.success == 1) {
-			$('#balance').text(stats.balance);
-			$('.miniprofile-pic').attr('src', stats.profile_picture);
+			$('#balanceCount').text(stats.balance)
+			$('#balanceTopUp').text(stats.balance)
+			$('.nav__profile-pic').attr('src', stats.profile_picture)
+		} else {
+			alert('Пожалуйста, войдите в аккаунт')
+			window.location.href = '../../main/main.html'
 		}
-		else {
-			alert("Ты как сюда попал?");
-			window.location.href = '../../main/main.html';
-		}
-	});
+	})
 
+	const modalToggle = function () {
+		const modal = document.getElementById(`${this.dataset.modal}`)
+		console.log(modal)
+		modal.classList.remove('hidden')
+		modal.addEventListener('click', function (event) {
+			if (event.target.id == `${modal.id}`) {
+				modal.classList.add('hidden')
+
+				if ($('#privacyMessage').text().length) {
+					$('#privacyMessage')
+						.removeClass(
+							'pr-settings-modal__ans--error pr-settings-modal__ans--success'
+						)
+						.text('')
+				}
+			}
+		})
+	}
+
+	const dropdownState = {
+		'profile-dropdown': false,
+		'notif-dropdown': false,
+	}
 
 	// наводка на блок профиля
 
-	let hoverTimeOut;
-	$('.miniprofile-pic').hover(function () {
+	const dropdownToggle = function (clickName) {
+		const dropdown = $(`.${clickName}`)
+		dropdown.stop(true, true).slideToggle(200)
+		dropdownState[`${clickName}`] = !dropdownState[`${clickName}`]
+	}
 
-		clearTimeout(hoverTimeOut);
+	const dropdownClose = function (dropdownName) {
+		const dropdown = $(`.${dropdownName}`)
+		dropdown.stop(true, true).slideUp(100)
+		dropdownState[`${dropdownName}`] = !dropdownState[`${dropdownName}`]
+	}
 
-		$('.dropdown').stop(true, true).slideDown(200);
-	}, function () {
-		hoverTimeOut = setTimeout(function () {
-			$('.dropdown').stop(true, true).slideUp(200);
-		}, 200);
-	});
+	const modalItems = ['nav__lisa-icon', 'profile-dropdown__settings']
+	const dropdownItems = ['notif-dropdown', 'profile-dropdown']
 
-	$('.dropdown').mouseleave(function () {
-		hoverTimeOut = setTimeout(function () {
-			$('.dropdown').stop(true, true).slideUp(200);
-		}, 200);
-	}).mouseenter(function () {
-		clearTimeout(hoverTimeOut);
-	});
+	for (let key in modalItems) {
+		document
+			.querySelector(`.${modalItems[key]}`)
+			.addEventListener('click', modalToggle)
+	}
 
-	// клик по настройкам
+	$('.nav__profile-pic').click(() => {
+		if (dropdownState['notif-dropdown'] == true) {
+			dropdownClose('notif-dropdown')
+		}
+		dropdownToggle('profile-dropdown')
+	})
 
-	$('.dropdown').on('click', '.settings', function () {
-		//отобразил модальное окно и убрал ненужный скролл
-		$('.privacyModal').show();
-		$('body').css('overflow', 'hidden');
+	$('.nav__notif-icon').click(() => {
+		if (dropdownState['profile-dropdown'] == true) {
+			dropdownClose('profile-dropdown')
+		}
+		dropdownToggle('notif-dropdown')
+	})
 
-	});
+	// клик по log out
+
+	$('.profile-dropdown').on('click', '.profile-dropdown__exit', function () {
+		$.post('../../scripts/logout.php', {}, function () {
+			location.reload()
+		})
+	})
+
+	const topUpBalance = function () {
+		const inputValue = Number($('#balanceInput')[0].value)
+		$.post(
+			'../../../scripts/addBalance.php',
+			{ add: inputValue },
+			function (data) {
+				const result = JSON.parse(data)
+				const stats = result.data
+				if (result.success == 1) {
+					$('#balanceCount').text(stats.balance)
+					$('#balanceTopUp').text(stats.balance)
+				} else {
+					alert('Что-то пошло не так!')
+				}
+			}
+		)
+	}
+	$('#addBalance').click(topUpBalance)
 
 	// запрос для редактирования данных
 
-	$('.privacyModal form').submit(function (event) {
-		event.preventDefault();
+	$('.pr-settings-modal form').submit(function (event) {
+		event.preventDefault()
 
-		let currPass = $('input[name="currPass"]').val();
+		let currPass = $('input[name="currPass"]').val()
 		let newEmail = $('input[name="newEmail"]').val()
 		let newPass = $('input[name="newPass"]').val()
 		let repeatPass = $('input[name="repeatPass"]').val()
 
-		const allowedChars = /^[A-Za-z0-9_]+$/;
+		const allowedChars = /^[A-Za-z0-9_]+$/
 
 		if (!allowedChars.test(currPass)) {
-			alert("Пожалуйста, используйте только допустимые символы в полях ввода");
-			return;
+			alert('Пожалуйста, используйте только допустимые символы в полях ввода')
+			return
 		}
 
 		if (newPass.trim() !== '' && !allowedChars.test(newPass)) {
-			alert("Пожалуйста, используйте только допустимые символы в полях ввода");
-			return;
+			alert('Пожалуйста, используйте только допустимые символы в полях ввода')
+			return
 		}
 
 		if (newPass === repeatPass) {
-			$.post('../../scripts/changeSecurityData.php', { password: currPass, new_password: newPass, email: newEmail }, function (answer) {
-				response = JSON.parse(answer);
-				console.log(response);
-				$('input[name="currPass"]').val('');
-				$('input[name="newEmail"]').val('');
-				$('input[name="newPass"]').val('');
-				$('input[name="repeatPass"]').val('');
-			});
+			$.post(
+				'../../scripts/changeSecurityData.php',
+				{ password: currPass, new_password: newPass, email: newEmail },
+				function (answer) {
+					const response = JSON.parse(answer)
+					if (response.success == 1) {
+						$('input[name="currPass"]').val('')
+						$('input[name="newEmail"]').val('')
+						$('input[name="newPass"]').val('')
+						$('input[name="repeatPass"]').val('')
+						$('.pr-settings-modal__ans')
+							.removeClass(
+								'pr-settings-modal__ans--success pr-settings-modal__ans--error'
+							)
+							.addClass('pr-settings-modal__ans--success')
+							.text(response.success)
+					} else {
+						$('input[name="currPass"]').val('')
+						$('.pr-settings-modal__ans')
+							.removeClass(
+								'pr-settings-modal__ans--success pr-settings-modal__ans--error'
+							)
+							.addClass('pr-settings-modal__ans--error')
+							.text(response.error)
+					}
+				}
+			)
 		} else {
-			alert('Пароли не совпадают');
-			return;
-		}
-	});
-	// закрытие модального окна с изменением настройки приватности
-	$(document).click(function (event) {
-		if ($(event.target).is('.privacyModal')) {
-			$('.privacyModal').hide();
-
-			$('body').css('overflow', 'visible');
+			alert('Пароли не совпадают')
+			return
 		}
 	})
-	
+
 	// клик по log out
 
 	$('.dropdown').on('click', '.exit', function () {
 		$.post('../../scripts/logout.php', {}, function () {
-			location.reload();
+			location.reload()
 		})
-	});
+	})
 
-	 // Выбираем элементы модального окна
-  let modal = $("#modal");
-  let modalHeader = modal.find(".modal-header");
-  let uploadButton = modalHeader.find(".upload-photo");
-  let publishButton = modal.find(".publish-button");
+	$('.search-input').on('input', function (event) {
+		// Получение введенного текста из поля поиска
+		let searchQuery = $(this).val().trim()
+		// Отправка запроса на сервер только если текст запроса не пустой
+		if (searchQuery !== '') {
+			$.ajax({
+				type: 'POST',
+				url: '../../scripts/searchUser.php',
+				data: { login: searchQuery, limit: 10 },
+				dataType: 'json',
+				success: function (response) {
+					if (response.success == '1') {
+						// Очистка списка результатов поиска перед добавлением новых
+						$('.search-results').empty()
+						// Добавление каждого результата поиска в список
+						$.each(response.data, function (index, user) {
+							let userProfileLink =
+								'<a href="../../profile/HTML/profile.html?id=' +
+								user.user_id +
+								'"><img src="' +
+								user.profile_picture +
+								'"> ' +
+								user.login +
+								'</a>'
+							$('.search-results').append('<li>' + userProfileLink + '</li>')
+						})
+						// Отображение списка результатов поиска
+						$('.search-results').show()
+						// Если есть результаты поиска, перейти на первый результат при нажатии Enter
+						if (response.data.length > 0) {
+							$(document).on('keypress', function (e) {
+								if (e.which === 13) {
+									window.location.href = $(
+										'.search-results li:first-child a'
+									).attr('href')
+								}
+							})
+						}
+					}
+				},
+			})
+		} else {
+			// Скрытие списка результатов поиска, если поле поиска пустое
+			$('.search-results').hide()
+		}
+	})
 
-  // Обработчик клика на элемент, который открывает модальное окно
-  if ($(".nav-item-plus").length) {
-    $(".nav-item-plus").on("click", function (event) {
-      event.stopPropagation();
-      modal.show();
-      $("body").addClass("modal-open");
-    });
-  }
+	// Скрытие списка результатов поиска при клике вне поля поиска или списка
+	$(document).mouseup(function (e) {
+		let searchResults = $('.search-results')
+		if (
+			!searchResults.is(e.target) &&
+			searchResults.has(e.target).length === 0 &&
+			!$('.search-input').is(e.target)
+		) {
+			searchResults.hide()
+		}
+	})
+	$('.exit').click(function (event) {
+		event.preventDefault()
+		$.ajax({
+			url: '../../scripts/logout.php',
+			success: function () {
+				window.location.href = 'http://project/main/main.html'
+			},
+		})
+	})
 
-  // Получаем список стилей и генерируем список в выпадающем меню
-  $.post("../../scripts/getStyles.php", {}, function (data) {
-    let result = JSON.parse(data);
-    if (result.success == 1){
-      generateStyles(result.data);
-    }
-  }).fail(function (xhr, status, error) {
-    console.log("Произошла ошибка" + xhr + status + error);
-  });
+	let notificationCheck = 'no'
 
-  function generateStyles(styles) {
-    let styleList = $("#paint-style");
+	setInterval(async function () {
+		await $.post(
+			'../../../scripts/checkNewNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					if (messageData == 'yes') {
+						notificationCheck = messageData
+						getNotifications()
+					}
+				}
+			}
+		)
+	}, 5000)
 
-    $.each(styles, function (i, styles) {
-      let styleItem = $("<option>")
-        .text(styles.name)
-        .attr("value", styles.style_id);
+	const checkNewNotifications = new Promise(function (resolve, reject) {
+		$.post(
+			'../../../scripts/checkNewNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					if (messageData == 'yes') {
+						notificationCheck = messageData
+					}
+				}
+			}
+		)
+	})
 
-      styleList.append(styleItem);
-    });
-  }
+	const clearNotifications = function () {
+		$('.notif-dropdown__container').empty()
+	}
 
-  // Ограничение максимального количества символов в paint-name до 50
-  const nameInput = $("#paint-name");
-  nameInput.on("input", function () {
-    const maxLength = 50;
-    if (nameInput.val().length > maxLength) {
-      nameInput.val(nameInput.val().slice(0, maxLength));
-    }
-  });
+	const changeToChecked = function () {
+		$('.nav__notif-icon')
+			.removeClass('nav__notif-icon--checked nav__notif-icon--unchecked')
+			.addClass('nav__notif-icon--checked')
+		notificationCheck = 'no'
+	}
 
-  // Ограничение максимального количества символов в paint-description до 150
-  const aboutInput = $("#paint-description");
-  aboutInput.on("input", function () {
-    const maxLength = 150;
-    if (aboutInput.val().length > maxLength) {
-      aboutInput.val(aboutInput.val().slice(0, maxLength));
-    }
-  });
+	const changeToUnchecked = function () {
+		$('.nav__notif-icon')
+			.removeClass('nav__notif-icon--checked nav__notif-icon--unchecked')
+			.addClass('nav__notif-icon--unchecked')
+	}
 
-  $("#photo-upload").change(function () {
-    let file = this.files[0];
-    /* console.log("Выбранный файл:", file); // добавлено для вывода информации о файле в консоль */
-    let reader = new FileReader();
-    reader.onload = function (event) {
-      let image = new Image();
-      image.src = event.target.result;
-      image.onload = function () {
-        if (image.width < 400 || image.height < 400) {
-          alert("Минимальный размер изображения должен быть 400x400.");
-          return false;
-        } else {
-          $(".select-image").hide();
-          $(".upload-photo").css({
-            "background-image": "url(" + event.target.result + ")",
-            "background-size": "cover",
-            "background-position": "center",
-          });
-        }
-      };
-    };
-    reader.readAsDataURL(file);
-  });
+	const createNotifications = function (message) {
+		checkNewNotifications.then()
+		if (notificationCheck == 'no') {
+			changeToChecked()
+		} else {
+			changeToUnchecked()
+			$('.nav__notif-icon').click(changeToChecked)
+		}
+		const notificationContainer = $('.notif-dropdown__container')
+		const notificationItem = $('<li>').addClass('notif-dropdown__item')
+		const notificationParagraph = $('<p>').text(message.message)
+		const notificationSpan = $('<span>').addClass('mrg-small-right')
+		const notificationUserImage = $('<img>').attr('src', message.icon)
+		notificationParagraph.append(notificationSpan)
+		notificationItem.append(notificationParagraph, notificationUserImage)
+		notificationContainer.append(notificationItem)
+	}
 
-  $(".modal").click(function (event) {
-    if ($(event.target).hasClass("modal")) {
-      $(this).hide();
-    }
-  });
-
-  // Обработчик клика на кнопку "Publish"
-  publishButton.on("click", function (event) {
-    event.preventDefault();
-
-    // Получаем значение поля с именем картины и проверяем на пустое значение
-    const name = nameInput.val().trim();
-    if (!name) {
-      alert("Имя картины не может быть пустым");
-      return;
-    }
-
-    $(".publish-button").on("click", function () {
-      let fileInput = $("#photo-upload");
-      let file = fileInput[0].files[0];
-
-      if (!file) {
-        alert("Please select a file to upload.");
-        return false;
-      }
-
-      let formData = new FormData($("form")[0]); // создаем объект FormData с данными формы
-      formData.append("image", file); // добавляем данные о файле в объект FormData
-
-      // выводим содержимое объекта FormData в консоль
-      for (let pair of formData.entries()) {
-        console.log(pair[0] + ": " + pair[1]);
-      }
-
-      console.log("Form data:", formData);
-      console.log("File:", file);
-
-      $.ajax({
-        url: "../../scripts/createPost.php", // адрес обработчика формы на сервере
-        type: "POST",
-        data: formData, // данные формы
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          // код, который будет выполнен после успешной отправки формы
-          console.log(response);
-          location.reload(); // перезагрузить страницу после успешной отправки формы
-        },
-        error: function (jqXHR, textStatus, errorMessage) {
-          // код, который будет выполнен в случае ошибки отправки формы
-          console.log(errorMessage);
-        },
-      });
-    });
-  });
-  $(".search-input").on("input", function (event) {
-    // Получение введенного текста из поля поиска
-    let searchQuery = $(this).val().trim();
-    // Отправка запроса на сервер только если текст запроса не пустой
-    if (searchQuery !== "") {
-      $.ajax({
-        type: "POST",
-        url: "../../scripts/searchUser.php",
-        data: { login: searchQuery, limit: 10 },
-        dataType: "json",
-        success: function (response) {
-          if (response.success == "1") {
-            // Очистка списка результатов поиска перед добавлением новых
-            $(".search-results").empty();
-            // Добавление каждого результата поиска в список
-            $.each(response.data, function (index, user) {
-              let userProfileLink =
-                '<a href="../../profile/HTML/profile.html?id=' +
-                user.user_id +
-                '"><img src="' +
-                user.profile_picture +
-                '"> ' +
-                user.login +
-                "</a>";
-              $(".search-results").append("<li>" + userProfileLink + "</li>");
-            });
-            // Отображение списка результатов поиска
-            $(".search-results").show();
-            // Если есть результаты поиска, перейти на первый результат при нажатии Enter
-            if (response.data.length > 0) {
-              $(document).on("keypress", function (e) {
-                if (e.which === 13) {
-                  window.location.href = $(
-                    ".search-results li:first-child a"
-                  ).attr("href");
-                }
-              });
-            }
-          }
-        },
-      });
-    } else {
-      // Скрытие списка результатов поиска, если поле поиска пустое
-      $(".search-results").hide();
-    }
-  });
-
-  // Скрытие списка результатов поиска при клике вне поля поиска или списка
-  $(document).mouseup(function (e) {
-    let searchResults = $(".search-results");
-    if (
-      !searchResults.is(e.target) &&
-      searchResults.has(e.target).length === 0 &&
-      !$(".search-input").is(e.target)
-    ) {
-      searchResults.hide();
-    }
-  });
-  $(".exit").click(function (event) {
-    event.preventDefault();
-    $.ajax({
-      url: "../../scripts/logout.php",
-      success: function () {
-        window.location.href = "http://project/main/main.html";
-      },
-    });
-  });
-
-
-});
+	const getNotifications = async function () {
+		await $.post(
+			'../../../scripts/getNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					clearNotifications()
+					$.each(messageData, function (i, message) {
+						createNotifications(message)
+					})
+				}
+			}
+		)
+	}
+	getNotifications()
+})

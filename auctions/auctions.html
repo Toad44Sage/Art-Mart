@@ -15,6 +15,8 @@
 			href="https://db.onlinewebfonts.com/c/e130d119682ecb567748343bf7f263b0?family=Franklin+Gothic+Book"
 			rel="stylesheet"
 		/>
+		<link rel="icon" type="image/x-icon" href="../../favicon.ico" />
+
 		<link rel="stylesheet" href="./css/style.css" />
 		<script
 			defer
@@ -26,8 +28,9 @@
 		<script defer src="./js/nav/nav.js"></script>
 		<script defer src="./js/filter/filter.js"></script>
 		<script defer src="./js/notif/notif.js"></script>
+		<script defer src="./js/modals/editSettings.js"></script>
 
-		<title>Аукционы</title>
+		<title>Auctions</title>
 	</head>
 	<body>
 		<!-- ############################## NAVIGATION ############################## -->
@@ -38,7 +41,11 @@
 					<a class="nav__link" href="../newsfeed/HTML/news.html">Home</a>
 				</li>
 				<li class="nav__item">
-					<a class="nav__link" href="../../auctions/auctions.html">Auctions</a>
+					<a
+						class="nav__link nav__link--active"
+						href="../../auctions/auctions.html"
+						>Auctions</a
+					>
 				</li>
 			</ul>
 			<ul class="nav__right">
@@ -441,43 +448,6 @@
 			</div>
 		</div>
 
-		<!-- ##########################  PAINTING-UPLOAD MODAL   ########################## -->
-		<div class="painting-upload hidden" id="pushModal">
-			<div class="painting-upload__container">
-				<form action="upload.php" method="POST" enctype="multipart/form-data">
-					<div class="painting-upload__header">
-						<input
-							type="file"
-							id="photo-upload"
-							accept=".png, .jpg, .jpeg"
-							style="display: none"
-						/>
-						<label for="photo-upload" class="painting-upload__select-img"
-							>Select an Image</label
-						>
-					</div>
-					<div class="painting-upload__body">
-						<input
-							type="text"
-							id="paint-name"
-							name="name"
-							placeholder="Name:"
-						/>
-						<input
-							type="text"
-							id="paint-description"
-							name="about"
-							placeholder="Description:"
-						/>
-						<select id="paint-style" name="style_id">
-							<option value="">Style: &darr;</option>
-						</select>
-						<button class="btn-post btn-post--orange">Publish</button>
-					</div>
-				</form>
-			</div>
-		</div>
-
 		<!-- ##########################  PRIVACY-SETTINGS MODAL   ########################## -->
 		<div class="pr-settings-modal hidden" id="privacyModal">
 			<div class="pr-settings-modal__content">
@@ -527,12 +497,7 @@
 					</div>
 					<button type="submit">Confirm</button>
 				</form>
-				<div
-					class="pr-settings-modal__ans pr-settings-modal__ans--error"
-					id="privacyMessage"
-				>
-					Пароли не совпадают
-				</div>
+				<div class="pr-settings-modal__ans" id="privacyMessage"></div>
 			</div>
 		</div>
 	</body>

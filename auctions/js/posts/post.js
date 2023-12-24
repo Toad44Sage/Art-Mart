@@ -2,8 +2,6 @@
 
 let postState = 1;
 
-let scrollState = 0;
-
 const postShift = {
   offset: 0,
   limit: 2,
@@ -12,10 +10,6 @@ const postShift = {
 const resetShift = function () {
   postShift.offset = 0;
   postShift.limit = 2;
-};
-
-const resetScrollState = function () {
-  scrollState = 0;
 };
 
 const closeBetModal = function (modal) {
@@ -238,6 +232,7 @@ function loadPosts() {
       response = JSON.parse(response);
       let posts = response.data;
       if (response.success == 1) {
+        postShift.offset += posts.length;
         $.each(posts, function (i, post) {
           generateMainAuctions(post, response.current_user_id);
         });
@@ -256,6 +251,7 @@ function loadCompletedPosts() {
       response = JSON.parse(response);
       let posts = response.data;
       if (response.success == 1) {
+        postShift.offset += posts.length;
         $.each(posts, function (i, post) {
           generateCompletedAuctions(post, response.current_user_id);
         });
@@ -283,33 +279,25 @@ const clearFilter = function () {
   $('#filterForm').find('input[type="checkbox"]').prop('checked', false);
 };
 
-const resetScroll = function () {
-  scrollState = 0;
-};
-
 const postToggle = function () {
   // changed to Ongoing posts
   if (postState === 1) {
     clearFilter();
     resetFilterActive();
-    resetScroll();
     enableInputs();
     clearPosts();
     resetShift();
     resetFilterState();
-    resetScrollState();
     loadPosts();
   }
   // changed to Completed posts
   else {
     clearFilter();
     resetFilterActive();
-    resetScroll();
     disableInputs();
     clearPosts();
     resetShift();
     resetFilterState();
-    resetScrollState();
     loadCompletedPosts();
   }
 };
@@ -333,19 +321,12 @@ $('.btn-filter').click(function () {
 $(window).scroll(function () {
   if (
     $(window).scrollTop() >= $(document).height() - $(window).height() &&
-    scrollState === 0 &&
     !isFilterActive
   ) {
     if (postState === 1) {
-      postShift.offset += postShift.limit;
-      postShift.limit = 99999999;
       loadPosts();
-      scrollState = 1;
     } else {
-      postShift.offset += postShift.limit;
-      postShift.limit = 99999999;
       loadCompletedPosts();
-      scrollState = 1;
     }
   }
 });

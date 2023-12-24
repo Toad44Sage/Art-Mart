@@ -130,6 +130,20 @@ function filterPostList() {
           filterComplete = { ...data };
         }
       });
+    } else if (
+      !(filterState.bet_down && filterState.bet_up) &&
+      !filterState.painting &&
+      !filterState.author
+    ) {
+      if (postState === 1) {
+        clearPosts();
+        resetShift();
+        loadPosts();
+      } else {
+        clearPosts();
+        resetShift();
+        loadCompletedPosts();
+      }
     }
   }
 }

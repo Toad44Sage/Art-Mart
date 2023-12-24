@@ -1,78 +1,129 @@
+'use strict'
+
 $(function () {
 	// прогрузка баланса и аватарки
 	$.post('../../scripts/getUserHeadInfo.php', {}, function (data) {
-		result = JSON.parse(data)
-		stats = result.data
+		const result = JSON.parse(data)
+		const stats = result.data
 		if (result.success == 1) {
-			$('#balance').text(stats.balance)
-			$('.miniprofile-pic').attr('src', stats.profile_picture)
+			$('#balanceCount').text(stats.balance)
+			$('#balanceTopUp').text(stats.balance)
+			$('.nav__profile-pic').attr('src', stats.profile_picture)
 		} else {
-			alert('Ты как сюда попал?')
+			alert('Пожалуйста, войдите в аккаунт')
 			window.location.href = '../../main/main.html'
 		}
 	})
 
+	const modalToggle = function () {
+		const modal = document.getElementById(`${this.dataset.modal}`)
+		modal.classList.remove('hidden')
+		modal.addEventListener('click', function (event) {
+			if (event.target.id == `${modal.id}`) {
+				modal.classList.add('hidden')
+				if ($('#privacyMessage').text().length) {
+					$('#privacyMessage')
+						.removeClass(
+							'pr-settings-modal__ans--error pr-settings-modal__ans--success'
+						)
+						.text('')
+				}
+			}
+		})
+	}
+
+	const dropdownState = {
+		'profile-dropdown': false,
+		'notif-dropdown': false,
+	}
+
 	// наводка на блок профиля
 
-	let hoverTimeOut
-	$('.miniprofile-pic').hover(
-		function () {
-			clearTimeout(hoverTimeOut)
+	const dropdownToggle = function (clickName) {
+		const dropdown = $(`.${clickName}`)
+		dropdown.stop(true, true).slideToggle(200)
+		dropdownState[`${clickName}`] = !dropdownState[`${clickName}`]
+	}
 
-			$('.dropdown').stop(true, true).slideDown(200)
-		},
-		function () {
-			hoverTimeOut = setTimeout(function () {
-				$('.dropdown').stop(true, true).slideUp(200)
-			}, 200)
+	const dropdownClose = function (dropdownName) {
+		const dropdown = $(`.${dropdownName}`)
+		dropdown.stop(true, true).slideUp(100)
+		dropdownState[`${dropdownName}`] = !dropdownState[`${dropdownName}`]
+	}
+
+	const modalItems = [
+		'nav__lisa-icon',
+		'profile-dropdown__settings',
+		'nav__upload-icon',
+	]
+	const dropdownItems = ['notif-dropdown', 'profile-dropdown']
+
+	for (let key in modalItems) {
+		document
+			.querySelector(`.${modalItems[key]}`)
+			.addEventListener('click', modalToggle)
+	}
+
+	$('.nav__profile-pic').click(() => {
+		if (dropdownState['notif-dropdown'] == true) {
+			dropdownClose('notif-dropdown')
 		}
-	)
-
-	$('.dropdown')
-		.mouseleave(function () {
-			hoverTimeOut = setTimeout(function () {
-				$('.dropdown').stop(true, true).slideUp(200)
-			}, 200)
-		})
-		.mouseenter(function () {
-			clearTimeout(hoverTimeOut)
-		})
-
-	// клик по настройкам
-
-	$('.dropdown').on('click', '.settings', function () {
-		//отобразил модальное окно и убрал ненужный скролл
-		$('.privacyModal').show()
-		$('body').css('overflow', 'hidden')
+		dropdownToggle('profile-dropdown')
 	})
+
+	$('.nav__notif-icon').click(() => {
+		if (dropdownState['profile-dropdown'] == true) {
+			dropdownClose('profile-dropdown')
+		}
+		dropdownToggle('notif-dropdown')
+	})
+
+	// клик по log out
+
+	$('.profile-dropdown').on('click', '.profile-dropdown__exit', function () {
+		$.post('../../scripts/logout.php', {}, function () {
+			location.reload()
+		})
+	})
+
+	const topUpBalance = function () {
+		const inputValue = Number($('#balanceInput')[0].value)
+		$.post(
+			'../../../scripts/addBalance.php',
+			{ add: inputValue },
+			function (data) {
+				const result = JSON.parse(data)
+				const stats = result.data
+				if (result.success == 1) {
+					$('#balanceCount').text(stats.balance)
+					$('#balanceTopUp').text(stats.balance)
+				} else {
+					alert('Что-то пошло не так!')
+				}
+			}
+		)
+	}
+	$('#addBalance').click(topUpBalance)
 
 	// запрос для редактирования данных
 
-	$('.privacyModal form').submit(function (event) {
+	$('.pr-settings-modal form').submit(function (event) {
 		event.preventDefault()
 
 		let currPass = $('input[name="currPass"]').val()
 		let newEmail = $('input[name="newEmail"]').val()
 		let newPass = $('input[name="newPass"]').val()
 		let repeatPass = $('input[name="repeatPass"]').val()
-		let message = document.getElementById('privacyMessage')
 
-		console.log(message.style)
 		const allowedChars = /^[A-Za-z0-9_]+$/
 
 		if (!allowedChars.test(currPass)) {
-			message.style.display = 'block'
-			message.classList.remove('error', 'warning', 'success')
-			message.classList.add('warning')
-			message.textContent = 'Пожалуйста, используйте только допустимые символы'
+			alert('Пожалуйста, используйте только допустимые символы в полях ввода')
 			return
 		}
 
 		if (newPass.trim() !== '' && !allowedChars.test(newPass)) {
-			message.style.display = 'block'
-			message.classList.remove('error', 'warning', 'success')
-			message.classList.add('warning')
-			message.textContent = 'Пожалуйста, используйте только допустимые символы'
+			alert('Пожалуйста, используйте только допустимые символы в полях ввода')
 			return
 		}
 
@@ -81,39 +132,32 @@ $(function () {
 				'../../scripts/changeSecurityData.php',
 				{ password: currPass, new_password: newPass, email: newEmail },
 				function (answer) {
-					response = JSON.parse(answer)
-
-					$('input[name="currPass"]').val('')
-					$('input[name="newEmail"]').val('')
-					$('input[name="newPass"]').val('')
-					$('input[name="repeatPass"]').val('')
+					const response = JSON.parse(answer)
 					if (response.success == 1) {
-						message.style.display = 'block'
-						message.classList.remove('error', 'warning', 'success')
-						message.classList.add('success')
-						message.textContent = 'Успешно'
+						$('input[name="currPass"]').val('')
+						$('input[name="newEmail"]').val('')
+						$('input[name="newPass"]').val('')
+						$('input[name="repeatPass"]').val('')
+						$('.pr-settings-modal__ans')
+							.removeClass(
+								'pr-settings-modal__ans--success pr-settings-modal__ans--error'
+							)
+							.addClass('pr-settings-modal__ans--success')
+							.text(response.success)
 					} else {
-						message.style.display = 'block'
-						message.classList.remove('error', 'warning')
-						message.classList.add('error')
-						message.textContent = response.error
+						$('input[name="currPass"]').val('')
+						$('.pr-settings-modal__ans')
+							.removeClass(
+								'pr-settings-modal__ans--success pr-settings-modal__ans--error'
+							)
+							.addClass('pr-settings-modal__ans--error')
+							.text(response.error)
 					}
 				}
 			)
 		} else {
-			message.style.display = 'block'
-			message.classList.remove('error', 'warning')
-			message.classList.add('error')
-			message.textContent = 'Пароли не совпадают'
+			alert('Пароли не совпадают')
 			return
-		}
-	})
-	// закрытие модального окна с изменением настройки приватности
-	$(document).click(function (event) {
-		if ($(event.target).is('.privacyModal')) {
-			$('.privacyModal').hide()
-
-			$('body').css('overflow', 'visible')
 		}
 	})
 
@@ -125,140 +169,6 @@ $(function () {
 		})
 	})
 
-	// Выбираем элементы модального окна
-	let modal = $('#modal')
-	let modalHeader = modal.find('.modal-header')
-	let uploadButton = modalHeader.find('.upload-photo')
-	let publishButton = modal.find('.publish-button')
-
-	// Обработчик клика на элемент, который открывает модальное окно
-	if ($('.nav-item-plus').length) {
-		$('.nav-item-plus').on('click', function (event) {
-			event.stopPropagation()
-			modal.show()
-			$('body').addClass('modal-open')
-		})
-	}
-
-	// Получаем список стилей и генерируем список в выпадающем меню
-	$.post('../../scripts/getStyles.php', {}, function (data) {
-		let result = JSON.parse(data)
-		if (result.success == 1) {
-			generateStyles(result.data)
-		}
-	}).fail(function (xhr, status, error) {
-		console.log('Произошла ошибка' + xhr + status + error)
-	})
-
-	function generateStyles(styles) {
-		let styleList = $('#paint-style')
-
-		$.each(styles, function (i, styles) {
-			let styleItem = $('<option>')
-				.text(styles.name)
-				.attr('value', styles.style_id)
-
-			styleList.append(styleItem)
-		})
-	}
-
-	// Ограничение максимального количества символов в paint-name до 50
-	const nameInput = $('#paint-name')
-	nameInput.on('input', function () {
-		const maxLength = 50
-		if (nameInput.val().length > maxLength) {
-			nameInput.val(nameInput.val().slice(0, maxLength))
-		}
-	})
-
-	// Ограничение максимального количества символов в paint-description до 150
-	const aboutInput = $('#paint-description')
-	aboutInput.on('input', function () {
-		const maxLength = 150
-		if (aboutInput.val().length > maxLength) {
-			aboutInput.val(aboutInput.val().slice(0, maxLength))
-		}
-	})
-
-	$('#photo-upload').change(function () {
-		let file = this.files[0]
-		/* console.log("Выбранный файл:", file); // добавлено для вывода информации о файле в консоль */
-		let reader = new FileReader()
-		reader.onload = function (event) {
-			let image = new Image()
-			image.src = event.target.result
-			image.onload = function () {
-				if (image.width < 400 || image.height < 400) {
-					alert('Минимальный размер изображения должен быть 400x400.')
-					return false
-				} else {
-					$('.select-image').hide()
-					$('.upload-photo').css({
-						'background-image': 'url(' + event.target.result + ')',
-						'background-size': 'cover',
-						'background-position': 'center',
-					})
-				}
-			}
-		}
-		reader.readAsDataURL(file)
-	})
-
-	$('.modal').click(function (event) {
-		if ($(event.target).hasClass('modal')) {
-			$(this).hide()
-		}
-	})
-
-	// Обработчик клика на кнопку "Publish"
-	publishButton.on('click', function (event) {
-		event.preventDefault()
-
-		// Получаем значение поля с именем картины и проверяем на пустое значение
-		const name = nameInput.val().trim()
-		if (!name) {
-			alert('Имя картины не может быть пустым')
-			return
-		}
-
-		$('.publish-button').on('click', function () {
-			let fileInput = $('#photo-upload')
-			let file = fileInput[0].files[0]
-
-			if (!file) {
-				alert('Please select a file to upload.')
-				return false
-			}
-
-			let formData = new FormData($('form')[0]) // создаем объект FormData с данными формы
-			formData.append('image', file) // добавляем данные о файле в объект FormData
-
-			// выводим содержимое объекта FormData в консоль
-			for (let pair of formData.entries()) {
-				console.log(pair[0] + ': ' + pair[1])
-			}
-
-			console.log('Form data:', formData)
-			console.log('File:', file)
-
-			$.ajax({
-				url: '../../scripts/createPost.php', // адрес обработчика формы на сервере
-				type: 'POST',
-				data: formData, // данные формы
-				processData: false,
-				contentType: false,
-				success: function (response) {
-					// код, который будет выполнен после успешной отправки формы
-					console.log(response)
-					location.reload() // перезагрузить страницу после успешной отправки формы
-				},
-				error: function (jqXHR, textStatus, errorMessage) {
-					// код, который будет выполнен в случае ошибки отправки формы
-					console.log(errorMessage)
-				},
-			})
-		})
-	})
 	$('.search-input').on('input', function (event) {
 		// Получение введенного текста из поля поиска
 		let searchQuery = $(this).val().trim()
@@ -326,4 +236,92 @@ $(function () {
 			},
 		})
 	})
+
+	let notificationCheck = 'no'
+
+	setInterval(async function () {
+		await $.post(
+			'../../../scripts/checkNewNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					if (messageData == 'yes') {
+						notificationCheck = messageData
+						getNotifications()
+					}
+				}
+			}
+		)
+	}, 5000)
+
+	const checkNewNotifications = new Promise(function (resolve, reject) {
+		$.post(
+			'../../../scripts/checkNewNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					if (messageData == 'yes') {
+						notificationCheck = messageData
+					}
+				}
+			}
+		)
+	})
+
+	const clearNotifications = function () {
+		$('.notif-dropdown__container').empty()
+	}
+
+	const changeToChecked = function () {
+		$('.nav__notif-icon')
+			.removeClass('nav__notif-icon--checked nav__notif-icon--unchecked')
+			.addClass('nav__notif-icon--checked')
+		notificationCheck = 'no'
+	}
+
+	const changeToUnchecked = function () {
+		$('.nav__notif-icon')
+			.removeClass('nav__notif-icon--checked nav__notif-icon--unchecked')
+			.addClass('nav__notif-icon--unchecked')
+	}
+
+	const createNotifications = function (message) {
+		checkNewNotifications.then()
+		if (notificationCheck == 'no') {
+			changeToChecked()
+		} else {
+			changeToUnchecked()
+			$('.nav__notif-icon').click(changeToChecked)
+		}
+		const notificationContainer = $('.notif-dropdown__container')
+		const notificationItem = $('<li>').addClass('notif-dropdown__item')
+		const notificationParagraph = $('<p>').text(message.message)
+		const notificationSpan = $('<span>').addClass('mrg-small-right')
+		const notificationUserImage = $('<img>').attr('src', message.icon)
+		notificationParagraph.append(notificationSpan)
+		notificationItem.append(notificationParagraph, notificationUserImage)
+		notificationContainer.append(notificationItem)
+	}
+
+	const getNotifications = async function () {
+		await $.post(
+			'../../../scripts/getNotifications.php',
+			{},
+			function (response) {
+				response = JSON.parse(response)
+				const messageData = response.data
+				if (response.success == 1) {
+					clearNotifications()
+					$.each(messageData, function (i, message) {
+						createNotifications(message)
+					})
+				}
+			}
+		)
+	}
+	getNotifications()
 })

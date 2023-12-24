@@ -1,48 +1,44 @@
 <?php
 
-	//массив ответа сервера
-	$response = array();
+//массив ответа сервера
+$response = array();
 
-	if (isset($_POST['limit']) and isset($_POST['offset'])) {
+if (isset($_POST['limit']) and isset($_POST['offset'])) {
 
-		session_start();
+    session_start();
 
-		require 'authorizationCheck.php';
-		require 'connectDB.php';
-		
-		$limit = $_POST['limit'];
-		$offset = $_POST['offset'];
+    require 'authorizationCheck.php';
+    require 'connectDB.php';
 
-		//id был получен
-		if (!empty($_POST['user_id'])) {
+    $limit = $_POST['limit'];
+    $offset = $_POST['offset'];
 
-			$user_id = $_POST['user_id'];
+    //id был получен
+    if (!empty($_POST['user_id'])) {
 
-		}
+        $user_id = $_POST['user_id'];
 
-		//id не был получен, пользователь авторизован
-		else {
+    }
 
-			$user_id = $_SESSION['user_id'];
+    //id не был получен, пользователь авторизован
+    else {
 
-		}
+        $user_id = $_SESSION['user_id'];
 
-		$response['success'] = '1';
-		$response['data'] = $mysqli->query("SELECT painting_id, path_to_paint
+    }
+
+    $response['success'] = '1';
+    $response['data'] = $mysqli->query("SELECT paintings.painting_id, paintings.path_to_paint, paintings.author_id
 		FROM paintings
-		JOIN auctions USING(painting_id)
-		WHERE winner_id = $user_id
-		ORDER BY end_date DESC
+		JOIN auctions ON paintings.painting_id = auctions.painting_id
+		WHERE user_id = $user_id AND is_current = 0
+		ORDER BY auctions.end_date DESC
 		LIMIT $limit OFFSET $offset")->fetch_all(MYSQLI_ASSOC);
 
-	}
+} else {
 
-	else {
+    $response['error'] = "Error when displaying paintings";
 
-		$response['error'] = "Error when displaying paintings";
+}
 
-	}
-
-	echo json_encode($response);
-
-?>
+echo json_encode($response);

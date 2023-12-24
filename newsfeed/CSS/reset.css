@@ -1,36 +1,9 @@
-html,
-li,
-h1,
-h2,
-h3,
-nav,
-body,
-div,
-img,
-a,
-ul,
-li,
-span,
-main,
-button,
-input,
-form {
+* {
+	box-sizing: border-box;
+	text-decoration: none;
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
 	font: inherit;
-}
-
-* {
-	box-sizing: border-box;
-}
-
-ol,
-ul {
 	list-style: none;
-}
-
-* {
-	box-sizing: border-box;
 }

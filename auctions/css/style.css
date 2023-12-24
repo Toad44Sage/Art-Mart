@@ -991,18 +991,78 @@ body {
       border: none;
       font-size: 3.2rem;
       line-height: 19px;
-      text-align: center; }
+      text-align: center;
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/ }
       .pr-settings-modal__content button[type='submit']:hover {
         background: #ea7462;
         box-shadow: 0px 10px 30px #b22222;
         border-radius: 4.8px; }
+      @media (max-width: 100em) {
+        .pr-settings-modal__content button[type='submit'] {
+          width: 487px;
+          height: 55px; } }
+      @media (max-width: 90em) {
+        .pr-settings-modal__content button[type='submit'] {
+          width: 427px;
+          height: 50px; } }
+      @media (max-width: 75em) {
+        .pr-settings-modal__content button[type='submit'] {
+          width: 367px;
+          height: 45px; } }
     .pr-settings-modal__content .pass-line {
       width: 480px;
       height: 0px;
       border: 1px solid #e36f2d;
-      margin: 54px 0 59px 0; }
+      margin-top: 54px;
+      margin-bottom: 59px;
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 912px (Tablets) */
+      /**************************/
+      /**************************/
+      /* BELOW 1200px (Landscape Tablets) */
+      /**************************/ }
+      @media (max-width: 100em) {
+        .pr-settings-modal__content .pass-line {
+          width: 458px;
+          margin-top: 34px;
+          margin-bottom: 39px; } }
+      @media (max-width: 90em) {
+        .pr-settings-modal__content .pass-line {
+          width: 407px; } }
+      @media (max-width: 75em) {
+        .pr-settings-modal__content .pass-line {
+          width: 347px; } }
     .pr-settings-modal__content span {
-      font-size: 24px;
+      font-size: 2.4rem;
       color: #e36f2d;
       margin: 32px 0 48px 0; }
   .pr-settings-modal__input-item input {
@@ -1013,11 +1073,41 @@ body {
     border: 1px solid #e8e8e8;
     border-radius: 10px;
     padding: 17px 10px;
-    font-size: 18px; }
+    font-size: 1.8rem;
+    /**************************/
+    /* BELOW 912px (Tablets) */
+    /**************************/
+    /**************************/
+    /* BELOW 1200px (Landscape Tablets) */
+    /**************************/
+    /**************************/
+    /* BELOW 912px (Tablets) */
+    /**************************/
+    /**************************/
+    /* BELOW 1200px (Landscape Tablets) */
+    /**************************/
+    /**************************/
+    /* BELOW 912px (Tablets) */
+    /**************************/
+    /**************************/
+    /* BELOW 1200px (Landscape Tablets) */
+    /**************************/ }
     .pr-settings-modal__input-item input::placeholder {
       color: rgba(0, 0, 0, 0.7); }
     .pr-settings-modal__input-item input:focus {
       outline: 1px solid rgba(0, 0, 0, 0.7); }
+    @media (max-width: 100em) {
+      .pr-settings-modal__input-item input {
+        width: 450px;
+        height: 50px; } }
+    @media (max-width: 90em) {
+      .pr-settings-modal__input-item input {
+        width: 407px;
+        height: 42px; } }
+    @media (max-width: 75em) {
+      .pr-settings-modal__input-item input {
+        width: 347px;
+        height: 38px; } }
   .pr-settings-modal__input-item:not(:first-child) {
     margin-bottom: 4.8rem; }
   .pr-settings-modal__ans {
@@ -1528,3 +1618,10 @@ body {
   .nav__link:hover, .nav__link:active {
     color: #ea7462;
     transform: scale(1.05); }
+  .nav__link--active, .nav__link--active:link, .nav__link--active:visited {
+    color: #e36f2d;
+    transition: all 0.2s;
+    transform: scale(1.05); }
+  .nav__link--active:hover, .nav__link--active:active {
+    color: #000;
+    transform: scale(1); }

@@ -26,7 +26,6 @@ for (let key in modalItems) {
     .addEventListener('click', modalToggle);
 }
 
-let hoverTimeOut;
 $('.nav__profile-pic').click(() => {
   if (dropdownState['notif-dropdown'] == true) {
     dropdownClose('notif-dropdown');
@@ -48,6 +47,7 @@ $('.profile-dropdown').on('click', '.profile-dropdown__exit', function () {
     location.reload();
   });
 });
+
 $.post('../../../scripts/getUserHeadInfo.php', {}, function (data) {
   const result = JSON.parse(data);
   const stats = result.data;

@@ -59,17 +59,17 @@
 
 .post-img {
 	max-width: 1000px;
-	width: 100%;
-	max-height: 800px;
+	height: auto;
 	border-radius: 8px;
 }
 
 .post-image {
+	width: 100%;
+	height: auto;
 	display: block;
-	object-fit: cover;
+	object-fit: contain;
 	margin: 0 auto;
 	max-width: 1000px;
-	height: auto;
 }
 
 .post-header {
@@ -180,20 +180,43 @@
 }
 
 .author-profile-img {
+	border-radius: 50%;
+	object-fit: cover;
+	transition: all 0.3s;
+}
+
+.author-profile-img:hover {
 	cursor: pointer;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .author-img {
-	cursor: pointer;
 	border-radius: 50%;
 	object-fit: cover;
 	height: 42px;
 	width: 42px;
 }
 
+.author-img:hover {
+	cursor: pointer;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
 .comments-container {
 	overflow-y: auto;
 	height: 458px;
+}
+
+.comments-container::-webkit-scrollbar {
+	width: 0.6rem;
+}
+.comments-container::-webkit-scrollbar-track {
+	background: #dbdbdb;
+}
+.comments-container::-webkit-scrollbar-thumb {
+	background: rgba(136, 136, 136, 0.4);
+	border-radius: 4px;
+	width: 0.3rem;
 }
 
 .comment {
@@ -252,4 +275,17 @@
 	color: rgba(0, 0, 0, 0.6);
 	resize: none;
 	outline: none;
+	overflow-y: auto;
+}
+
+#comment::-webkit-scrollbar {
+	width: 0.6rem;
+}
+#comment::-webkit-scrollbar-track {
+	background: #dbdbdb;
+}
+#comment::-webkit-scrollbar-thumb {
+	background: rgba(136, 136, 136, 0.4);
+	border-radius: 4px;
+	width: 0.3rem;
 }

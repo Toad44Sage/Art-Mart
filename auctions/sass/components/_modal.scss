@@ -529,15 +529,39 @@
 				box-shadow: 0px 10px 30px #b22222;
 				border-radius: 4.8px;
 			}
+			@include respond(normal-desk) {
+				width: 487px;
+				height: 55px;
+			}
+			@include respond(small-desk) {
+				width: 427px;
+				height: 50px;
+			}
+			@include respond(tab-land) {
+				width: 367px;
+				height: 45px;
+			}
 		}
 		& .pass-line {
 			width: 480px;
 			height: 0px;
 			border: 1px solid $color-primary;
-			margin: 54px 0 59px 0;
+			margin-top: 54px;
+			margin-bottom: 59px;
+			@include respond(normal-desk) {
+				width: 458px;
+				margin-top: 34px;
+				margin-bottom: 39px;
+			}
+			@include respond(small-desk) {
+				width: 407px;
+			}
+			@include respond(tab-land) {
+				width: 347px;
+			}
 		}
 		& span {
-			font-size: 24px;
+			font-size: 2.4rem;
 			color: $color-primary;
 			margin: 32px 0 48px 0;
 		}
@@ -551,12 +575,24 @@
 			border: 1px solid #e8e8e8;
 			border-radius: 10px;
 			padding: 17px 10px;
-			font-size: 18px;
+			font-size: 1.8rem;
 			&::placeholder {
 				color: $color-grey-dark2;
 			}
 			&:focus {
 				outline: 1px solid $color-grey-dark2;
+			}
+			@include respond(normal-desk) {
+				width: 450px;
+				height: 50px;
+			}
+			@include respond(small-desk) {
+				width: 407px;
+				height: 42px;
+			}
+			@include respond(tab-land) {
+				width: 347px;
+				height: 38px;
 			}
 		}
 		&:not(:first-child) {

@@ -1,4 +1,5 @@
-$(document).ready(function () {
+//подписчики
+$(function () {
 	// функция для получения значения параметра из URL
 	function getParameterByName(name, url) {
 		if (!url) url = window.location.href
@@ -9,6 +10,7 @@ $(document).ready(function () {
 		if (!results[2]) return ''
 		return decodeURIComponent(results[2].replace(/\+/g, ' '))
 	}
+
 	// проверка, что элемент с идентификатором "profile-followers" существует на странице
 	if ($('#profile-followers').length) {
 		// при клике на элемент с идентификатором "profile-followers"
@@ -30,24 +32,18 @@ $(document).ready(function () {
 						followersList.empty()
 						$.each(response.data, function (index, follower) {
 							let listItem = $('<li>', {
-								'data-user-id': response.data.follower.id,
 								html:
-									"<img src='" +
+									"<img  src='" +
 									follower.profile_picture +
 									"' alt='" +
 									follower.login +
-									"' style='width: 70px; height: 70px; display: block; margin-bottom: 10px;' />" +
+									"' style='border-radius:50%; width: 70px; height: 70px; display: block; margin-bottom: 10px;' />" +
 									follower.login,
 							})
-							// установка обработчика кликов на элементах списка подписчиков
-							listItem.click(function () {
-								// получение id пользователя
-								let userId = $(this).attr('data-user-id')
-								// перенаправление на страницу пользователя
-								console.log(response.data.follower_id)
-							})
+							listItem.attr('data-user-id', follower.follower_id)
 							followersList.append(listItem)
 						})
+
 						// отображение модального окна
 						$('#followers-modal').show()
 
@@ -78,9 +74,13 @@ $(document).ready(function () {
 		$('#no-more-followers').hide()
 	})
 
-	// проверка, что элемент с идентификатором "profile-following" существует на странице
-	if ($('#profile-following').length) {
-		// при клике на элемент с идентификатором "profile-following"
+	// id получаю по клику на элемент
+	$('#followers-list').on('click', 'li', function () {
+		let clickedUserId = $(this).attr('data-user-id')
+		window.location.href = '../../profile/HTML/profile.html?id=' + clickedUserId
+	})
+	if ($('#profile-followers').length) {
+		// при клике на элемент с идентификатором "profile-followers"
 		$(document).on('click', '#profile-following', function () {
 			// получение id пользователя из URL
 			let userId = getParameterByName('id')
@@ -88,14 +88,14 @@ $(document).ready(function () {
 			$(this).attr('data-user-id', userId)
 			// отправка ajax запроса для получения списка подписчиков
 			$.ajax({
-				url: '../../scripts/getFollowingInfo.php',
+				url: '../../scripts/getFollowersInfo.php',
 				type: 'POST',
 				data: { user_id: userId, limit: 10, offset: 0 },
 				dataType: 'json',
 				success: function (response) {
 					if (response.success == '1') {
-						// заполнение списка подписок
-						let followersList = $('#following-list')
+						// заполнение списка подписчиков
+						let followersList = $('#followers-list')
 						followersList.empty()
 						$.each(response.data, function (index, follower) {
 							let listItem = $('<li>', {
@@ -112,13 +112,13 @@ $(document).ready(function () {
 						})
 
 						// отображение модального окна
-						$('#following-modal').show()
+						$('#followers-modal').show()
 
 						// проверка на наличие подписчиков
 						if (response.data.length == 0) {
-							$('#no-more-following').show()
+							$('#no-more-followers').show()
 						} else {
-							$('#no-more-following').hide()
+							$('#no-more-followers').hide()
 						}
 					} else {
 						// вывод сообщения об ошибке всплывающим окном
@@ -134,10 +134,16 @@ $(document).ready(function () {
 	}
 	// закрытие модального окна
 	$(document).on('click', '.close', function () {
-		$('#following-modal').hide()
-		// отключение обработчика события прокрутки на элементе
-		$('#following-list').off('scroll')
-		// скрытие текста
-		$('#no-more-following').hide()
+		$('#followers-modal').hide()
+		// отключение обработчика события прокрутки на элементе #followers-list
+		$('#followers-list').off('scroll')
+		// скрытие текста "Подписчиков больше нет"
+		$('#no-more-followers').hide()
+	})
+
+	// id получаю по клику на элемент
+	$('#followers-list').on('click', 'li', function () {
+		let clickedUserId = $(this).attr('data-user-id')
+		window.location.href = '../../profile/HTML/profile.html?id=' + clickedUserId
 	})
 })

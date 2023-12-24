@@ -6,6 +6,14 @@ const modalToggle = function () {
   modal.addEventListener('click', function (event) {
     if (event.target.id == `${modal.id}`) {
       modal.classList.add('hidden');
+
+      if ($('#privacyMessage').text().length) {
+        $('#privacyMessage')
+          .removeClass(
+            'pr-settings-modal__ans--error pr-settings-modal__ans--success'
+          )
+          .text('');
+      }
     }
   });
 };
