@@ -15,7 +15,7 @@ $(document).ready(function () {
       message.style.display = 'block';
       message.classList.remove("error");
       message.classList.add("warning");
-      message.textContent = "Пожалуйста, используйте только допустимые символы в полях ввода";
+      message.textContent = "Please, use only allowedChars";
       return;
     }
 
@@ -32,7 +32,7 @@ $(document).ready(function () {
           message.style.display = 'block';
           message.classList.remove("error", "warning");
           message.classList.add("success");
-          message.textContent = "Регистрация прошла успешно";
+          message.textContent = "Success";
           window.setTimeout(function(){
             window.location.href = "../newsfeed/HTML/news.html";}, 2000);
         }

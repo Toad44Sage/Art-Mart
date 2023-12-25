@@ -20,7 +20,7 @@ $(function(){
 				$('.likes-icon').addClass('active');
 			}
 		} else {
-			alert('Такой картины ещё нет, не надо играться..');
+			alert('Error');
 			window.history.back();
 		}
 	});

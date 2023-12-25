@@ -13,7 +13,7 @@ $(function () {
       message.classList.remove('error', 'warning');
       message.classList.add('warning');
       message.textContent =
-        'Пожалуйста, используйте только допустимые символы в полях ввода';
+        'Please, use only allowedChars';
       return;
     }
 
